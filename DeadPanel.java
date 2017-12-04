@@ -4,11 +4,21 @@
  * @author Angelina Li
  */
 
-public class DeadPanel {
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+
+public class DeadPanel extends JPanel {
+    private JButton quitButton, againButton;
     
-    public DeadPanel() {}
+    public DeadPanel(int score) {
+        super();
 
-    public String toString() {}
+        JLabel message = new JLabel("YOU DIED :(", JLabel.CENTER);
 
-    public static void main(String[] args) {}
+        quitButton = new JButton("Quit");
+        quitButton = new JButton("Play Again!");
+    }
+
 }

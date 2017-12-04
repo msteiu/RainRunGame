@@ -4,11 +4,6 @@
  * @author Mara Steiu
  */
 
-public class MyCharacter {
+public class MyCharacter implements Character {
     
-    public MyCharacter() {}
-
-    public String toString() {}
-
-    public static void main(String[] args) {}
 }
