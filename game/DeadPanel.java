@@ -14,11 +14,22 @@ public class DeadPanel extends JPanel {
     
     public DeadPanel(int score) {
         super();
+        setForeground(RainRun.BACKGROUND);
 
-        JLabel message = new JLabel("YOU DIED :(", JLabel.CENTER);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        add(getDeathLabel());
 
-        quitButton = new JButton("Quit");
-        quitButton = new JButton("Play Again!");
+        // quitButton = new JButton("Quit");
+        // quitButton = new JButton("Play Again!");
+    }
+
+    private JLabel getDeathLabel() {
+        JLabel message = new JLabel(
+            "<html><b>YOU DIED :(</b></html>", JLabel.CENTER);
+        message.setVerticalAlignment(JLabel.CENTER);
+        message.setFont(new Font("Sans Serif", Font.PLAIN, 18));
+        message.setForeground(RainRun.TEXT);
+        return message;
     }
 
 }
