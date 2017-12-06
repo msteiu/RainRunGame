@@ -2,6 +2,16 @@
 
 Simple Java game allowing user to control a character using keyboard input, where the user must make quick decisions to navigate a terrain.
 
+## To Do
+* Edit the graphics of the main character and the monsters to look nicer.
+* Create a main menu to start the game from.
+* When a game has ended, insert a button they can press to return to the main menu.
+* Create a rules panel explaining the rules of the game, to link from the main menu.
+* Figure out how to toggle between different panels based on buttons.
+* [Optional] Include a pause button, such that the user can manually pause the game when they want.
+* [Optional] Allow the user to choose what color their character should be, and/or different themes.
+* [Optional] Include "themes" / "levels" in our game, where periodically the background / monster colors change.
+
 ## Rules
 
 1. You control the character at the bottom using the left/right or A/D keys.
