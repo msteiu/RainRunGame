@@ -1,7 +1,7 @@
 /**
  * FILENAME: MyCharacter
  * DESCRIPTION: CS230 Final Project - Rain Run Game
- * @author Mara Steiu
+ * @author Mara Steiu and Angelina Li
  */
 
 import java.awt.*;
@@ -23,6 +23,14 @@ public class MyCharacter implements Character {
 
     public String getType() {
         return "mycharacter";
+    }
+
+    public int getX() {
+        return xPos;
+    }
+
+    public int getY() {
+        return yPos;
     }
 
     public void moveRight() {
