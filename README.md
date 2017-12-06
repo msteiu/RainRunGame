@@ -2,6 +2,16 @@
 
 Simple Java game allowing user to control a character using keyboard input, where the user must make quick decisions to navigate a terrain.
 
+To run:
+1. Download this repository.
+2. Run the file RainRunGUI.java
+
+```
+cd path/to/rain-run
+javac RainRunGUI.java
+java RainRunGUI
+```
+
 ## To Do
 * Edit the graphics of the main character and the monsters to look nicer.
 * Create a main menu to start the game from.
