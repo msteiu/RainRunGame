@@ -10,13 +10,13 @@ Simple Java game allowing user to control a character using keyboard input, wher
 4. Over time the monsters will start to get bigger and the game will start to move faster.
 5. The game ends when you lose each of your 3 lives.
 
-### Notes
+## Notes
 
 1. Monsters move straight down.
 2. Bigger monsters move faster - watch out!
 3. Powerups zig zag.
 
-### Powerups
+## Powerups
 
 ![alt text][health]
 
