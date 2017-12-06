@@ -11,23 +11,24 @@ import javax.swing.event.*;
 import java.util.Vector;
 
 public class RainRunPanel extends JPanel {
+    protected static final int HERO_SIZE = 10;
+
     private int score;
     private int health;
 
     private MyCharacter character;
-    private Vector<RainMonster> monsters;
+    private Vector<Monster> monsters;
     private Vector<PowerUp> powerUps;
     private Timer timer;
-    private Color backgroundColor;
 
     public RainRunPanel() {
         character = new MyCharacter();
         powerUps = new Vector<PowerUp>();
-        monsters = new Vector<RainMonster>();
+        monsters = new Vector<Monster>();
         timer = new Timer(1000, new TimerListener()); // 1000ms = 1 second
         backgroundColor = RainRun.BACKGROUND;
 
-        setBorder(BorderFactory.createLineBorder(backgroundColor, 10));
+        setBorder(BorderFactory.createLineBorder(, 10));
         setFocusable(true);
         addKeyListener(new MoveListener());
         timer.start();
@@ -36,7 +37,7 @@ public class RainRunPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         character.drawCharacter(g);
-        for(RainMonster monster : monsters) {
+        for(Monster monster : monsters) {
             monster.drawMonster(g);
         }
         repaint();

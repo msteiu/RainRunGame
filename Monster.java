@@ -1,12 +1,12 @@
 /**
- * FILENAME: DropMonster
+ * FILENAME: Monster
  * DESCRIPTION: CS230 Final Project - Rain Run Game
  * @author Mara Steiu
  */
 
-public class DropMonster implements Monster {
+public class Monster implements Character {
     
-    public DropMonster() {
+    public Monster() {
 
     }
 
