@@ -36,6 +36,6 @@ Will increase the pace of the game, and will also double the amount your score i
 
 Gives you a free 100 extra points!
 
-[health]: images/heart1.png "Health Powerup"
-[speed]: images/speed1.png "Speed Powerup"
-[umbrella]: images/umbrella1.png "Umbrella Powerup"
+[health]: images/heart2.png "Health Powerup"
+[speed]: images/speed2.png "Speed Powerup"
+[umbrella]: images/umbrella2.png "Umbrella Powerup"
