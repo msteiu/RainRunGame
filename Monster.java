@@ -4,11 +4,22 @@
  * @author Mara Steiu
  */
 
-public class Monster implements Character {
-    
-    public Monster() {
+import java.awt.*;
 
+public class Monster extends MyCharacter implements Character {
+    
+    public Monster(int xPos, int yPos, int size, Color color) {
+        super(xPos, yPos, size, color);
     }
 
-    public static void main(String[] args) {}
+    @Override
+    public String getType() {
+        return "monster";
+    }
+
+    // @Override
+    // public void drawCharacter(Graphics g) {}
+
+    // @Override
+    // public Rectangle getBounds() {}
 }

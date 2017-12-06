@@ -5,19 +5,12 @@
  * @author Angelina
  */
 
-import java.awt.Graphics;
+import java.awt.*;
 
 public interface Character {
 
-    public MyCharacter(int xPos, int yPos, int size);
-
-    public int getXPos();
-
-    public int setXPos();
-
-    public int getYPos();
-
-    public int setYPos();
+    // returns type of character
+    public String getType();
 
     // move character position by set amount to the right
     public void moveRight();
@@ -30,4 +23,7 @@ public interface Character {
 
     // will draw character using Graphics package
     public void drawCharacter(Graphics g);
+
+    // gets bounds of character in a rectangle
+    public Rectangle getBounds();
 }

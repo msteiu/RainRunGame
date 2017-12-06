@@ -14,7 +14,7 @@ public class RainRunGUI extends JFrame implements Runnable {
     public RainRunGUI() {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(HeroGame.WIDTH, HeroGame.HEIGHT);
+        setSize(RainRunPanel.WIDTH, RainRunPanel.HEIGHT);
         getContentPane().add(new RainRunPanel());
     }
 
