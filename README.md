@@ -8,6 +8,7 @@ Simple Java game allowing user to control a character using keyboard input, wher
 * When a game has ended, insert a button they can press to return to the main menu.
 * Create a rules panel explaining the rules of the game, to link from the main menu.
 * Figure out how to toggle between different panels based on buttons.
+* [Optional] Make monsters move down in a less choppy fashion (can maybe use another timer to achieve this and modify the moveDown methods)
 * [Optional] Include a pause button, such that the user can manually pause the game when they want.
 * [Optional] Allow the user to choose what color their character should be, and/or different themes.
 * [Optional] Include "themes" / "levels" in our game, where periodically the background / monster colors change.
