@@ -24,7 +24,10 @@ public class Monster extends MyCharacter implements Character {
     public String getType() {
         return "monster";
     }
-
+    //follow instead of moveUp? monster has different speed, so it couldnt use super() for moveUp
+    public void follow(MyCharacter me){
+        
+    }
     // @Override
     // public void moveRight() {
     //     super.moveRight();
