@@ -13,6 +13,18 @@ java RainRunGUI
 ```
 
 ## To Do
+
+### Mara
+
+
+### Angelina
+
+
+### Isabel
+
+
+### Hunter
+
 * Edit the graphics of the main character and the monsters to look nicer.
 * Create a main menu to start the game from.
 * When a game has ended, insert a button they can press to return to the main menu.
@@ -22,6 +34,29 @@ java RainRunGUI
 * [Optional] Include a pause button, such that the user can manually pause the game when they want.
 * [Optional] Allow the user to choose what color their character should be, and/or different themes.
 * [Optional] Include "themes" / "levels" in our game, where periodically the background / monster colors change.
+
+
+## Technical specifications
+
+### Character - DONE (Angelina)
+* Character interface specifies what properties Characters have
+* Think of each object appearing on RainRunPanel as a Character
+
+### FallingObject - 
+* maybe: create a new class for all Characters that fall (monsters, powerups)
+
+### MyCharacter - Mara
+* Attributes: died; health;
+
+### Monster - Mara
+* Attributes: moveDown();
+
+### RainRun
+* Attributes: score; time; scoreInc; speed; monsters / powerUps (maybe Vector<FallingObject>); addElInterval; increaseSizeInterval; increaseSpeedInterval;
+
+### PowerUp
+* Method: moveDown(int speed) <-- probably wants to zig zag differently based on speed
+
 
 ## Rules
 
