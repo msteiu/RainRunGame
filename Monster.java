@@ -42,7 +42,7 @@ public class Monster extends MyCharacter implements Character {
     // }
 
     // @Override
-    // public void moveDown() {
+    // public void moveDown() { //is MyCharacter supposed to move down as well? thought it'd only move forward
     //     super.moveDown();
     //     if (movingLeft) {
     //         moveLeft();
