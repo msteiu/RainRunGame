@@ -125,15 +125,13 @@ public class RainRun {
     }
 
     public void addNewObject() {
-        if (running) {
-            if (Math.random() <= PROB_MONSTER)
-                addMonster();
-            else
-                addPowerUp();
+        if (Math.random() <= PROB_MONSTER)
+            addMonster();
+        else
+            addPowerUp();
 
-            while (fallingObjects.size() > HEIGHT / monsterSize)
-                fallingObjects.remove(0); // faster than removing only elements that are off the screen but maybe glitchy
-        }
+        while (fallingObjects.size() > HEIGHT / monsterSize)
+            fallingObjects.remove(0); // faster than removing only elements that are off the screen but maybe glitchy
     }
 
 
@@ -162,6 +160,29 @@ public class RainRun {
                     this.running = false;
                 }
             }                
+        }
+    }
+
+
+    // Check time //
+
+    private void checkTime() {
+        if (running) {
+            if (time % getMS(ADD_EL_INTERVAL) == 0)
+                addNewObject();
+
+            if (time % getMS(INCREASE_SIZE_INTERVAL) == 0)
+                monsterSize++;
+
+            if (time % getMS(INCREASE_SPEED_INTERVAL) == 0 && speed - 1 < MAX_SPEED)
+                speed++;
+
+            for (FallingObject obj : fallingObjects)
+                obj.moveDown(speed);
+
+            checkHit();
+            score += scoreInc;
+            time += speed; // speed == number of milliseconds
         }
     }
 
