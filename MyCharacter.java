@@ -10,17 +10,17 @@ public class MyCharacter implements Character {
   protected Color charColor;
   protected int xPos, yPos, size;
   protected int leftEdge, rightEdge;
-  protected boolean hasShield; //optional
-  protected String[] powerups; //optional
-  protected int countPowerups; //optional
+  protected boolean hasShield; //optional (not all instances will have shields)
+  protected String[] powerups; //optional (not all instances will have powerups)
+  protected int countPowerups; //optional (used to check for powerups array's size)
   
-  public MyCharacter(int xPos, int yPos, int size, Color color, boolean shield, String[] powers) {
+  public MyCharacter(int xPos, int yPos, int size, Color color, boolean shield) {
     this.xPos = xPos;
     this.yPos = yPos;
     this.size = size;
     this.charColor = color;
     this.hasShield = shield;
-    this.powerups = powers;
+    this.powerups = new String[1];
     this.countPowerups = 0;
     
     this.leftEdge = RainRunPanel.BORDER;
@@ -36,9 +36,7 @@ public class MyCharacter implements Character {
     if (countPowerups == this.powerups.length){
       expandCapacity(powerups);
     }      
-    powerups[current] = powerUp;
-    health += 10; //increase health score by 10 for each new power-up acquired 
-    speed += 5; //increase speed score by 5 for each new power-up acquired 
+    powerups[countPowerups] = powerUp;
   }
   
   private void expandCapacity(String[] array){
@@ -49,9 +47,6 @@ public class MyCharacter implements Character {
   }
   
   //getters
-  public String getType() {
-    return "mycharacter";
-  }
   
   public int getX() {
     return xPos;
@@ -77,23 +72,20 @@ public class MyCharacter implements Character {
   public void moveDown() {
     this.yPos += this.size;
   }
-  
-  //character is dead
-  public boolean isDead(){
-    return this.health <= 0;
-  }
-  
-  //character is hit
+    
+  //character is hit - check!
   public boolean isHit(){
-    boolean hit = false;
     if (FallingObject.xLocation == this.xLocation && FallingObject.yLocation == this.yLocation){
-      this.health -= 5; //for every hit from a falling object, decrease health by 5
-      hit = true;
+      return trye;
     }
-    return hit;
+    return false;
   }
   
-  // modify to be whatever you want. filler for now
+  // Character interface's methods implementation
+  public String getType() {
+    return "mycharacter";
+  }
+  
   public void drawCharacter(Graphics g) {
     g.setColor(charColor);
     g.fillRect(xPos, yPos, size, size);
