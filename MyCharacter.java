@@ -46,8 +46,7 @@ public class MyCharacter implements Character {
     array = newArray;
   }
   
-  //getters
-  
+  //getters (location)
   public int getX() {
     return xPos;
   }
@@ -68,14 +67,9 @@ public class MyCharacter implements Character {
       xPos -= size;
     }
   }
-  
-  public void moveDown() {
-    this.yPos += this.size;
-  }
     
-  //character is hit - check!
-  public boolean isHit(){
-    if (FallingObject.xLocation == this.xLocation && FallingObject.yLocation == this.yLocation){
+  public boolean isHit(Monster other){
+    if (other.xPos == this.xPos && other.yPos == this.yPos){
       return true;
     }
     return false;
