@@ -76,7 +76,7 @@ public class MyCharacter implements Character {
   //character is hit - check!
   public boolean isHit(){
     if (FallingObject.xLocation == this.xLocation && FallingObject.yLocation == this.yLocation){
-      return trye;
+      return true;
     }
     return false;
   }
