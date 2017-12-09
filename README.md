@@ -18,6 +18,7 @@ java RainRunGUI
 * Updated the FallingObject & Character interfaces, and PowerUp class to reflect that change
 * Mara - Update backend classes (MyCharacter, Monster)
 * Mara - FallingObject interface needs to be implemented by Monster - all things that fall are FallingObjects in this game.
+* Mara - Added png files to images, for MyCharacter (minion) and rain drops (2 dimensions)
 
 
 ## Data Structures
@@ -30,8 +31,6 @@ java RainRunGUI
 ## To Do
 
 ### Mara
-
-* Edit the graphics of the main character and the monsters to look nicer.
 
 ### Angelina
 
