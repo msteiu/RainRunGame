@@ -12,15 +12,6 @@ public interface Character {
     // returns type of character
     public String getType();
 
-    // move character position by set amount to the right
-    public void moveRight();
-
-    // move character position by set amount to the left
-    public void moveLeft();
-
-    // move character by set amount down
-    public void moveDown();
-
     // will draw character using Graphics package
     public void drawCharacter(Graphics g);
 

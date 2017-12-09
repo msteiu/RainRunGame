@@ -181,7 +181,7 @@ public class RainRun {
         if (time % getMS(INCREASE_SIZE_INTERVAL) == 0)
             monsterSize++;
 
-        if (time % getMS(INCREASE_SPEED_INTERVAL) == 0 && speed - 1 < MAX_SPEED)
+        if (time % getMS(INCREASE_SPEED_INTERVAL) == 0 && speed - 1 < MAX_SPEED) 
             speed++;
 
         for (FallingObject obj : fallingObjects)

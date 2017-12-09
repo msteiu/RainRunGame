@@ -7,24 +7,13 @@ import java.io.*;
 
 import java.util.Random;
 
-public class PowerUp implements Character {
+public class PowerUp implements FallingObject {
     
     protected String powerType;
     private int xCoord, yCoord, height, width, moveAmt;
     private int leftEdge, rightEdge;
-    private boolean onScreen, movingLeft;
+    private boolean movingLeft;
     private BufferedImage img;
-
-    // potentially not in this class:
-    // protected ImageIcon icon;
-
-    // // temporary until we discuss panel size
-    // private final int SCREEN_WIDTH = 10;
-    // private final int SCREEN_HEIGHT = 40;
-    
-    // // temp to complete isCaught method:
-    // private final int CHAR_TEMP_X = 1;
-    // private final int CHAR_TEMP_Y = 1;
     
     public PowerUp(int xCoord, int yCoord, String imagePath) {
         this.xCoord = xCoord;
@@ -38,37 +27,35 @@ public class PowerUp implements Character {
             System.out.println("Couldn't open image " + imagePath);
         }
 
-        this.moveAmt = new Random().nextInt((width / 2) + 1);
+        this.moveAmt = new Random().nextInt(3);
         this.leftEdge = RainRunPanel.BORDER;
         this.rightEdge = RainRunPanel.WIDTH - width - RainRunPanel.BORDER;
-
-        onScreen = true;
-        movingLeft = true;
+        this.movingLeft = true;
     }
 
     public String getType() {
         return powerType;
     }
 
-    public void moveRight() {
-        if ( (xCoord + moveAmt) <= rightEdge) {
-            xCoord += moveAmt;
+    public void moveRight(int speed) {
+        if ( (xCoord + (moveAmt*speed)) <= rightEdge) {
+            xCoord += (moveAmt*speed);
         } else {
             movingLeft = true;
         }
     }
 
-    public void moveLeft() {
-        if ( (xCoord - moveAmt) >= leftEdge) {
-            xCoord -= moveAmt;
+    public void moveLeft(int speed) {
+        if ( (xCoord - (moveAmt*speed)) >= leftEdge) {
+            xCoord -= (moveAmt*speed);
         } else {
             movingLeft = false;
         }
     }
     
     // Will move down in a zig zag motion
-    public void moveDown() {
-        this.yCoord += (height / 2);
+    public void moveDown(int speed) {
+        this.yCoord += (moveAmt*speed);
         if (movingLeft) {
             moveLeft();
         } else {
@@ -98,35 +85,6 @@ public class PowerUp implements Character {
         return height;
     }
 
-    // // diagonal motion
-    // // test actual values when GUI is set up
-    // public void fall() {
-    //     while (yCoord > 0) {
-    //         yCoord -= 0.5;
-    //         bounce();
-    //     }
-    //     onScreen = false;
-    // }
-    
-    // // possible bug
-    // public void bounce() {
-    //     while (xCoord < SCREEN_WIDTH) {
-    //         xCoord += 0.5;
-    //     } 
-    //     while (xCoord > 0) {
-    //         xCoord -= 0.5;
-    //     } 
-    // }
-    
-    // need info about character position -
-    // public boolean isCaught() {
-    //     if (xCoord == CHAR_TEMP_X && yCoord == CHAR_TEMP_Y) {
-    //         onScreen = false;
-    //         return true;
-    //     } 
-    //     return false;
-    // }
-    
     public int getXCoord() {
         return xCoord;
     }
@@ -146,9 +104,5 @@ public class PowerUp implements Character {
     public void setYCoord (int yCoord) {
         this.yCoord = yCoord;
     }
-    
-    // public ImageIcon getIcon() {
-    //     return icon; 
-    // }
     
 }

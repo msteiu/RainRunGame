@@ -12,25 +12,28 @@ javac RainRunGUI.java
 java RainRunGUI
 ```
 
-## To Do
+## Change log
 
-### Data Structures
+* Angelina - Modified RainRun and RainRunPanel for modularity. Assumes that FallingObjects all contain the method: public void moveDown(int speed);
+* Updated the FallingObject & Character interfaces, and PowerUp class to reflect that change
 
-* Hash Tables for case and effect for implementHit
 
-* Stack for hearts/lives 
+## Data Structures
 
+* Hash Tables for storing the hit rules
+* Vector to store FallingObjects 
 * Hash Tables for scores 
 
+
+## To Do
 
 ### Mara
 
 * Edit the graphics of the main character and the monsters to look nicer.
-* Update backend classes 
+* Update backend classes
+* FallingObject interface needs to be implemented by Monster - all things that fall are FallingObjects in this game.
 
 ### Angelina
-
-* Examine RainRunPanel for code to be moved to 
 
 ### Isabel
 
@@ -40,22 +43,15 @@ java RainRunGUI
 
 ### Hunter
 
-
 * DeadPanel 
 * FallingObject
 * Start slides 
-
-
 
 ### Other 
 
 * Figure out how to toggle between different panels based on buttons.
 * [Optional] Make monsters move down in a less choppy fashion (can maybe use another timer to achieve this and modify the moveDown methods)
 * [Optional] Include a pause button, such that the user can manually pause the game when they want.
-
-
-## Extras
-
 * [Optional] Allow the user to choose what color their character should be, and/or different themes.
 * [Optional] Include "themes" / "levels" in our game, where periodically the background / monster colors change.
 
@@ -64,9 +60,9 @@ java RainRunGUI
 
 ### Character - DONE (Angelina)
 * Character interface specifies what properties Characters have
-* Think of each object appearing on RainRunPanel as a Character
+* Think of each object appearing on RainRunPanel as a Character / sometimes a FallingObject
 
-### FallingObject - 
+### FallingObject - DONE
 * maybe: create a new class for all Characters that fall (monsters, powerups)
 
 ### MyCharacter - Mara
