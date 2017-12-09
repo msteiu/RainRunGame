@@ -7,6 +7,7 @@
 import java.awt.*;
 import java.util.*;
 
+//a FallingObject is a Character interface's child
 public interface FallingObject extends Character {
     
     public void moveDown(int speed);
