@@ -16,6 +16,8 @@ java RainRunGUI
 
 * Angelina - Modified RainRun and RainRunPanel for modularity. Assumes that FallingObjects all contain the method: public void moveDown(int speed);
 * Updated the FallingObject & Character interfaces, and PowerUp class to reflect that change
+* Mara - Update backend classes (MyCharacter, Monster)
+* Mara - FallingObject interface needs to be implemented by Monster - all things that fall are FallingObjects in this game.
 
 
 ## Data Structures
@@ -30,8 +32,6 @@ java RainRunGUI
 ### Mara
 
 * Edit the graphics of the main character and the monsters to look nicer.
-* Update backend classes
-* FallingObject interface needs to be implemented by Monster - all things that fall are FallingObjects in this game.
 
 ### Angelina
 
