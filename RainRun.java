@@ -4,7 +4,8 @@
  * @author Hunter Sessa
  */
 
-import java.awt.Color;
+import java.awt.*;
+import java.util.*;
 
 public class RainRun {
 
@@ -35,7 +36,6 @@ public class RainRun {
 
         this.scoreFont = new Font("Sans Serif", Font.BOLD, 16);
         this.monsterSize = charSize;
-        this.running = false;
         this.died = false;
         this.time = 0;
         this.score = 0;
@@ -99,6 +99,17 @@ public class RainRun {
     }
 
 
+    // Allowing our characters to move based on keyboard input //
+
+    public void moveLeft() {
+        character.moveLeft();
+    }
+
+    public void moveRight() {
+        character.moveRight();
+    }
+
+
     // Add a new FallingObject to our game //
 
     public void addMonster() {
@@ -155,10 +166,8 @@ public class RainRun {
                 applyHitRule(obj);
                 monsters.remove(i);
 
-                if (health <= 0) {
+                if (health <= 0)
                     this.died = true;
-                    this.running = false;
-                }
             }                
         }
     }
@@ -167,23 +176,21 @@ public class RainRun {
     // Check time //
 
     private void checkTime() {
-        if (running) {
-            if (time % getMS(ADD_EL_INTERVAL) == 0)
-                addNewObject();
+        if (time % getMS(ADD_EL_INTERVAL) == 0)
+            addNewObject();
 
-            if (time % getMS(INCREASE_SIZE_INTERVAL) == 0)
-                monsterSize++;
+        if (time % getMS(INCREASE_SIZE_INTERVAL) == 0)
+            monsterSize++;
 
-            if (time % getMS(INCREASE_SPEED_INTERVAL) == 0 && speed - 1 < MAX_SPEED)
-                speed++;
+        if (time % getMS(INCREASE_SPEED_INTERVAL) == 0 && speed - 1 < MAX_SPEED)
+            speed++;
 
-            for (FallingObject obj : fallingObjects)
-                obj.moveDown(speed);
+        for (FallingObject obj : fallingObjects)
+            obj.moveDown(speed);
 
-            checkHit();
-            score += scoreInc;
-            time += speed; // speed == number of milliseconds
-        }
+        checkHit();
+        score += scoreInc;
+        time += speed; // speed == number of milliseconds
     }
 
 
@@ -245,13 +252,12 @@ public class RainRun {
         this.died = died;
     }
 
-    public boolean getRunning() {
-        return running;
+    public Vector<FallingObject> getFallingObjects() {
+        return fallingObjects;
     }
 
-    public void setRunning(boolean running) {
-        this.running = running;
+    public MyCharacter getCharacter() {
+        return character;
     }
-
 
 }
