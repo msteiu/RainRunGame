@@ -25,12 +25,11 @@ public class RainRun {
     private Vector<FallingObject> fallingObjects;
     private HashMap<String, HashMap<String, Integer>> hitRules;
 
-    public RainRun(Color charColor, Color monsterColor, int charSize, 
-            int height, int width, int borderSize) {
+    public RainRun(Color charColor, Color monsterColor, int charSize) {
 
-        HEIGHT = height;
-        WIDTH = width;
-        BORDER = borderSize;
+        HEIGHT = RainRunPanel.HEIGHT;
+        WIDTH = RainRunPanel.WIDTH;
+        BORDER = RainRunPanel.BORDER;
         this.character = new MyCharacter(WIDTH/2, HEIGHT - BORDER - 75, charSize, charColor);
         this.monsterColor = monsterColor;
 
@@ -47,12 +46,12 @@ public class RainRun {
         this.hitRules = getHitRules();
     }
 
-    public RainRun(int height, int width, int borderSize) {
+    public RainRun() {
         Color defaultCharColor = new Color(255, 215, 0);
         Color defaultMonsterColor = Color.CYAN;
         int defaultCharSize = 20;
 
-        this(defaultCharColor, defaultMonsterColor, defaultCharSize, height, width, borderSize);
+        this(defaultCharColor, defaultMonsterColor, defaultCharSize);
     }
 
 
