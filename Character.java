@@ -17,4 +17,5 @@ public interface Character {
 
     // gets bounds of character in a rectangle
     public Rectangle getBounds();
+    
 }

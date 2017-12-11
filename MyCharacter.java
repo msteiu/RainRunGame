@@ -7,86 +7,87 @@
 import java.awt.*;
 
 public class MyCharacter implements Character {
-  protected Color charColor;
-  protected int xPos, yPos, size;
-  protected int leftEdge, rightEdge;
-  protected boolean hasShield; //optional (not all instances will have shields)
-  protected String[] powerups; //optional (not all instances will have powerups)
-  protected int countPowerups; //optional (used to check for powerups array's size)
-  
-  public MyCharacter(int xPos, int yPos, int size, Color color, boolean shield) {
-    this.xPos = xPos;
-    this.yPos = yPos;
-    this.size = size;
-    this.charColor = color;
-    this.hasShield = shield;
-    this.powerups = new String[1];
-    this.countPowerups = 0;
+    protected Color charColor;
+    protected int xPos, yPos, size;
+    protected int leftEdge, rightEdge;
+    protected boolean hasShield; //optional (not all instances will have shields)
+    protected String[] powerups; //optional (not all instances will have powerups)
+    protected int countPowerups; //optional (used to check for powerups array's size)
     
-    this.leftEdge = RainRunPanel.BORDER;
-    this.rightEdge = RainRunPanel.WIDTH - size - RainRunPanel.BORDER;
-  }
-  
-  //power-ups
-  public boolean hasPowerUp(){
-    return this.powerups.length != 0;
-  }
-  
-  public void applyPowerUp(String powerUp){
-    if (countPowerups == this.powerups.length){
-      expandCapacity(powerups);
-    }      
-    powerups[countPowerups] = powerUp;
-  }
-  
-  private void expandCapacity(String[] array){
-    String[] newArray = new String[array.length*2];
-    for (int i = 0; i<newArray.length; i++)
-      newArray[i] = array[i];
-    array = newArray;
-  }
-  
-  //getters (location)
-  public int getX() {
-    return xPos;
-  }
-  
-  public int getY() {
-    return yPos;
-  }
-  
-  //moving character
-  public void moveRight() {
-    if ( (xPos + size) <= rightEdge) {
-      xPos += size;
+    public MyCharacter(int xPos, int yPos, int size, Color color) {
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.size = size;
+        this.charColor = color;
+        this.hasShield = false;
+        // this.powerups = new String[1];
+        // this.countPowerups = 0;
+        
+        this.leftEdge = RainRunPanel.BORDER;
+        this.rightEdge = RainRunPanel.WIDTH - size - RainRunPanel.BORDER;
     }
-  }
-  
-  public void moveLeft() {
-    if ( (xPos - size) >= leftEdge) {
-      xPos -= size;
-    }
-  }
     
-  public boolean isHit(Monster other){
-    if (other.xPos == this.xPos && other.yPos == this.yPos){
-      return true;
+    //power-ups
+    // public boolean hasPowerUp() {
+    //     return this.powerups.length != 0;
+    // }
+    
+    // public void applyPowerUp(String powerUp){
+    //     if (countPowerups == this.powerups.length){
+    //         expandCapacity(powerups);
+    //     }      
+    //     powerups[countPowerups] = powerUp;
+    // }
+    
+    // private void expandCapacity(String[] array){
+    //     String[] newArray = new String[array.length*2];
+    //     for (int i = 0; i<newArray.length; i++)
+    //         newArray[i] = array[i];
+    //     array = newArray;
+    // }
+    
+    //getters (location)
+    public int getX() {
+        return xPos;
     }
-    return false;
-  }
-  
-  // Character interface's methods implementation
-  public String getType() {
-    return "mycharacter";
-  }
-  
-  public void drawCharacter(Graphics g) {
-    g.setColor(charColor);
-    g.fillRect(xPos, yPos, size, size);
-  }
-  
-  public Rectangle getBounds() {
-    return new Rectangle(xPos, yPos, size, size);
-  }
-  
+    
+    public int getY() {
+        return yPos;
+    }
+
+    public boolean getHasShield() {
+        return hasShield;
+    }
+
+    public void setHasShield(boolean hasShield) {
+        this.hasShield = hasShield;
+    }
+    
+    //moving character
+    public void moveRight() {
+        if ( (xPos + size) <= rightEdge) {
+            xPos += size;
+        }
+    }
+    
+    public void moveLeft() {
+        if ( (xPos - size) >= leftEdge) {
+            xPos -= size;
+        }
+    }
+    
+    // Character interface's methods implementation
+    public String getType() {
+        return "mycharacter";
+    }
+    
+    public void drawCharacter(Graphics g) {
+        g.setColor(charColor);
+        g.fillRect(xPos, yPos, size, size);
+    }
+    
+    public Rectangle getBounds() {
+        return new Rectangle(xPos, yPos, size, size);
+    }
+    
 }

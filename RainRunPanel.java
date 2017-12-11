@@ -22,6 +22,8 @@ public class RainRunPanel extends JPanel {
     protected static final int WIDTH = 300; // how wide the overall game frame is
     protected static final int BORDER = 15; // thickness of border
     protected static final Font SCORE_FONT = new Font("Sans Serif", Font.BOLD, 16);
+    protected static final Color BORDER_COLOR = new Color(75, 0, 130); // dark purple
+    protected static final int DELAY = 25;
 
     private RainRun game;
     private Timer timer;
@@ -30,11 +32,11 @@ public class RainRunPanel extends JPanel {
     private boolean running;
 
     public RainRunPanel() {
-        this.game = new RainRun(HEIGHT, WIDTH, BORDER);
+        this.game = new RainRun();
         tListener = new TimerListener();
         kListener = new MoveListener();
 
-        timer = new Timer(game.getSpeed(), tListener); // 1000ms = 1 second
+        timer = new Timer(DELAY, tListener); // 1000ms = 1 second
 
         setBorder(BorderFactory.createLineBorder(BORDER_COLOR, BORDER));
         setFocusable(true);
@@ -44,11 +46,11 @@ public class RainRunPanel extends JPanel {
     }
 
     public RainRunPanel(Color charColor, Color monsterColor, int charSize) {
-        this.game = new RainRun(charColor, monsterColor, charSize, HEIGHT, WIDTH, BORDER);
+        this.game = new RainRun(charColor, monsterColor, charSize);
         tListener = new TimerListener();
         kListener = new MoveListener();
 
-        timer = new Timer(game.getSpeed(), tListener); // 1000ms = 1 second
+        timer = new Timer(DELAY, tListener); // 1000ms = 1 second
 
         setBorder(BorderFactory.createLineBorder(BORDER_COLOR, BORDER));
         setFocusable(true);
@@ -66,7 +68,7 @@ public class RainRunPanel extends JPanel {
             obj.drawCharacter(g);
         }
 
-        if (!died) // remove char when dead
+        if (!game.getDied()) // remove char when dead
             game.getCharacter().drawCharacter(g);
         else
             makeDeathPane(g);
@@ -141,9 +143,23 @@ public class RainRunPanel extends JPanel {
                     running = false;
                 }
 
-                checkTime();
+                game.checkTime();
             }
         }
+    }
+
+    // GETTERS AND SETTERS //
+
+    public void start() {
+        this.running = true;
+    }
+
+    public void pause() {
+        this.running = false;
+    }
+
+    public boolean isRunning() {
+        return running;
     }
 
 }

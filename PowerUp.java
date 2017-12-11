@@ -27,7 +27,7 @@ public class PowerUp implements FallingObject {
             System.out.println("Couldn't open image " + imagePath);
         }
 
-        this.moveAmt = new Random().nextInt(3);
+        this.moveAmt = new Random().nextInt(2) + 1;
         this.leftEdge = RainRunPanel.BORDER;
         this.rightEdge = RainRunPanel.WIDTH - width - RainRunPanel.BORDER;
         this.movingLeft = true;
@@ -57,9 +57,9 @@ public class PowerUp implements FallingObject {
     public void moveDown(int speed) {
         this.yCoord += (moveAmt*speed);
         if (movingLeft) {
-            moveLeft();
+            moveLeft(speed);
         } else {
-            moveRight();
+            moveRight(speed);
         }
     }
 
@@ -91,10 +91,6 @@ public class PowerUp implements FallingObject {
     
     public int getYCoord() {
         return yCoord;
-    }
-    
-    public boolean isOnScreen() {
-        return onScreen; 
     }
     
     public void setXCoord(int xCoord) {

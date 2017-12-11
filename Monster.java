@@ -10,7 +10,7 @@ import java.util.Random;
 public class Monster extends MyCharacter implements FallingObject {
     
     public Monster(int xPos, int yPos, int size, Color color) {
-        super(xPos, yPos, size, color, false);
+        super(xPos, yPos, size, color);
     }
 
     @Override 

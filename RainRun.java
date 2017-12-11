@@ -9,8 +9,10 @@ import java.util.*;
 
 public class RainRun {
 
-    private static final int HEIGHT, WIDTH, BORDER;
-    private static final int ADD_EL_INTERVAL = 1; // add an element every second
+    private static final int HEIGHT = RainRunPanel.HEIGHT;
+    private static final int WIDTH = RainRunPanel.WIDTH;
+    private static final int BORDER = RainRunPanel.BORDER;
+    private static final int ADD_EL_INTERVAL = 2; // add an element every second
     private static final int INCREASE_SIZE_INTERVAL = 10;
     private static final int INCREASE_SPEED_INTERVAL = 10;
     private static final int MAX_SPEED = 10;
@@ -27,9 +29,6 @@ public class RainRun {
 
     public RainRun(Color charColor, Color monsterColor, int charSize) {
 
-        HEIGHT = RainRunPanel.HEIGHT;
-        WIDTH = RainRunPanel.WIDTH;
-        BORDER = RainRunPanel.BORDER;
         this.character = new MyCharacter(WIDTH/2, HEIGHT - BORDER - 75, charSize, charColor);
         this.monsterColor = monsterColor;
 
@@ -47,11 +46,7 @@ public class RainRun {
     }
 
     public RainRun() {
-        Color defaultCharColor = new Color(255, 215, 0);
-        Color defaultMonsterColor = Color.CYAN;
-        int defaultCharSize = 20;
-
-        this(defaultCharColor, defaultMonsterColor, defaultCharSize);
+        this(new Color(255, 215, 0), Color.CYAN, 20);
     }
 
 
@@ -66,9 +61,13 @@ public class RainRun {
         return (rand >= start && rand <= end) ? rand : end;
     }
 
-    private static int getMS(int seconds) {
+    private int getMSFromTime() {
+        return time*RainRunPanel.DELAY;
+    }
+
+    private static int getMSFromSecond(int seconds) {
         // convert second to millisecond
-        return seconds * 1000;
+        return seconds * 1000; 
     }
 
 
@@ -140,8 +139,9 @@ public class RainRun {
         else
             addPowerUp();
 
-        while (fallingObjects.size() > HEIGHT / monsterSize)
+        while (fallingObjects.size() > HEIGHT / monsterSize) {
             fallingObjects.remove(0); // faster than removing only elements that are off the screen but maybe glitchy
+        }
     }
 
 
@@ -150,20 +150,27 @@ public class RainRun {
     private void applyHitRule(FallingObject obj) {
         HashMap<String, Integer> rules = hitRules.get(obj.getType());
         this.score += rules.get("points");
-        this.health += rules.get("health");
-        this.speed += rules.get("speed");
         this.scoreInc += rules.get("scoreInc");
+
+        int newHealth = health + rules.get("health");
+        if (newHealth <= MAX_HEALTH)
+            health = newHealth;
+
+        int newSpeed = speed + rules.get("speed");
+        if (speed <= MAX_SPEED)
+            speed = newSpeed;
     }
 
     public void checkHit() {
         Rectangle charBounds = character.getBounds();
+
         
         for(int i = fallingObjects.size() - 1; i >= 0; i--) {
             FallingObject obj = fallingObjects.get(i);
+            
             if (charBounds.intersects(obj.getBounds())) {
-
                 applyHitRule(obj);
-                monsters.remove(i);
+                fallingObjects.remove(i);
 
                 if (health <= 0)
                     this.died = true;
@@ -174,22 +181,24 @@ public class RainRun {
 
     // Check time //
 
-    private void checkTime() {
-        if (time % getMS(ADD_EL_INTERVAL) == 0)
+    public void checkTime() {
+        if (getMSFromTime() % getMSFromSecond(ADD_EL_INTERVAL) == 0) {
             addNewObject();
+            score += scoreInc;
+        }
 
-        if (time % getMS(INCREASE_SIZE_INTERVAL) == 0)
+        if (getMSFromTime() % getMSFromSecond(INCREASE_SIZE_INTERVAL) == 0) {
             monsterSize++;
+        }
 
-        if (time % getMS(INCREASE_SPEED_INTERVAL) == 0 && speed - 1 < MAX_SPEED) 
+        if (getMSFromTime() % getMSFromSecond(INCREASE_SPEED_INTERVAL) == 0 && speed - 1 < MAX_SPEED) 
             speed++;
 
         for (FallingObject obj : fallingObjects)
             obj.moveDown(speed);
 
         checkHit();
-        score += scoreInc;
-        time += speed; // speed == number of milliseconds
+        time++;
     }
 
 

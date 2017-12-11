@@ -11,15 +11,19 @@ import javax.swing.event.*;
 
 public class RainRunGUI extends JFrame implements Runnable {
 
+    private RainRunPanel gamePanel;
+
     public RainRunGUI() {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(RainRunPanel.WIDTH, RainRunPanel.HEIGHT);
-        getContentPane().add(new RainRunPanel());
+        gamePanel = new RainRunPanel();
+        getContentPane().add(gamePanel);
     }
 
     public void run() {
         setVisible(true);
+        gamePanel.start();
     }
 
     public static void main(String[] args) {
