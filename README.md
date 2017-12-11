@@ -15,11 +15,11 @@ java RainRunGUI
 ## Change log
 
 * Angelina - Modified RainRun and RainRunPanel for modularity. Assumes that FallingObjects all contain the method: public void moveDown(int speed);
-* Updated the FallingObject & Character interfaces, and PowerUp class to reflect that change
+* Angelina - Updated the FallingObject & Character interfaces, and PowerUp class to reflect that change
 * Mara - Update backend classes (MyCharacter, Monster)
 * Mara - FallingObject interface needs to be implemented by Monster - all things that fall are FallingObjects in this game.
 * Mara - Added png files to images, for MyCharacter (minion) and rain drops (2 dimensions)
-
+* Angelina - Changed the way falling objects are added such that the space between falling objects stays approximately the same
 
 ## Data Structures
 

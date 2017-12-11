@@ -5,12 +5,10 @@ import javax.imageio.*;
 import java.awt.image.*;
 import java.io.*;
 
-import java.util.Random;
-
 public class PowerUp implements FallingObject {
     
     protected String powerType;
-    private int xCoord, yCoord, height, width, moveAmt;
+    private int xCoord, yCoord, height, width;
     private int leftEdge, rightEdge;
     private boolean movingLeft;
     private BufferedImage img;
@@ -27,7 +25,6 @@ public class PowerUp implements FallingObject {
             System.out.println("Couldn't open image " + imagePath);
         }
 
-        this.moveAmt = new Random().nextInt(2) + 1;
         this.leftEdge = RainRunPanel.BORDER;
         this.rightEdge = RainRunPanel.WIDTH - width - RainRunPanel.BORDER;
         this.movingLeft = true;
@@ -37,17 +34,20 @@ public class PowerUp implements FallingObject {
         return powerType;
     }
 
+    // move left and right by less than you move down
     public void moveRight(int speed) {
-        if ( (xCoord + (moveAmt*speed)) <= rightEdge) {
-            xCoord += (moveAmt*speed);
+        int moveAmt = Math.max(speed / 2, 1);
+        if ( (xCoord + moveAmt) <= rightEdge) {
+            xCoord += moveAmt;
         } else {
             movingLeft = true;
         }
     }
 
     public void moveLeft(int speed) {
-        if ( (xCoord - (moveAmt*speed)) >= leftEdge) {
-            xCoord -= (moveAmt*speed);
+        int moveAmt = Math.max(speed / 2, 1);
+        if ( (xCoord - moveAmt) >= leftEdge) {
+            xCoord -= moveAmt;
         } else {
             movingLeft = false;
         }
@@ -55,7 +55,7 @@ public class PowerUp implements FallingObject {
     
     // Will move down in a zig zag motion
     public void moveDown(int speed) {
-        this.yCoord += (moveAmt*speed);
+        this.yCoord += speed;
         if (movingLeft) {
             moveLeft(speed);
         } else {
@@ -85,11 +85,11 @@ public class PowerUp implements FallingObject {
         return height;
     }
 
-    public int getXCoord() {
+    public int getX() {
         return xCoord;
     }
     
-    public int getYCoord() {
+    public int getY() {
         return yCoord;
     }
     

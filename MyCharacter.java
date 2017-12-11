@@ -27,25 +27,6 @@ public class MyCharacter implements Character {
         this.rightEdge = RainRunPanel.WIDTH - size - RainRunPanel.BORDER;
     }
     
-    //power-ups
-    // public boolean hasPowerUp() {
-    //     return this.powerups.length != 0;
-    // }
-    
-    // public void applyPowerUp(String powerUp){
-    //     if (countPowerups == this.powerups.length){
-    //         expandCapacity(powerups);
-    //     }      
-    //     powerups[countPowerups] = powerUp;
-    // }
-    
-    // private void expandCapacity(String[] array){
-    //     String[] newArray = new String[array.length*2];
-    //     for (int i = 0; i<newArray.length; i++)
-    //         newArray[i] = array[i];
-    //     array = newArray;
-    // }
-    
     //getters (location)
     public int getX() {
         return xPos;
@@ -75,7 +56,7 @@ public class MyCharacter implements Character {
             xPos -= size;
         }
     }
-    
+
     // Character interface's methods implementation
     public String getType() {
         return "mycharacter";

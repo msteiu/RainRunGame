@@ -12,4 +12,7 @@ public interface FallingObject extends Character {
     
     public void moveDown(int speed);
     
+    public int getX();
+
+    public int getY();
 }

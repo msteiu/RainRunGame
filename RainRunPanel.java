@@ -20,9 +20,10 @@ import java.io.*;
 public class RainRunPanel extends JPanel {
     protected static final int HEIGHT = 550; // how high the overall game frame is
     protected static final int WIDTH = 300; // how wide the overall game frame is
-    protected static final int BORDER = 15; // thickness of border
+    protected static final int BORDER = 10; // thickness of border
     protected static final Font SCORE_FONT = new Font("Sans Serif", Font.BOLD, 16);
     protected static final Color BORDER_COLOR = new Color(75, 0, 130); // dark purple
+    protected static final Color BACKGROUND_COLOR = new Color(233, 223, 239);
     protected static final int DELAY = 25;
 
     private RainRun game;
@@ -39,14 +40,15 @@ public class RainRunPanel extends JPanel {
         timer = new Timer(DELAY, tListener); // 1000ms = 1 second
 
         setBorder(BorderFactory.createLineBorder(BORDER_COLOR, BORDER));
+        setBackground(BACKGROUND_COLOR);
         setFocusable(true);
         addKeyListener(kListener);
         running = false;
         timer.start();
     }
 
-    public RainRunPanel(Color charColor, Color monsterColor, int charSize) {
-        this.game = new RainRun(charColor, monsterColor, charSize);
+    public RainRunPanel(Color charColor, int charSize) {
+        this.game = new RainRun(charColor, charSize);
         tListener = new TimerListener();
         kListener = new MoveListener();
 
@@ -60,7 +62,8 @@ public class RainRunPanel extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+        
+        game.getCharacter().drawCharacter(g);
         makeScore(g);
         makeHealth(g);
 
@@ -68,9 +71,7 @@ public class RainRunPanel extends JPanel {
             obj.drawCharacter(g);
         }
 
-        if (!game.getDied()) // remove char when dead
-            game.getCharacter().drawCharacter(g);
-        else
+        if (game.getDied())
             makeDeathPane(g);
 
         repaint();

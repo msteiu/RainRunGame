@@ -12,25 +12,22 @@ public class RainRun {
     private static final int HEIGHT = RainRunPanel.HEIGHT;
     private static final int WIDTH = RainRunPanel.WIDTH;
     private static final int BORDER = RainRunPanel.BORDER;
-    private static final int ADD_EL_INTERVAL = 2; // add an element every second
-    private static final int INCREASE_SIZE_INTERVAL = 10;
-    private static final int INCREASE_SPEED_INTERVAL = 10;
+    private static final int SPACE_BETWEEN_OBJ = 150; // leave approx 80 pixels between falling objects
+    private static final int NEXT_LEVEL_INTERVAL = getIntervalFromSecond(30); // new level every half minute
     private static final int MAX_SPEED = 10;
     private static final int MAX_HEALTH = 3;
     private static final double PROB_MONSTER = 0.8;
 
     private MyCharacter character;
-    private Color monsterColor;
     private Font scoreFont;
     private boolean died;
-    private int charSize, monsterSize, time, score, scoreInc, speed, health;
+    private int charSize, monsterSize, time, score, scoreInc, speed, health, level;
     private Vector<FallingObject> fallingObjects;
     private HashMap<String, HashMap<String, Integer>> hitRules;
 
-    public RainRun(Color charColor, Color monsterColor, int charSize) {
+    public RainRun(Color charColor, int charSize) {
 
         this.character = new MyCharacter(WIDTH/2, HEIGHT - BORDER - 75, charSize, charColor);
-        this.monsterColor = monsterColor;
 
         this.scoreFont = new Font("Sans Serif", Font.BOLD, 16);
         this.monsterSize = charSize;
@@ -39,6 +36,7 @@ public class RainRun {
         this.score = 0;
         this.scoreInc = 1;
         this.speed = 1;
+        this.level = 1;
         this.health = MAX_HEALTH;
 
         this.fallingObjects = new Vector<FallingObject>();
@@ -46,7 +44,7 @@ public class RainRun {
     }
 
     public RainRun() {
-        this(new Color(255, 215, 0), Color.CYAN, 20);
+        this(new Color(255, 215, 0), 20);
     }
 
 
@@ -61,13 +59,9 @@ public class RainRun {
         return (rand >= start && rand <= end) ? rand : end;
     }
 
-    private int getMSFromTime() {
-        return time*RainRunPanel.DELAY;
-    }
 
-    private static int getMSFromSecond(int seconds) {
-        // convert second to millisecond
-        return seconds * 1000; 
+    private static int getIntervalFromSecond(int seconds) {
+        return (seconds * 1000) / RainRunPanel.DELAY;
     }
 
 
@@ -91,7 +85,7 @@ public class RainRun {
         allHitRules.put("monster", getHitRule(0, -1, 0, 0));
         allHitRules.put("health", getHitRule(10, 1, 0, 0));
         allHitRules.put("speed", getHitRule(0, 0, 1, 1));
-        allHitRules.put("umbrella", getHitRule(100, 0, 0, 0));
+        allHitRules.put("umbrella", getHitRule(50, 0, 0, 0));
 
         return allHitRules;
     }
@@ -115,7 +109,7 @@ public class RainRun {
         int xLeftBound = Math.max(0, character.getX() - 50); // monsters will appear near character
         int xRightBound = Math.min(WIDTH - size, character.getX() + 50);
         int xCoord = randInt(xLeftBound, xRightBound);
-        fallingObjects.add(new Monster(xCoord, BORDER, size, monsterColor));
+        fallingObjects.add(new Monster(xCoord, BORDER, size));
     }
 
     public String getPUPath(String nameStub, int size) {
@@ -181,18 +175,30 @@ public class RainRun {
 
     // Check time //
 
+    private boolean timeToAddElement() {
+        return fallingObjects.lastElement().getY() >= BORDER + SPACE_BETWEEN_OBJ;
+    }
+
     public void checkTime() {
-        if (getMSFromTime() % getMSFromSecond(ADD_EL_INTERVAL) == 0) {
+
+        if (time == 0) {
             addNewObject();
+        }
+
+        if (time % getIntervalFromSecond(1) == 0) { // add to score each second
             score += scoreInc;
         }
 
-        if (getMSFromTime() % getMSFromSecond(INCREASE_SIZE_INTERVAL) == 0) {
-            monsterSize++;
+        if (fallingObjects.size() > 0 && timeToAddElement()) {
+            addNewObject();
         }
 
-        if (getMSFromTime() % getMSFromSecond(INCREASE_SPEED_INTERVAL) == 0 && speed - 1 < MAX_SPEED) 
-            speed++;
+        if (time % NEXT_LEVEL_INTERVAL == 0) {
+            monsterSize++;
+
+            if (speed + 1 <= MAX_SPEED)
+                speed++;
+        }
 
         for (FallingObject obj : fallingObjects)
             obj.moveDown(speed);
