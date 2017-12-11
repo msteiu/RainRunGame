@@ -12,7 +12,7 @@ public class RainRun {
     private static final int HEIGHT = RainRunPanel.HEIGHT;
     private static final int WIDTH = RainRunPanel.WIDTH;
     private static final int BORDER = RainRunPanel.BORDER;
-    private static final int SPACE_BETWEEN_OBJ = 150; // leave approx 80 pixels between falling objects
+    private static final int SPACE_BETWEEN_OBJ = 100; // leave approx 80 pixels between falling objects
     private static final int NEXT_LEVEL_INTERVAL = getIntervalFromSecond(30); // new level every half minute
     private static final int MAX_SPEED = 10;
     private static final int MAX_HEALTH = 3;
@@ -106,8 +106,8 @@ public class RainRun {
 
     public void addMonster() {
         int size = randInt(monsterSize, monsterSize*2);
-        int xLeftBound = Math.max(0, character.getX() - 50); // monsters will appear near character
-        int xRightBound = Math.min(WIDTH - size, character.getX() + 50);
+        int xLeftBound = Math.max(0, character.getX() - 75); // monsters will appear near character
+        int xRightBound = Math.min(WIDTH - size, character.getX() + 75);
         int xCoord = randInt(xLeftBound, xRightBound);
         fallingObjects.add(new Monster(xCoord, BORDER, size));
     }
@@ -128,12 +128,12 @@ public class RainRun {
     }
 
     public void addNewObject() {
-        if (Math.random() <= PROB_MONSTER)
+        if (Math.random() <= PROB_MONSTER) 
             addMonster();
         else
             addPowerUp();
 
-        while (fallingObjects.size() > HEIGHT / monsterSize) {
+        while (fallingObjects.firstElement().getY() > HEIGHT  - BORDER) {
             fallingObjects.remove(0); // faster than removing only elements that are off the screen but maybe glitchy
         }
     }
