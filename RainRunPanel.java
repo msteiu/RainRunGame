@@ -30,8 +30,6 @@ public class RainRunPanel extends JPanel {
     private Timer timer;
     private TimerListener tListener;
     private MoveListener kListener;
-    //izzy
-//    private PauseListener pListener;
     private boolean running;
 
     public RainRunPanel() {
@@ -44,9 +42,9 @@ public class RainRunPanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(BORDER_COLOR, BORDER));
         setBackground(BACKGROUND_COLOR);
         setFocusable(true);
+        requestFocus();
+
         addKeyListener(kListener);
-        //izzy
-//        addActionListener(pListener);
         running = false;
         timer.start();
     }
@@ -61,8 +59,8 @@ public class RainRunPanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(BORDER_COLOR, BORDER));
         setFocusable(true);
         addKeyListener(kListener);
-        //izzy
-//        addActionListener(pListener);
+
+        running = false;
         timer.start();
     }
 
@@ -162,10 +160,6 @@ public class RainRunPanel extends JPanel {
         }
     }
     
-    //izzy
-//    public class PauseListener implements ActionListner {
-//      //when pause button pressed, display play button and back to menu button
-//    }
 
     // GETTERS AND SETTERS //
 

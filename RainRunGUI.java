@@ -40,7 +40,7 @@ public class RainRunGUI extends JFrame implements Runnable {
   
   public void run() {
     setVisible(true);
-    gamePanel.startGame();
+    // gamePanel.startGame();
   }
   
   public static void main(String[] args) {
