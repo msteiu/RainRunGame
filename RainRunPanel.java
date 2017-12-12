@@ -117,13 +117,20 @@ public class RainRunPanel extends JPanel {
 
         public void keyPressed(KeyEvent e) {
             int keyPressed = e.getKeyCode();
-            if (keyPressed == KeyEvent.VK_LEFT || keyPressed == KeyEvent.VK_A) {
+            if (running && (keyPressed == KeyEvent.VK_LEFT || keyPressed == KeyEvent.VK_A)) {
                 game.moveLeft();
                 game.checkHit();
             }
-            if (keyPressed == KeyEvent.VK_RIGHT || keyPressed == KeyEvent.VK_D) {
+            if (running && (keyPressed == KeyEvent.VK_RIGHT || keyPressed == KeyEvent.VK_D)) {
                 game.moveRight();
                 game.checkHit();
+            }
+            if (keyPressed == KeyEvent.VK_SPACE) {
+                if (isRunning()) {
+                    pauseGame();
+                } else {
+                    startGame();
+                }
             }
         }
         // required by the KeyListener interface
@@ -151,11 +158,11 @@ public class RainRunPanel extends JPanel {
 
     // GETTERS AND SETTERS //
 
-    public void start() {
+    public void startGame() {
         this.running = true;
     }
 
-    public void pause() {
+    public void pauseGame() {
         this.running = false;
     }
 
