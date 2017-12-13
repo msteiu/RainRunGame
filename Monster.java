@@ -10,7 +10,7 @@ import java.util.Random;
 public class Monster extends MyCharacter implements FallingObject {
 
     // a bunch of nice blues
-    private static final Color[] colors = {
+    private static final Color[] COLORS = {
         new Color(22, 111, 213),
         new Color(0, 70, 112),
         new Color(10, 164, 255),
@@ -22,9 +22,11 @@ public class Monster extends MyCharacter implements FallingObject {
         new Color(0, 157, 216),
         new Color(176, 224, 230)
     };
+    private int reflectionSize;
     
     public Monster(int xPos, int yPos, int size) {
-        super(xPos, yPos, size, colors[new Random().nextInt(colors.length - 1)]);
+        super(xPos, yPos, size, COLORS[new Random().nextInt(COLORS.length - 1)]);
+        reflectionSize = size / 4;
     }
 
     @Override 
@@ -41,5 +43,8 @@ public class Monster extends MyCharacter implements FallingObject {
     public void drawCharacter(Graphics g) {
         g.setColor(charColor);
         g.fillOval(xPos, yPos, size, size);
+
+        // g.setColor(Color.WHITE);
+        // g.fillRect(xPos + reflectionSize, yPos + reflectionSize, reflectionSize, reflectionSize);
     }
 }

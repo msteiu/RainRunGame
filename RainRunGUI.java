@@ -13,15 +13,15 @@ public class RainRunGUI extends JFrame implements Runnable {
   
   protected static RainRunPanel gamePanel;
   protected static JPanel cards;
-  final static String MENUPANEL = "Card with Main Menu";
-  final static String PLAYPANEL = "Card with Rain Run";
-  final static String RULESPANEL = "Card with Rules";
+  protected final static String MENUPANEL = "Card with Main Menu";
+  protected final static String PLAYPANEL = "Card with Rain Run";
+  protected final static String RULESPANEL = "Card with Rules";
   protected static CardLayout c1 = new CardLayout();
   
   public RainRunGUI() {
     setResizable(false);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setSize(RainRunPanel.WIDTH, RainRunPanel.HEIGHT);
+    setSize(RRConstants.WIDTH, RRConstants.HEIGHT);
     
     gamePanel = new RainRunPanel();
     gamePanel.pauseGame();

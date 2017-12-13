@@ -18,12 +18,8 @@ import javax.imageio.*;
 import java.io.*;
 
 public class RainRunPanel extends JPanel {
-    protected static final int HEIGHT = 550; // how high the overall game frame is
-    protected static final int WIDTH = 300; // how wide the overall game frame is
-    protected static final int BORDER = 10; // thickness of border
-    protected static final Font SCORE_FONT = new Font("Sans Serif", Font.BOLD, 16);
-    protected static final Color BORDER_COLOR = new Color(75, 0, 130); // dark purple
-    protected static final Color BACKGROUND_COLOR = new Color(233, 223, 239);
+
+    private static final Font SCORE_FONT = RRConstants.getFont(16); // new Font(RRConstants.FONT_NAME, Font.BOLD, 16);
     protected static final int DELAY = 25;
 
     private RainRun game;
@@ -39,8 +35,8 @@ public class RainRunPanel extends JPanel {
 
         timer = new Timer(DELAY, tListener); // 1000ms = 1 second
 
-        setBorder(BorderFactory.createLineBorder(BORDER_COLOR, BORDER));
-        setBackground(BACKGROUND_COLOR);
+        setBorder(BorderFactory.createLineBorder(RRConstants.BORDER_COLOR, RRConstants.BORDER));
+        setBackground(RRConstants.BACKGROUND_COLOR);
         setFocusable(true);
         requestFocus();
 
@@ -56,7 +52,7 @@ public class RainRunPanel extends JPanel {
 
         timer = new Timer(DELAY, tListener); // 1000ms = 1 second
 
-        setBorder(BorderFactory.createLineBorder(BORDER_COLOR, BORDER));
+        setBorder(BorderFactory.createLineBorder(RRConstants.BORDER_COLOR, RRConstants.BORDER));
         setFocusable(true);
         addKeyListener(kListener);
 
@@ -68,12 +64,14 @@ public class RainRunPanel extends JPanel {
         super.paintComponent(g);
         
         game.getCharacter().drawCharacter(g);
-        makeScore(g);
-        makeHealth(g);
 
         for(FallingObject obj : game.getFallingObjects()) {
             obj.drawCharacter(g);
         }
+        
+        // score and health appear on top of objects
+        makeScore(g);
+        makeHealth(g);
 
         if (game.getDied())
             makeDeathPane(g);
@@ -82,17 +80,17 @@ public class RainRunPanel extends JPanel {
     }
 
     private void makeScore(Graphics g) {
-        g.setColor(BORDER_COLOR);
+        g.setColor(RRConstants.BORDER_COLOR);
         g.setFont(SCORE_FONT);
-        g.drawString("Score: " + game.getScore(), BORDER + 8, BORDER + 20);
+        g.drawString("Score: " + game.getScore(), RRConstants.BORDER + 8, RRConstants.BORDER + 20);
     }
 
     private void makeHealth(Graphics g) {
         try { // the health hearts are each 20 px wide
             Image img = ImageIO.read(new File("images/life.png"));
             for (int i = 1; i <= game.getHealth(); i++) {
-                int xCoord = WIDTH - (BORDER + 3) - i*(20 + 5);
-                g.drawImage(img, xCoord, BORDER + 8, new PaneObserver());
+                int xCoord = RRConstants.WIDTH - (RRConstants.BORDER + 3) - i*(20 + 5);
+                g.drawImage(img, xCoord, RRConstants.BORDER + 8, new PaneObserver());
             }
         } catch (IOException e) {
             System.out.println("Couldn't open image images/life.png");
@@ -102,7 +100,7 @@ public class RainRunPanel extends JPanel {
     private void makeDeathPane(Graphics g) {
         try {
             Image img = ImageIO.read(new File("images/dead.png"));
-            g.drawImage(img, (WIDTH - 300) / 2, (HEIGHT/2) - 50, new PaneObserver()); // img 300x100
+            g.drawImage(img, (RRConstants.WIDTH - 300) / 2, (RRConstants.HEIGHT/2) - 50, new PaneObserver()); // img 300x100
         } catch (IOException e) {
             System.out.println("Couldn't open image dead.png");
         }

@@ -25,8 +25,8 @@ public class PowerUp implements FallingObject {
             System.out.println("Couldn't open image " + imagePath);
         }
 
-        this.leftEdge = RainRunPanel.BORDER;
-        this.rightEdge = RainRunPanel.WIDTH - width - RainRunPanel.BORDER;
+        this.leftEdge = RRConstants.BORDER;
+        this.rightEdge = RRConstants.WIDTH - width - RRConstants.BORDER;
         this.movingLeft = true;
     }
 

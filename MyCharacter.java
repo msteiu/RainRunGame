@@ -23,8 +23,8 @@ public class MyCharacter implements Character {
         // this.powerups = new String[1];
         // this.countPowerups = 0;
         
-        this.leftEdge = RainRunPanel.BORDER;
-        this.rightEdge = RainRunPanel.WIDTH - size - RainRunPanel.BORDER;
+        this.leftEdge = RRConstants.BORDER;
+        this.rightEdge = RRConstants.WIDTH - size - RRConstants.BORDER;
     }
     
     //getters (location)

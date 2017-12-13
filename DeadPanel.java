@@ -14,7 +14,7 @@ public class DeadPanel extends JPanel {
     
     public DeadPanel(int score) {
         super();
-        setForeground(RainRun.BACKGROUND);
+        setForeground(RRConstants.BACKGROUND);
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(getDeathLabel());
@@ -28,7 +28,7 @@ public class DeadPanel extends JPanel {
             "<html><b>YOU DIED :(</b></html>", JLabel.CENTER);
         message.setVerticalAlignment(JLabel.CENTER);
         message.setFont(new Font("Sans Serif", Font.PLAIN, 18));
-        message.setForeground(RainRun.TEXT);
+        message.setForeground(RRConstants.TEXT);
         return message;
     }
 

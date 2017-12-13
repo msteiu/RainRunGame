@@ -15,36 +15,32 @@ import java.io.*;
 
 public class RulesPanel extends JPanel {
   
-  protected static final int WIDTH = 300; // how wide the overall game frame is
-  protected static final int HEIGHT = 550; // how high the overall game frame is
-  protected static final int BORDER = 15; // thickness of border
-  protected static final Color BACKGROUND_COLOR = new Color(233, 223, 239); // lilac-ish
-  protected static final Color BORDER_COLOR = new Color(75, 0, 130); // dark purple
-  protected static final Font NAME_FONT = new Font("Courier", Font.BOLD, 60);
-  protected static final Font TEXT_FONT = new Font("Courier", Font.BOLD, 20);
-  protected static final Font BUTTON_FONT = new Font("Courier", Font.BOLD, 30);
-  protected static final Color BACK_COLOR = Color.CYAN;
-  protected JLabel rules;
-  protected JLabel text;
-  protected JButton backButton;
+  private static final Font NAME_FONT = RRConstants.getFont(60); // new Font(RRConstants.FONT_NAME, Font.BOLD, 60);
+  private static final Font TEXT_FONT = RRConstants.getFont(20); // new Font(RRConstants.FONT_NAME, Font.BOLD, 20);
+  private static final Font BUTTON_FONT = RRConstants.getFont(30); // new Font(RRConstants.FONT_NAME, Font.BOLD, 30);
+  private static final Color BACK_COLOR = RRConstants.RULE_BUTTON_COLOR;
+  
+  private JLabel rules;
+  private JLabel text;
+  private JButton backButton;
   
   public RulesPanel() {
     //setting up background panel
     setLayout(null);
-    setBorder(BorderFactory.createLineBorder(BORDER_COLOR, BORDER));
-    setBackground(BACKGROUND_COLOR);
-    setSize(WIDTH, HEIGHT);
+    setBorder(BorderFactory.createLineBorder(RRConstants.BORDER_COLOR, RRConstants.BORDER));
+    setBackground(RRConstants.BACKGROUND_COLOR);
+    setSize(RRConstants.WIDTH, RRConstants.HEIGHT);
     
     //setting up "Rules" Label
     rules = new JLabel("RULES");
     rules.setFont(NAME_FONT);
-    rules.setForeground(BORDER_COLOR);
+    rules.setForeground(RRConstants.BORDER_COLOR);
     
     //setting up text
     text = new JLabel("<html><center>Use the left and<br>right arrows to<br>dodge the " + 
     "falling<br>raindrops. Collect<br>power-ups for special<br>abilities. Stay dry,<br>and have fun!</html>");
     text.setFont(TEXT_FONT);
-    text.setForeground(BORDER_COLOR);
+    text.setForeground(RRConstants.BORDER_COLOR);
     
     
     //setting up backButton
@@ -66,9 +62,9 @@ public class RulesPanel extends JPanel {
     Dimension sizeText = text.getPreferredSize();
     Dimension sizeBack = backButton.getPreferredSize();
 
-    rules.setBounds((WIDTH - sizeRules.width)/2, HEIGHT/5, sizeRules.width, sizeRules.height);
-    text.setBounds((WIDTH - sizeText.width)/2, HEIGHT/3, sizeText.width, sizeText.height);
-    backButton.setBounds((WIDTH - sizeBack.width)/2, HEIGHT/2 + HEIGHT/5, sizeBack.width, sizeBack.height);
+    rules.setBounds((RRConstants.WIDTH - sizeRules.width)/2, RRConstants.HEIGHT/5, sizeRules.width, sizeRules.height);
+    text.setBounds((RRConstants.WIDTH - sizeText.width)/2, RRConstants.HEIGHT/3, sizeText.width, sizeText.height);
+    backButton.setBounds((RRConstants.WIDTH - sizeBack.width)/2, RRConstants.HEIGHT/2 + RRConstants.HEIGHT/5, sizeBack.width, sizeBack.height);
     
   }
   

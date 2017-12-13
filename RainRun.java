@@ -9,9 +9,6 @@ import java.util.*;
 
 public class RainRun {
 
-    private static final int HEIGHT = RainRunPanel.HEIGHT;
-    private static final int WIDTH = RainRunPanel.WIDTH;
-    private static final int BORDER = RainRunPanel.BORDER;
     private static final int SPACE_BETWEEN_OBJ = 100; // leave approx 80 pixels between falling objects
     private static final int NEXT_LEVEL_INTERVAL = getIntervalFromSecond(30); // new level every half minute
     private static final int MAX_SPEED = 10;
@@ -19,7 +16,6 @@ public class RainRun {
     private static final double PROB_MONSTER = 0.8;
 
     private MyCharacter character;
-    private Font scoreFont;
     private boolean died;
     private int charSize, monsterSize, time, score, scoreInc, speed, health, level;
     private Vector<FallingObject> fallingObjects;
@@ -27,9 +23,7 @@ public class RainRun {
 
     public RainRun(Color charColor, int charSize) {
 
-        this.character = new MyCharacter(WIDTH/2, HEIGHT - BORDER - 75, charSize, charColor);
-
-        this.scoreFont = new Font("Sans Serif", Font.BOLD, 16);
+        this.character = new MyCharacter(RRConstants.WIDTH/2, RRConstants.HEIGHT - RRConstants.BORDER - 75, charSize, charColor);
         this.monsterSize = charSize;
         this.died = false;
         this.time = 0;
@@ -44,7 +38,7 @@ public class RainRun {
     }
 
     public RainRun() {
-        this(new Color(255, 215, 0), 20);
+        this(RRConstants.CHAR_DEFAULT_COLOR, 20);
     }
 
 
@@ -107,9 +101,9 @@ public class RainRun {
     public void addMonster() {
         int size = randInt(monsterSize, monsterSize*2);
         int xLeftBound = Math.max(0, character.getX() - 75); // monsters will appear near character
-        int xRightBound = Math.min(WIDTH - size, character.getX() + 75);
+        int xRightBound = Math.min(RRConstants.WIDTH - size, character.getX() + 75);
         int xCoord = randInt(xLeftBound, xRightBound);
-        fallingObjects.add(new Monster(xCoord, BORDER, size));
+        fallingObjects.add(new Monster(xCoord, RRConstants.BORDER, size));
     }
 
     public String getPUPath(String nameStub, int size) {
@@ -118,11 +112,11 @@ public class RainRun {
 
     public void addPowerUp() {
         int size = randInt(1, 2);
-        int xCoord = randInt(0, WIDTH - 30); // biggest image size is 30px
-        PowerUp newPowerUp = new HealthPowerUp(xCoord, BORDER, getPUPath("heart", size));
+        int xCoord = randInt(0, RRConstants.WIDTH - 30); // biggest image size is 30px
+        PowerUp newPowerUp = new HealthPowerUp(xCoord, RRConstants.BORDER, getPUPath("heart", size));
         switch (randInt(0, 2)) {
-            case(1) : newPowerUp = new SpeedPowerUp(xCoord, BORDER, getPUPath("speed", size)); break;
-            case(2) : newPowerUp = new UmbrellaPowerUp(xCoord, BORDER, getPUPath("umbrella", size)); break;
+            case(1) : newPowerUp = new SpeedPowerUp(xCoord, RRConstants.BORDER, getPUPath("speed", size)); break;
+            case(2) : newPowerUp = new UmbrellaPowerUp(xCoord, RRConstants.BORDER, getPUPath("umbrella", size)); break;
         }
         fallingObjects.add(newPowerUp);
     }
@@ -133,7 +127,7 @@ public class RainRun {
         else
             addPowerUp();
 
-        while (fallingObjects.firstElement().getY() > HEIGHT  - BORDER) {
+        while (fallingObjects.firstElement().getY() > RRConstants.HEIGHT  - RRConstants.BORDER) {
             fallingObjects.remove(0); // faster than removing only elements that are off the screen but maybe glitchy
         }
     }
@@ -176,7 +170,7 @@ public class RainRun {
     // Check time //
 
     private boolean timeToAddElement() {
-        return fallingObjects.lastElement().getY() >= BORDER + SPACE_BETWEEN_OBJ;
+        return fallingObjects.lastElement().getY() >= RRConstants.BORDER + SPACE_BETWEEN_OBJ;
     }
 
     public void checkTime() {

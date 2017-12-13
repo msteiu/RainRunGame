@@ -18,24 +18,21 @@ import java.util.Random;
 
 public class MainMenuPanel extends JPanel {
     
-    protected static final int WIDTH = 300; // how wide the overall game frame is
-    protected static final int HEIGHT = 550; // how high the overall game frame is
-    protected static final int BORDER = 15; // thickness of border
-    protected static final Color BACKGROUND_COLOR = new Color(75, 0, 130); // dark purple
-    protected static final Font NAME_FONT = new Font("Courier", Font.BOLD, 60);
-    protected static final Font BUTTON_FONT = new Font("Courier", Font.BOLD, 30);
-    protected static final Color PLAY_COLOR = new Color(255, 215, 0);
-    protected static final Color RULES_COLOR = Color.CYAN;
-    protected JLabel gameName;
-    protected JButton playButton;
-    protected JButton rulesButton;
+    private static final Font NAME_FONT = RRConstants.getFont(60); // new Font(RRConstants.FONT_NAME, Font.BOLD, 60);
+    private static final Font BUTTON_FONT = RRConstants.getFont(30); // new Font(RRConstants.FONT_NAME, Font.BOLD, 30);
+    private static final Color PLAY_COLOR = RRConstants.CHAR_DEFAULT_COLOR;
+    private static final Color RULES_COLOR = RRConstants.RULE_BUTTON_COLOR;
+    
+    private JLabel gameName;
+    private JButton playButton;
+    private JButton rulesButton;
     
     public MainMenuPanel() {
         //setting up background panel
         setLayout(null);
         
-        setBackground(BACKGROUND_COLOR);
-        setSize(WIDTH, HEIGHT);
+        setBackground(RRConstants.BORDER_COLOR);
+        setSize(RRConstants.WIDTH, RRConstants.HEIGHT);
         
         //setting up "Rain Run" Label
         gameName = new JLabel("RAIN RUN");
@@ -72,9 +69,9 @@ public class MainMenuPanel extends JPanel {
         Dimension sizePlay = playButton.getPreferredSize();
         Dimension sizeRules = rulesButton.getPreferredSize();
         
-        gameName.setBounds((WIDTH - sizeName.width)/2, HEIGHT/4, sizeName.width, sizeName.height);
-        playButton.setBounds((WIDTH - sizePlay.width)/2, HEIGHT/2, sizePlay.width, sizePlay.height);
-        rulesButton.setBounds((WIDTH - sizeRules.width)/2, HEIGHT/2 + HEIGHT/8, sizeRules.width, sizeRules.height);
+        gameName.setBounds((RRConstants.WIDTH - sizeName.width)/2, RRConstants.HEIGHT/4, sizeName.width, sizeName.height);
+        playButton.setBounds((RRConstants.WIDTH - sizePlay.width)/2, RRConstants.HEIGHT/2, sizePlay.width, sizePlay.height);
+        rulesButton.setBounds((RRConstants.WIDTH - sizeRules.width)/2, RRConstants.HEIGHT/2 + RRConstants.HEIGHT/8, sizeRules.width, sizeRules.height);
     }
     
     private class ButtonListener implements ActionListener {
