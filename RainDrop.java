@@ -7,7 +7,7 @@
 import java.awt.*;
 import java.util.Random;
 
-public class Rain extends FallingObject {
+public class RainDrop extends FallingObject {
 
     // a bunch of nice blues
     private static final Color[] COLORS = {
@@ -22,50 +22,45 @@ public class Rain extends FallingObject {
         new Color(0, 157, 216),
         new Color(176, 224, 230)
     };
+
     private Color charColor;
     private int size;
-      
-    private int reflectionSize;
     
- /**
- * Constructor - defines what will be contained in Rain instance
- * @param xCoord int- x position of rain drop
- * @param yCoord int- y position of rain drop
- * @param size int size of rain drop
- */ 
-    public Rain(int xPos, int yPos, int size) {
-        
-      super(xPos, yPos);
-
+    /**
+     * Constructor - defines what will be contained in RainDrop instance
+     * @param xCoord int- x position of rain drop
+     * @param yCoord int- y position of rain drop
+     * @param size int size of rain drop
+     */ 
+    public RainDrop(int xCoord, int yCoord, int size) {
+        super(xCoord, yCoord);
         this.charColor = COLORS[new Random().nextInt(COLORS.length - 1)];
         this.size = size;
         this.setHeight(size);
-        setWidth(size);
+        this.setWidth(size);
     }
- 
 
-/**
- * getType() returns type of character 
- * @return String type of character 
- */     
+    /**
+     * getType() returns type of character 
+     * @return String type of character 
+     */     
     public String getType() {
-        return "rain";
+        return "raindrop";
     }
 
-/**
- * moveDown () updates postion of rain drops on y axis  
- * @param speed int to define how much the rain moves 
- */    
+    /**
+     * moveDown() updates postion of rain drops on y axis  
+     * @param speed int to define how much the rain drop moves 
+     */    
     public void moveDown(int speed) {
-     int updatedSpeed = getYCoord() + speed;
-      setYCoord(updatedSpeed);
+        int updatedSpeed = getY() + speed;
+        setY(updatedSpeed);
     }
 
-   // (((( NOT SURE ABOUT THIS ONE ))))
-    @Override
+    // (((( NOT SURE ABOUT THIS ONE ))))
     public void drawCharacter(Graphics g) {
         g.setColor(charColor);
-        g.fillOval(getXCoord(), getYCoord(), size, size);
+        g.fillOval(getX(), getY(), size, size);
 
     }
 }

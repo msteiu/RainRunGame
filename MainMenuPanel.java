@@ -40,55 +40,41 @@ public class MainMenuPanel extends JPanel {
         gameName = new JLabel("RAIN RUN");
         gameName.setFont(NAME_FONT);
         gameName.setForeground(Color.white);
-        
-        //setting up playButton
-        playButton = new JButton("PLAY");
-        playButton.setFont(BUTTON_FONT);
-        playButton.setForeground(Color.white);
-        playButton.setBackground(PLAY_COLOR);
-        playButton.setOpaque(true);
-        playButton.setBorderPainted(false);
-        
-        //setting up rulesButton
-        rulesButton = new JButton("RULES");
-        rulesButton.setFont(BUTTON_FONT);
-        rulesButton.setForeground(Color.white);
-        rulesButton.setBackground(RULES_COLOR);
-        rulesButton.setOpaque(true);
-        rulesButton.setBorderPainted(false);
-        
-        //setting up scoresButton
-        scoresButton = new JButton("SCORES");
-        scoresButton.setFont(BUTTON_FONT);
-        scoresButton.setForeground(Color.white);
-        scoresButton.setBackground(SCORES_COLOR);
-        scoresButton.setOpaque(true);
-        scoresButton.setBorderPainted(false);
-        
-        //setting up action listener for playButton, rulesButton, and scoresButton
-        ButtonListener b = new ButtonListener();
-        playButton.addActionListener (b);
-        rulesButton.addActionListener (b);
-        scoresButton.addActionListener (b);
-        
 
-        add(gameName);
-        add(playButton);
-        add(rulesButton);
-        add(scoresButton);
+        // setting up the buttons
+        ButtonListener b = new ButtonListener();
+        playButton = getButton("PLAY", PLAY_COLOR, b);
+        rulesButton = getButton("RULES", RULES_COLOR, b);
+        scoresButton = getButton("SCORES", SCORES_COLOR, b);
+
+        addComponent(gameName, RRConstants.HEIGHT/4);
+        addComponent(playButton, RRConstants.HEIGHT/2);
+        addComponent(rulesButton, RRConstants.HEIGHT/2 + RRConstants.HEIGHT/8);
+        addComponent(scoresButton, RRConstants.HEIGHT/2 + RRConstants.HEIGHT/4);
+    }
+
+    private void addComponent(JComponent component, int yCoord) {
+        add(component);
+        Dimension sizeComponent = component.getPreferredSize();
+        int xCoord = (RRConstants.WIDTH - sizeComponent.width)/2;
+        component.setBounds(xCoord, yCoord, sizeComponent.width, sizeComponent.height);
+    }
+
+    private JButton getButton(String name, Color color, ButtonListener b) {
+        JButton button = new JButton(name);
         
-        Dimension sizeName = gameName.getPreferredSize();
-        Dimension sizePlay = playButton.getPreferredSize();
-        Dimension sizeRules = rulesButton.getPreferredSize();
-        Dimension sizeScores = scoresButton.getPreferredSize();
-        
-        gameName.setBounds((RRConstants.WIDTH - sizeName.width)/2, RRConstants.HEIGHT/4, sizeName.width, sizeName.height);
-        playButton.setBounds((RRConstants.WIDTH - sizePlay.width)/2, RRConstants.HEIGHT/2, sizePlay.width, sizePlay.height);
-        rulesButton.setBounds((RRConstants.WIDTH - sizeRules.width)/2, RRConstants.HEIGHT/2 + RRConstants.HEIGHT/8, sizeRules.width, sizeRules.height);
-        scoresButton.setBounds((RRConstants.WIDTH - sizeScores.width)/2, RRConstants.HEIGHT/2 + RRConstants.HEIGHT/4, sizeScores.width, sizeScores.height);
+        button.setFont(BUTTON_FONT);
+        button.setForeground(Color.white);
+        button.setBackground(color);
+        button.setOpaque(true);
+        button.setBorderPainted(false);
+        button.addActionListener(b);
+
+        return button;
     }
     
     private class ButtonListener implements ActionListener {
+
         public void actionPerformed (ActionEvent event) {
             if (event.getSource() == playButton) {
                 RainRunGUI.c1.show(RainRunGUI.cards, RainRunGUI.PLAYPANEL);

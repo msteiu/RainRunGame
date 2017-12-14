@@ -9,150 +9,96 @@ import java.awt.*;
 public class MyCharacter implements Character {
     
   // instance variables 
-    protected Color charColor;
-    protected int xPos, yPos, size, speed, health;
-    protected int leftEdge, rightEdge;
-    protected boolean hasShield; //optional (not all instances will have shields)
-    protected int countPowerups; //optional (used to check for powerups array's size)
+    private Color charColor;
+    private int xCoord, yCoord, size, health;
+    private int leftEdge, rightEdge;
     private boolean died;
 
-    
-    
- /**
- * Constructor - defines what will be contained in MyCharacter instance
- * @param xCoord int- x position of character
- * @param yCoord int- y position of character
- * @param size int- size of character
- * @param color Color- color of character
- */    
-    public MyCharacter(int xPos, int yPos, int size, Color color) {
-        this.xPos = xPos;
-        this.yPos = yPos;
+    /**
+     * Constructor - defines what will be contained in MyCharacter instance
+     * @param xCoord int- x position of character
+     * @param yCoord int- y position of character
+     * @param size int- size of character
+     * @param color Color- color of character
+     */    
+    public MyCharacter(int xCoord, int yCoord, int size, Color color) {
+        this.xCoord = xCoord;
+        this.yCoord = yCoord;
         this.size = size;
-        this.died = false;
-        this.speed = 1;
-        this.health = RainRun.MAX_HEALTH;
         this.charColor = color;
-       // this.hasShield = false;
-        
-        this.leftEdge = RRConstants.BORDER;
-        this.rightEdge = RRConstants.WIDTH - size - RRConstants.BORDER;
+        this.died = false;
+        this.health = RRConstants.MAX_HEALTH;
+
+        this.leftEdge = RRConstants.getLeftEdge();
+        this.rightEdge = RRConstants.getRightEdge(size);
     }
     
-    
- /**
- * getX() returns x position of character
- * @return xPos int value of x position 
- */
+    /**
+     * getX() returns x position of character
+     * @return xCoord int value of x position 
+     */
     public int getX() {
-        return xPos;
+        return xCoord;
     }
 
-
-//    public boolean getHasShield() {
-//        return hasShield;
-//    }
-//
-//    public void setHasShield(boolean hasShield) {
-//        this.hasShield = hasShield;
-//    }
-    
-      
- /**
- * moveRight() moves the character icon right
- * Ensures that movement would keep character in bounds
- */
+    /**
+     * moveRight() moves the character right
+     * Ensures that movement would keep character in bounds
+     */
     public void moveRight() {
-        if ( (xPos + size) <= rightEdge) {
-            xPos += size;
+        int newxCoord = xCoord + size;
+        if ( newxCoord <= rightEdge) {
+            xCoord = newxCoord;
         }
     }
     
- /**
- * moveLeft() moves the character icon left
- * Ensures that movement would keep character in bounds
- */    
+    /**
+     * moveLeft() moves the character left
+     * Ensures that movement would keep character in bounds
+     */    
     public void moveLeft() {
-        if ( (xPos - size) >= leftEdge) {
-            xPos -= size;
+        int newxCoord = xCoord - size;
+        if ( newxCoord >= leftEdge) {
+            xCoord = newxCoord;
         }
     }
 
-
- /**
- * getType() returns String type of character to be used in RainRun main controls
- * @return String mycharacter
- */    
+    /**
+    * getType() returns String type of character to be used in RainRun main controls
+    * @return String mycharacter
+    */    
     public String getType() {
         return "mycharacter";
     }
     
-  // (((( NOT SURE ))))  
+    // (((( NOT SURE ))))  
     public void drawCharacter(Graphics g) {
         g.setColor(charColor);
-        g.fillRect(xPos, yPos, size, size);
+        g.fillRect(xCoord, yCoord, size, size);
     }
     
-/**
- * getBounds()
- * @return new Rectangle object with inputted postion and dimensions 
- */     
+    /**
+     * getBounds()
+     * @return new Rectangle object with inputted postion and dimensions 
+     */     
     public Rectangle getBounds() {
-        return new Rectangle(xPos, yPos, size, size);
-    }
-    
-    
- /**
- * getSpeed() returns speed value 
- * @return int value of speed 
- */    
-    public int getSpeed() {
-        return speed;
+        return new Rectangle(xCoord, yCoord, size, size);
     }
 
-    
- /**
- * setSpeed(int speed) sets speed as inputted value 
- * @param int speed value to be set as new speed
- */     
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    
- /**
- * getHealth() returns health value 
- * @return int value of health 
- */    
-    public int getHealth() {
-        return health;
-    }
-
-   
- /**
- * setHealth(int health) sets health as inputted value 
- * @param int health value to be set as new health
- */     
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
- 
- /**
- * getDied() returns true if dead
- * @return boolean whether or not dead
- */    
     public boolean getDied() {
         return died;
     }
 
-    
- /**
- * setDied(boolean died) sets died variable as true or false 
- * @param boolean true or false for the died var to be set as 
- */     
     public void setDied(boolean died) {
         this.died = died;
     }
-    
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
 }

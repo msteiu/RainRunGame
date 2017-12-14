@@ -12,7 +12,6 @@ public class RainRun {
     private static final int SPACE_BETWEEN_OBJ = 100; // leave approx 80 pixels between falling objects
     private static final int NEXT_LEVEL_INTERVAL = getIntervalFromSecond(30); // new level every half minute
     private static final int MAX_SPEED = 10;
-    public static final int MAX_HEALTH = 3;
     private static final double PROB_RAIN = 0.8;
 
     private MyCharacter character;
@@ -21,32 +20,30 @@ public class RainRun {
     private Vector<FallingObject> fallingObjects;
     private HashMap<String, HashMap<String, Integer>> hitRules;
 
- /**
- * Constructor - defines what will be contained in RainRun instance
- * Threads all backend aspects of the game together 
- * @param charColor- color of character
- * @param charSize- size of character
- */     
-    public RainRun(Color charColor, int charSize) {
+    /**
+     * Constructor - defines what will be contained in RainRun instance
+     * Threads all backend aspects of the game together 
+     * @param charColor- color of character
+     * @param charSize- size of character
+     */     
+    public RainRun(int charSize, Color charColor) {
 
-        this.character = new MyCharacter(RRConstants.WIDTH/2, RRConstants.HEIGHT - RRConstants.BORDER - 75, charSize, charColor);
+        this.character = new MyCharacter(RRConstants.WIDTH/2, 
+            RRConstants.HEIGHT - RRConstants.BORDER - 75, charSize, charColor);
         this.rainSize = charSize;
         this.speed = 1;
         this.time = 0;
         this.score = 0;
         this.scoreInc = 1;
-        
         this.level = 1;
         
-
         this.fallingObjects = new Vector<FallingObject>();
         this.hitRules = getHitRules();
     }
 
     public RainRun() {
-        this(RRConstants.CHAR_DEFAULT_COLOR, 20);
+        this(20, RRConstants.CHAR_DEFAULT_COLOR);
     }
-
 
     // Helper methods //
 
@@ -64,7 +61,6 @@ public class RainRun {
         return (seconds * 1000) / RainRunPanel.DELAY;
     }
 
-
     // Initializing our instance variables //
 
     private HashMap<String, Integer> getHitRule(int pointAdd, int healthAdd, 
@@ -78,19 +74,17 @@ public class RainRun {
         return hitRule;
     }
  
-
     private HashMap<String, HashMap<String, Integer>> getHitRules() {
         HashMap<String, HashMap<String, Integer>> allHitRules;
         allHitRules = new HashMap<String, HashMap<String, Integer>>();
 
-        allHitRules.put("rain", getHitRule(0, -1, 0, 0));
+        allHitRules.put("raindrop", getHitRule(0, -1, 0, 0));
         allHitRules.put("health", getHitRule(10, 1, 0, 0));
         allHitRules.put("speed", getHitRule(0, 0, 1, 1));
         allHitRules.put("umbrella", getHitRule(50, 0, 0, 0));
 
         return allHitRules;
     }
-
 
     // Allowing our characters to move based on keyboard input //
 
@@ -102,22 +96,21 @@ public class RainRun {
         character.moveRight();
     }
 
-
     // Add a new FallingObject to our game //
 
-    public void addRain() {
+    private void addRainDrop() {
         int size = randInt(rainSize, rainSize*2);
         int xLeftBound = Math.max(0, character.getX() - 75); // monsters will appear near character
         int xRightBound = Math.min(RRConstants.WIDTH - size, character.getX() + 75);
         int xCoord = randInt(xLeftBound, xRightBound);
-        fallingObjects.add(new Rain(xCoord, RRConstants.BORDER, size));
+        fallingObjects.add(new RainDrop(xCoord, RRConstants.BORDER, size));
     }
 
-    public String getPUPath(String nameStub, int size) {
+    private String getPUPath(String nameStub, int size) {
         return "images/" + nameStub + size + ".png";
     }
 
-    public void addPowerUp() {
+    private void addPowerUp() {
         int size = randInt(1, 2);
         int xCoord = randInt(0, RRConstants.WIDTH - 30); // biggest image size is 30px
         PowerUp newPowerUp = new HealthPowerUp(xCoord, RRConstants.BORDER, getPUPath("heart", size));
@@ -130,12 +123,14 @@ public class RainRun {
 
     public void addNewObject() {
         if (Math.random() <= PROB_RAIN) 
-            addRain();
+            addRainDrop();
+        
         else
             addPowerUp();
 
-        while (fallingObjects.firstElement().getYCoord() > RRConstants.HEIGHT  - RRConstants.BORDER) {
-            fallingObjects.remove(0); // faster than removing only elements that are off the screen but maybe glitchy
+        // while adding a new object, remove any stray objects who can't be seen by the game anymore
+        while (fallingObjects.firstElement().getY() > RRConstants.HEIGHT  - RRConstants.BORDER) {
+            fallingObjects.remove(0);
         }
     }
 
@@ -149,28 +144,25 @@ public class RainRun {
         this.scoreInc += rules.get("scoreInc");
 
         int newHealth = character.getHealth() + rules.get("health");
-        if (newHealth <= MAX_HEALTH)
+        if (newHealth <= RRConstants.MAX_HEALTH)
             character.setHealth(newHealth);
 
-        int newSpeed = character.getSpeed() + rules.get("speed");
+        int newSpeed = speed + rules.get("speed");
         if (newSpeed <= MAX_SPEED)
-            character.setSpeed(newSpeed);
+            speed = newSpeed;
     }
 
     public void checkHit() {
         Rectangle charBounds = character.getBounds();
 
-        
         for(int i = fallingObjects.size() - 1; i >= 0; i--) {
+            
             FallingObject obj = fallingObjects.get(i);
             
             if (charBounds.intersects(obj.getBounds())) {
-                System.out.println("Hit by: " + obj.getType());
                 applyHitRule(obj);
                 fallingObjects.remove(i);
                 
-                System.out.println("Character was hit");
-
                 if (character.getHealth() <= 0)
                     character.setDied(true);
             }                
@@ -181,22 +173,17 @@ public class RainRun {
     // Check time //
 
     private boolean timeToAddElement() {
-      return fallingObjects.lastElement().getYCoord() >= RRConstants.BORDER + SPACE_BETWEEN_OBJ;
+      return fallingObjects.lastElement().getY() >= (RRConstants.BORDER + SPACE_BETWEEN_OBJ);
     }
-
     
     public void checkTime() {
-       
-      if (time == 0) {
+
+        if (time == 0 || (fallingObjects.size() > 0 && timeToAddElement())) {
             addNewObject();
         }
 
         if (time % getIntervalFromSecond(1) == 0) { // add to score each second
             score += scoreInc;
-        }
-
-        if (fallingObjects.size() > 0 && timeToAddElement()) {
-            addNewObject();
         }
 
         if (time % NEXT_LEVEL_INTERVAL == 0) {
