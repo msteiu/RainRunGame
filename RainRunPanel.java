@@ -32,6 +32,7 @@ public class RainRunPanel extends JPanel {
   private boolean running;
   private JButton pause;
   private PauseListener pListener;
+  private ImageIcon pauseIcon, playIcon;
   
   public RainRunPanel() {
     this.game = new RainRun();
@@ -50,25 +51,20 @@ public class RainRunPanel extends JPanel {
     running = false;
     timer.start();
     
-    
     //setting up pauseButton with image
+    pauseIcon = new ImageIcon(new ImageIcon("images/pause.png").getImage().getScaledInstance(15, 15, Image.SCALE_DEFAULT));
+    playIcon = new ImageIcon(new ImageIcon("images/play.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+
     pause = new JButton();
-    pause.setIcon(new ImageIcon(new ImageIcon("images/pause.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
+    pause.setIcon(pauseIcon);
     
-    //setting up pauseButton with text: "PAUSE"
-//  pause.setFont(SCORE_FONT);
-//  pause.setForeground(Color.white);
     pause.setBackground(PLAY_COLOR);
     pause.setOpaque(true);
     pause.setBorderPainted(false);
     
-    //setting up action listener for playButton, rulesButton, and scoresButton
     pause.addActionListener (pListener);
-    
     add(pause);
-    
-//    Dimension sizePause = pause.getPreferredSize();
-//    pause.setBounds(RRConstants.WIDTH - sizePause.width)/2, RRConstants.HEIGHT, sizePause.width/2, sizePause.height);
+
   }
   
   public RainRunPanel(Color charColor, int charSize) {
@@ -150,10 +146,10 @@ public class RainRunPanel extends JPanel {
       if (keyPressed == KeyEvent.VK_SPACE) {
         if (isRunning()) {
           pauseGame();
-          pause.setIcon(new ImageIcon(new ImageIcon("images/play.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
+          pause.setIcon(playIcon);
         } else {
           startGame();
-          pause.setIcon(new ImageIcon(new ImageIcon("images/pause.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
+          pause.setIcon(pauseIcon);
         }
       }
     }
@@ -184,13 +180,11 @@ public class RainRunPanel extends JPanel {
     public void actionPerformed (ActionEvent event) {
       if (isRunning()) {
         pauseGame();
-        pause.setIcon(new ImageIcon(new ImageIcon("images/play.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
-//      pause.setText("PLAY");
+        pause.setIcon(playIcon);
       } else {
         startGame();
-        pause.setIcon(new ImageIcon(new ImageIcon("images/pause.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
+        pause.setIcon(pauseIcon);
         RainRunGUI.gamePanel.requestFocusInWindow();
-        //pause.setText("PAUSE");
       }
     }
   }
