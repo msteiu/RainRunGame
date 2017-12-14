@@ -100,7 +100,7 @@ public class RainRunPanel extends JPanel {
     makeScore(g);
     makeHealth(g);
     
-    if (game.getDied()) {
+    if (game.getCharacter().getDied()) {
 //          makeDeathPane(g);
       pauseGame();
       RainRunGUI.gamePanel = new RainRunPanel();
@@ -120,7 +120,7 @@ public class RainRunPanel extends JPanel {
   private void makeHealth(Graphics g) {
     try { // the health hearts are each 20 px wide
       Image img = ImageIO.read(new File("images/life.png"));
-      for (int i = 1; i <= game.getHealth(); i++) {
+      for (int i = 1; i <= game.getCharacter().getHealth(); i++) {
         int xCoord = RRConstants.WIDTH - (RRConstants.BORDER + 3) - i*(20 + 5);
         g.drawImage(img, xCoord, RRConstants.BORDER + 8, new PaneObserver());
       }
@@ -180,7 +180,7 @@ public class RainRunPanel extends JPanel {
       
       if (event.getSource() == timer && running) {
         
-        if (game.getDied()) {
+        if (game.getCharacter().getDied()) {
           timer.stop();
           removeKeyListener(kListener);
           timer.removeActionListener(tListener);
