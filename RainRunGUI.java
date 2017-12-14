@@ -19,6 +19,10 @@ public class RainRunGUI extends JFrame implements Runnable {
   protected final static String SCORESPANEL = "Card with Scores";
   protected final static String DEADPANEL = "Card with Death";
   protected static CardLayout c1 = new CardLayout();
+  protected static JPanel MainMenuPanel;
+  protected static JPanel RulesPanel;
+  protected static JPanel ScoresPanel;
+  protected static JPanel DeadPanel;
   
   public RainRunGUI() {
     setResizable(false);
@@ -27,10 +31,10 @@ public class RainRunGUI extends JFrame implements Runnable {
     
     gamePanel = new RainRunPanel();
     gamePanel.pauseGame();
-    JPanel MainMenuPanel = new MainMenuPanel();
-    JPanel RulesPanel = new RulesPanel();
-    JPanel ScoresPanel = new ScoresPanel();
-    JPanel DeadPanel = new DeadPanel();
+    MainMenuPanel = new MainMenuPanel();
+    RulesPanel = new RulesPanel();
+    ScoresPanel = new ScoresPanel();
+    DeadPanel = new DeadPanel();
     cards = new JPanel(c1);
     
     cards.add(MainMenuPanel, MENUPANEL);
@@ -42,6 +46,12 @@ public class RainRunGUI extends JFrame implements Runnable {
     c1.show(cards, MENUPANEL);
     
     add(cards, BorderLayout.CENTER);
+  }
+  
+  public static void newGame() {
+    cards.remove(gamePanel);
+    gamePanel = new RainRunPanel();
+    cards.add(gamePanel, PLAYPANEL);
   }
   
   public void run() {

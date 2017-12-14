@@ -23,7 +23,6 @@ public class RainRunPanel extends JPanel {
   
   private static final Color PLAY_COLOR = RRConstants.CHAR_DEFAULT_COLOR;
   private static final Font SCORE_FONT = RRConstants.getFont(16); // new Font(RRConstants.FONT_NAME, Font.BOLD, 16);
-//    private static final Font SCORE_FONT = RRConstants.getFont(16); // new Font(RRConstants.FONT_NAME, Font.BOLD, 16);
   protected static final int DELAY = 25;
   
   private RainRun game;
@@ -100,12 +99,10 @@ public class RainRunPanel extends JPanel {
     makeScore(g);
     makeHealth(g);
     
-    if (game.getDied()) {
-//          makeDeathPane(g);
+    if (game.getCharacter().getDied()) {
       pauseGame();
-      RainRunGUI.gamePanel = new RainRunPanel();
       RainRunGUI.c1.show(RainRunGUI.cards, RainRunGUI.DEADPANEL);
-      
+      RainRunGUI.newGame();
     }
     
     repaint();
@@ -120,21 +117,12 @@ public class RainRunPanel extends JPanel {
   private void makeHealth(Graphics g) {
     try { // the health hearts are each 20 px wide
       Image img = ImageIO.read(new File("images/life.png"));
-      for (int i = 1; i <= game.getHealth(); i++) {
+      for (int i = 1; i <= game.getCharacter().getHealth(); i++) {
         int xCoord = RRConstants.WIDTH - (RRConstants.BORDER + 3) - i*(20 + 5);
         g.drawImage(img, xCoord, RRConstants.BORDER + 8, new PaneObserver());
       }
     } catch (IOException e) {
       System.out.println("Couldn't open image images/life.png");
-    }
-  }
-  
-  private void makeDeathPane(Graphics g) {
-    try {
-      Image img = ImageIO.read(new File("images/dead.png"));
-      g.drawImage(img, (RRConstants.WIDTH - 300) / 2, (RRConstants.HEIGHT/2) - 50, new PaneObserver()); // img 300x100
-    } catch (IOException e) {
-      System.out.println("Couldn't open image dead.png");
     }
   }
   
@@ -180,7 +168,7 @@ public class RainRunPanel extends JPanel {
       
       if (event.getSource() == timer && running) {
         
-        if (game.getDied()) {
+        if (game.getCharacter().getDied()) {
           timer.stop();
           removeKeyListener(kListener);
           timer.removeActionListener(tListener);

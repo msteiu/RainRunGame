@@ -62,15 +62,16 @@ public class DeadPanel extends JPanel {
     Dimension sizePlayAgain = playAgain.getPreferredSize();
     Dimension sizeMainMenu = mainMenu.getPreferredSize();
     
-    died.setBounds((WIDTH - sizeDied.width)/2, HEIGHT/4, sizeDied.width, sizeDied.height);
-    playAgain.setBounds((WIDTH - sizePlayAgain.width)/2, HEIGHT/2, sizePlayAgain.width, sizePlayAgain.height);
-    mainMenu.setBounds((WIDTH - sizeMainMenu.width)/2, HEIGHT/2 + HEIGHT/8, sizeMainMenu.width, sizeMainMenu.height);
+    died.setBounds((RRConstants.WIDTH - sizeDied.width)/2, RRConstants.HEIGHT/4, sizeDied.width, sizeDied.height);
+    playAgain.setBounds((RRConstants.WIDTH - sizePlayAgain.width)/2, RRConstants.HEIGHT/2, sizePlayAgain.width, sizePlayAgain.height);
+    mainMenu.setBounds((RRConstants.WIDTH - sizeMainMenu.width)/2, RRConstants.HEIGHT/2 + RRConstants.HEIGHT/8, sizeMainMenu.width, sizeMainMenu.height);
     
   }
   
   private class ButtonListener implements ActionListener {
     public void actionPerformed (ActionEvent event) {
       if (event.getSource() == playAgain) {
+        new RainRunPanel();
         RainRunGUI.c1.show(RainRunGUI.cards, RainRunGUI.PLAYPANEL);
         RainRunGUI.gamePanel.startGame();
         RainRunGUI.gamePanel.requestFocusInWindow();
