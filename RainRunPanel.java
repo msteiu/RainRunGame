@@ -23,7 +23,6 @@ public class RainRunPanel extends JPanel {
   
   private static final Color PLAY_COLOR = RRConstants.CHAR_DEFAULT_COLOR;
   private static final Font SCORE_FONT = RRConstants.getFont(16); // new Font(RRConstants.FONT_NAME, Font.BOLD, 16);
-//    private static final Font SCORE_FONT = RRConstants.getFont(16); // new Font(RRConstants.FONT_NAME, Font.BOLD, 16);
   protected static final int DELAY = 25;
   
   private RainRun game;
@@ -101,11 +100,9 @@ public class RainRunPanel extends JPanel {
     makeHealth(g);
     
     if (game.getCharacter().getDied()) {
-//          makeDeathPane(g);
       pauseGame();
-      RainRunGUI.gamePanel = new RainRunPanel();
       RainRunGUI.c1.show(RainRunGUI.cards, RainRunGUI.DEADPANEL);
-      
+      RainRunGUI.newGame();
     }
     
     repaint();
@@ -126,15 +123,6 @@ public class RainRunPanel extends JPanel {
       }
     } catch (IOException e) {
       System.out.println("Couldn't open image images/life.png");
-    }
-  }
-  
-  private void makeDeathPane(Graphics g) {
-    try {
-      Image img = ImageIO.read(new File("images/dead.png"));
-      g.drawImage(img, (RRConstants.WIDTH - 300) / 2, (RRConstants.HEIGHT/2) - 50, new PaneObserver()); // img 300x100
-    } catch (IOException e) {
-      System.out.println("Couldn't open image dead.png");
     }
   }
   
