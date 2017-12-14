@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class MyCharacter implements Character {
     
-  // instance variables 
+    // instance variables 
     private Color charColor;
     private int xCoord, yCoord, size, health;
     private int leftEdge, rightEdge;

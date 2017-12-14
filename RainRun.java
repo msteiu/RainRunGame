@@ -204,38 +204,9 @@ public class RainRun {
 
     // Getters and Setters //
 
-    public int getCharSize() {
-        return rainSize;
-    }
-
-    public void setCharSize(int charSize) {
-        this.rainSize = charSize;
-    }
-
-    public int getTime() {
-        return time;
-    }
-
-    public void setTime(int time) {
-        this.time = time;
-    }
-
     public int getScore() {
         return score;
     }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public int getScoreInc() {
-        return scoreInc;
-    }
-
-    public void setScoreInc(int scoreInc) {
-        this.scoreInc = scoreInc;
-    }
-
 
     public Vector<FallingObject> getFallingObjects() {
         return fallingObjects;
@@ -243,10 +214,6 @@ public class RainRun {
 
     public MyCharacter getCharacter() {
         return character;
-    }
-    
-    public boolean getOver() {
-      return character.getDied();
     }
 
 }

@@ -13,6 +13,7 @@ public class RRConstants {
     protected static final Color RULE_BUTTON_COLOR = Color.CYAN;
     protected static final String FONT_NAME = "Courier";
 
+    
     protected static Font getFont(int size) {
         return new Font(FONT_NAME, Font.BOLD, size);
     }

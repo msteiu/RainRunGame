@@ -7,8 +7,6 @@
 import java.awt.*;
 import java.awt.image.*;
 import java.io.*;
-
-import javax.swing.*;
 import javax.imageio.*;
 
 import java.util.Random;

@@ -8,10 +8,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;
 import java.awt.image.*;
 
-import java.awt.image.ImageObserver;
 import javax.imageio.*;
 import java.io.*;
 
@@ -58,7 +56,7 @@ public class RainRunPanel extends JPanel {
         pause.setOpaque(true);
         pause.setBorderPainted(false);
         
-        pause.addActionListener (pListener);
+        pause.addActionListener(pListener);
         add(pause);
     }
     
@@ -106,6 +104,7 @@ public class RainRunPanel extends JPanel {
             System.out.println("Couldn't open image images/life.png");
         }
     }
+    
     
     // LISTENERS //
     
@@ -174,7 +173,8 @@ public class RainRunPanel extends JPanel {
         }
     }
        
-// GETTERS AND SETTERS //
+    
+    // GETTERS AND SETTERS //
     
     public void startGame() {
         this.running = true;

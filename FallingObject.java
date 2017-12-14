@@ -5,15 +5,8 @@
  */
 
 import java.awt.*;
-import java.util.*;
-import javax.swing.*;
-
-import javax.imageio.*;
-import java.awt.image.*;
-import java.io.*;
 
 // a FallingObject is a Character interface's child
-
 public abstract class FallingObject implements Character {
     
     // instance variables to be inherited by Rain and PowerUp
@@ -65,22 +58,6 @@ public abstract class FallingObject implements Character {
      */
     public int getLeftEdge() {
         return leftEdge;
-    }
-
-    /**
-     * getWidth() returns width value 
-     * @return int value of width 
-     */
-    public int getWidth() {
-        return width;
-    }
-
-    /**
-     * getHeight() returns height value 
-     * @return int value of height 
-     */    
-    public int getHeight() {
-        return height;
     }
     
     /**
