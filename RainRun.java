@@ -1,7 +1,7 @@
 /**
  * FILENAME: RainRun
  * DESCRIPTION: CS230 Final Project - Rain Run Game
- * @author Hunter Sessa
+ * @author Hunter Sessa, Angelina Li
  */
 
 import java.awt.*;
@@ -12,26 +12,32 @@ public class RainRun {
     private static final int SPACE_BETWEEN_OBJ = 100; // leave approx 80 pixels between falling objects
     private static final int NEXT_LEVEL_INTERVAL = getIntervalFromSecond(30); // new level every half minute
     private static final int MAX_SPEED = 10;
-    private static final int MAX_HEALTH = 3;
-    private static final double PROB_MONSTER = 0.8;
+    public static final int MAX_HEALTH = 3;
+    private static final double PROB_RAIN = 0.8;
 
     private MyCharacter character;
-    private boolean died;
-    private int charSize, monsterSize, time, score, scoreInc, speed, health, level;
+
+    private int rainSize, time, score, scoreInc, level, speed;
     private Vector<FallingObject> fallingObjects;
     private HashMap<String, HashMap<String, Integer>> hitRules;
 
+ /**
+ * Constructor - defines what will be contained in RainRun instance
+ * Threads all backend aspects of the game together 
+ * @param charColor- color of character
+ * @param charSize- size of character
+ */     
     public RainRun(Color charColor, int charSize) {
 
         this.character = new MyCharacter(RRConstants.WIDTH/2, RRConstants.HEIGHT - RRConstants.BORDER - 75, charSize, charColor);
-        this.monsterSize = charSize;
-        this.died = false;
+        this.rainSize = charSize;
+        this.speed = 1;
         this.time = 0;
         this.score = 0;
         this.scoreInc = 1;
-        this.speed = 1;
+        
         this.level = 1;
-        this.health = MAX_HEALTH;
+        
 
         this.fallingObjects = new Vector<FallingObject>();
         this.hitRules = getHitRules();
@@ -71,12 +77,13 @@ public class RainRun {
 
         return hitRule;
     }
+ 
 
     private HashMap<String, HashMap<String, Integer>> getHitRules() {
         HashMap<String, HashMap<String, Integer>> allHitRules;
         allHitRules = new HashMap<String, HashMap<String, Integer>>();
 
-        allHitRules.put("monster", getHitRule(0, -1, 0, 0));
+        allHitRules.put("rain", getHitRule(0, -1, 0, 0));
         allHitRules.put("health", getHitRule(10, 1, 0, 0));
         allHitRules.put("speed", getHitRule(0, 0, 1, 1));
         allHitRules.put("umbrella", getHitRule(50, 0, 0, 0));
@@ -98,12 +105,12 @@ public class RainRun {
 
     // Add a new FallingObject to our game //
 
-    public void addMonster() {
-        int size = randInt(monsterSize, monsterSize*2);
+    public void addRain() {
+        int size = randInt(rainSize, rainSize*2);
         int xLeftBound = Math.max(0, character.getX() - 75); // monsters will appear near character
         int xRightBound = Math.min(RRConstants.WIDTH - size, character.getX() + 75);
         int xCoord = randInt(xLeftBound, xRightBound);
-        fallingObjects.add(new Monster(xCoord, RRConstants.BORDER, size));
+        fallingObjects.add(new Rain(xCoord, RRConstants.BORDER, size));
     }
 
     public String getPUPath(String nameStub, int size) {
@@ -122,12 +129,12 @@ public class RainRun {
     }
 
     public void addNewObject() {
-        if (Math.random() <= PROB_MONSTER) 
-            addMonster();
+        if (Math.random() <= PROB_RAIN) 
+            addRain();
         else
             addPowerUp();
 
-        while (fallingObjects.firstElement().getY() > RRConstants.HEIGHT  - RRConstants.BORDER) {
+        while (fallingObjects.firstElement().getYCoord() > RRConstants.HEIGHT  - RRConstants.BORDER) {
             fallingObjects.remove(0); // faster than removing only elements that are off the screen but maybe glitchy
         }
     }
@@ -136,17 +143,18 @@ public class RainRun {
     // Check hit //
 
     private void applyHitRule(FallingObject obj) {
+        
         HashMap<String, Integer> rules = hitRules.get(obj.getType());
         this.score += rules.get("points");
         this.scoreInc += rules.get("scoreInc");
 
-        int newHealth = health + rules.get("health");
+        int newHealth = character.getHealth() + rules.get("health");
         if (newHealth <= MAX_HEALTH)
-            health = newHealth;
+            character.setHealth(newHealth);
 
-        int newSpeed = speed + rules.get("speed");
-        if (speed <= MAX_SPEED)
-            speed = newSpeed;
+        int newSpeed = character.getSpeed() + rules.get("speed");
+        if (newSpeed <= MAX_SPEED)
+            character.setSpeed(newSpeed);
     }
 
     public void checkHit() {
@@ -157,11 +165,14 @@ public class RainRun {
             FallingObject obj = fallingObjects.get(i);
             
             if (charBounds.intersects(obj.getBounds())) {
+                System.out.println("Hit by: " + obj.getType());
                 applyHitRule(obj);
                 fallingObjects.remove(i);
+                
+                System.out.println("Character was hit");
 
-                if (health <= 0)
-                    this.died = true;
+                if (character.getHealth() <= 0)
+                    character.setDied(true);
             }                
         }
     }
@@ -170,12 +181,13 @@ public class RainRun {
     // Check time //
 
     private boolean timeToAddElement() {
-        return fallingObjects.lastElement().getY() >= RRConstants.BORDER + SPACE_BETWEEN_OBJ;
+      return fallingObjects.lastElement().getYCoord() >= RRConstants.BORDER + SPACE_BETWEEN_OBJ;
     }
 
+    
     public void checkTime() {
-
-        if (time == 0) {
+       
+      if (time == 0) {
             addNewObject();
         }
 
@@ -188,14 +200,15 @@ public class RainRun {
         }
 
         if (time % NEXT_LEVEL_INTERVAL == 0) {
-            monsterSize++;
+            rainSize++;
 
-            if (speed + 1 <= MAX_SPEED)
+            if (speed + 1 <= MAX_SPEED) 
                 speed++;
         }
 
-        for (FallingObject obj : fallingObjects)
+        for (FallingObject obj : fallingObjects) {
             obj.moveDown(speed);
+        }
 
         checkHit();
         time++;
@@ -205,11 +218,11 @@ public class RainRun {
     // Getters and Setters //
 
     public int getCharSize() {
-        return charSize;
+        return rainSize;
     }
 
     public void setCharSize(int charSize) {
-        this.charSize = charSize;
+        this.rainSize = charSize;
     }
 
     public int getTime() {
@@ -236,29 +249,6 @@ public class RainRun {
         this.scoreInc = scoreInc;
     }
 
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public boolean getDied() {
-        return died;
-    }
-
-    public void setDied(boolean died) {
-        this.died = died;
-    }
 
     public Vector<FallingObject> getFallingObjects() {
         return fallingObjects;
@@ -266,6 +256,10 @@ public class RainRun {
 
     public MyCharacter getCharacter() {
         return character;
+    }
+    
+    public boolean getOver() {
+      return character.getDied();
     }
 
 }
