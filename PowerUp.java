@@ -66,7 +66,8 @@ public abstract class PowerUp extends FallingObject implements Character {
      * ensures powerup will not travel beyond the screen 
      */  
     private void moveRight(int speed) {
-        int newxCoord = this.getX() + speed;
+        int moveAmt = Math.max(speed/2, 1);
+        int newxCoord = this.getX() + moveAmt;
         if (newxCoord <= getRightEdge()) {
             setX(newxCoord);
         } else {
@@ -80,7 +81,8 @@ public abstract class PowerUp extends FallingObject implements Character {
      * ensures powerup will not travel beyond the screen 
      */     
     private void moveLeft(int speed) {
-        int newxCoord = this.getX() - speed;
+        int moveAmt = Math.max(speed/2, 1);
+        int newxCoord = this.getX() - moveAmt;
         if (newxCoord >= getLeftEdge()) {
             setX(newxCoord);
         } else {

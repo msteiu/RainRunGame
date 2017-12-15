@@ -40,7 +40,11 @@ public class MainMenuPanel extends TextPanel {
         nameLabel.setFont(this.textFont);
         nameLabel.setForeground(Color.white);
 
-        nameField = new JTextField(8);
+        nameField = new JTextField(10);
+        nameField.setFont(this.textFont);
+        nameField.setBackground(RRConstants.BORDER_COLOR);
+        nameField.setForeground(Color.white);
+        nameField.setBorder(BorderFactory.createLineBorder(RRConstants.BORDER_COLOR, RRConstants.BORDER));
         nameField.addActionListener(new NameListener());
 
         namePanel.add(nameLabel);
@@ -53,7 +57,7 @@ public class MainMenuPanel extends TextPanel {
         scoresButton = getButton("SCORES", SCORES_COLOR, b);
 
         addComponent(gameName, RRConstants.HEIGHT/4);
-        addComponent(namePanel, RRConstants.HEIGHT/2);
+        addComponent(namePanel, RRConstants.HEIGHT/2 - (increment/2));
         addComponent(playButton, RRConstants.HEIGHT/2 + increment);
         addComponent(rulesButton, RRConstants.HEIGHT/2 + 2*increment);
         addComponent(scoresButton, RRConstants.HEIGHT/2 + 3*increment);
@@ -82,7 +86,6 @@ public class MainMenuPanel extends TextPanel {
             String enteredName = nameField.getText();
             if (!enteredName.equals("")) {
                 name = enteredName;
-                System.out.println(name);
                 remove(namePanel);
             }
         }

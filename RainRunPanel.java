@@ -119,7 +119,7 @@ public class RainRunPanel extends JPanel {
             int totalAdded = 0;
             boolean added = false;
             
-            for(int i = 0; i < scores.size() && totalAdded < 3; i++) {
+            for(int i = 0; i < scores.size() && totalAdded < RRConstants.NUM_TOPSCORES; i++) {
                 // all else equal newer scores usurp old ones
                 Score prevScore = scores.get(i);
                 
@@ -129,7 +129,7 @@ public class RainRunPanel extends JPanel {
                     added = true;
                 }
 
-                if (totalAdded < 3) {
+                if (totalAdded < RRConstants.NUM_TOPSCORES) {
                     writer.println(prevScore);
                     totalAdded++;
                 }
