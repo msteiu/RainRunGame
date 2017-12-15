@@ -1,6 +1,6 @@
 /**
  * FILENAME: DeadPanel
- * DESCRIPTION: CS230 Final Project - Rain Run Game
+ * DESCRIPTION: Panel containing elements show when character dies.
  * @author Isabel Bryant
  */
 
@@ -16,6 +16,9 @@ public class DeadPanel extends TextPanel {
     private JButton playAgain;
     private JButton mainMenu;
     
+    /*
+     * Constructor of panel
+     */
     public DeadPanel() {
         super(RRConstants.BACKGROUND_COLOR);
         
@@ -34,7 +37,15 @@ public class DeadPanel extends TextPanel {
         addComponent(mainMenu, RRConstants.HEIGHT/2 + RRConstants.HEIGHT/8);
     }
     
+    /*
+     * Private class that listens to the action when button is pressed, implementing ActionListener interface
+     */
     private class ButtonListener implements ActionListener {
+        
+    /*
+     * Method that checks the source of the action perdormed (play again/go back to menu).
+     * @args event desired by player
+     */
         public void actionPerformed (ActionEvent event) {
             if (event.getSource() == playAgain) {
                 RainRunGUI.c1.show(RainRunGUI.cards, RainRunGUI.PLAYPANEL);
