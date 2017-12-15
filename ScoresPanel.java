@@ -21,6 +21,8 @@ public class ScoresPanel extends TextPanel {
     protected JLabel highScores;
     private Vector<Score> allHighScores;
     
+    /* Constructor
+     */
     public ScoresPanel() {
         //setting up background panel
         super(RRConstants.BACKGROUND_COLOR);
@@ -49,6 +51,9 @@ public class ScoresPanel extends TextPanel {
         addComponent(mainMenu, RRConstants.HEIGHT/2 + RRConstants.HEIGHT/4);
     }
 
+    /* makeLabelText() makes the text box of all the high scores
+     * formatted accordingly.
+     */
     private String makeLabelText() {
         StringBuilder build = new StringBuilder("<html>");
         
@@ -68,6 +73,8 @@ public class ScoresPanel extends TextPanel {
     }
     
     private class ButtonListener implements ActionListener {
+      /* Returns to main menu
+       */
         public void actionPerformed (ActionEvent event) {
             RainRunGUI.c1.show(RainRunGUI.cards, RainRunGUI.MENUPANEL);
         }

@@ -14,6 +14,10 @@ public abstract class TextPanel extends JPanel {
     protected Font textFont = RRConstants.getFont(20);
     protected Font buttonFont = RRConstants.getFont(30);
 
+    /* Constructor -- sets up the background panel with background color and border color
+     * and to correct size
+     * @param Color backgroundColor
+     */
     public TextPanel(Color backgroundColor) {
         setLayout(null);
         setBorder(BorderFactory.createLineBorder(RRConstants.BORDER_COLOR, RRConstants.BORDER));
@@ -21,6 +25,10 @@ public abstract class TextPanel extends JPanel {
         setBackground(backgroundColor);
     }
 
+    /* adds a component such as a JLabel or a JButton to the panel centered and at the 
+     * given yCoord
+     * @param int yCoord
+     */
     public void addComponent(JComponent component, int yCoord) {
         add(component);
         Dimension sizeComponent = component.getPreferredSize();
@@ -28,6 +36,12 @@ public abstract class TextPanel extends JPanel {
         component.setBounds(xCoord, yCoord, sizeComponent.width, sizeComponent.height);
     }
 
+    /* getButton() sets up and formats a JButton given it's name, color, and ActionListener
+     * @param String name
+     * @param Color color 
+     * @param ActionListener b
+     * @return JButton
+     */
     public JButton getButton(String name, Color color, ActionListener b) {
         JButton button = new JButton(name);
         

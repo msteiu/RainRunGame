@@ -31,8 +31,8 @@ public class RainRunPanel extends JPanel {
     private ImageIcon pauseIcon, playIcon;
     
     /*
-     * Constructor that uses username
-     * String username
+     * Constructor
+     * @param String username
      */
     public RainRunPanel(String username) {
         game = new RainRun();
@@ -67,7 +67,9 @@ public class RainRunPanel extends JPanel {
         add(pause);
     }
     
-    /
+    /* paintComponenet() draws the characters of the game
+     * @param Graphics g
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
@@ -94,6 +96,7 @@ public class RainRunPanel extends JPanel {
     
     /*
      * Method that shows score 
+     * @param Graphics g
      */
     private void makeScore(Graphics g) {
         g.setColor(RRConstants.BORDER_COLOR);
@@ -154,20 +157,19 @@ public class RainRunPanel extends JPanel {
     
     // LISTENERS //
     
-    
-    /*
-     * Method that updates an image by taking in info about image
-     * @param Image image wanted
-     * @param int 
-     * @param x location coordinate
-     * @param y location coordinate
-     * @param width of image
-     * @param heigh of image
-     */
     public class PaneObserver implements ImageObserver {
-        public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
-            return false;
-        }
+      /*
+       * Method that updates an image by taking in info about image
+       * @param Image image wanted
+       * @param int 
+       * @param x location coordinate
+       * @param y location coordinate
+       * @param width of image
+       * @param heigh of image
+       */
+      public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
+        return false;
+      }
     }
     
     public class MoveListener implements KeyListener {
@@ -228,8 +230,6 @@ public class RainRunPanel extends JPanel {
         }
     }
        
-    
-    // GETTERS AND SETTERS //
     
     public void startGame() {
         this.running = true;

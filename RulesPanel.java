@@ -46,7 +46,8 @@ public class RulesPanel extends TextPanel {
     
     private class ButtonListener implements ActionListener {
         /*
-         * Performing action desired by player
+         * Return to main menu
+         * @param ActionEvent event
          */
         public void actionPerformed (ActionEvent event) {
             RainRunGUI.c1.show(RainRunGUI.cards, RainRunGUI.MENUPANEL);
