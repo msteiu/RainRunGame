@@ -1,6 +1,6 @@
 /**
  * FILENAME: RulesPanel
- * DESCRIPTION: CS230 Final Project - Rain Run Game
+ * DESCRIPTION: Contains elements of the rules panel 
  * @author Isabel Bryant
  */
 
@@ -16,6 +16,9 @@ public class RulesPanel extends TextPanel {
     private JLabel text;
     private JButton backButton;
     
+    /*
+     * Constructor for rules panel
+     */
     public RulesPanel() {
         //setting up background panel
         super(RRConstants.BACKGROUND_COLOR);
@@ -42,6 +45,9 @@ public class RulesPanel extends TextPanel {
     }
     
     private class ButtonListener implements ActionListener {
+        /*
+         * Performing action desired by player
+         */
         public void actionPerformed (ActionEvent event) {
             RainRunGUI.c1.show(RainRunGUI.cards, RainRunGUI.MENUPANEL);
         }
