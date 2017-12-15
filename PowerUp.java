@@ -48,13 +48,16 @@ public abstract class PowerUp extends FallingObject implements Character {
         return powerType;
     }
     
-    // (((( NOT SURE )))))
+    /**
+     * drawCharacter() creates graphical representation of the PowerUp 
+     */ 
     public void drawCharacter(Graphics g) {
         g.drawImage(img, getX(), getY(), new ImgObserver());
     }
 
-    // ((( NOT SURE ABOUT THIS ONE ))))
+
     public class ImgObserver implements ImageObserver {
+
         public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
             return false;
         }
