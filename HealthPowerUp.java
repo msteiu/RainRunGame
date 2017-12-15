@@ -1,5 +1,5 @@
 /**
- * FILENAME: Character
+ * FILENAME: HealthPowerUp
  * DESCRIPTION: Powerup child implementing PowerUp abstract class. 
  */
 
