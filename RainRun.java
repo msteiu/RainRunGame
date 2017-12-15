@@ -39,8 +39,13 @@ public class RainRun {
         this.hitRules = getHitRules();
     }
 
-    // Helper methods //
-
+     
+    /*
+     * Helper method that returns a random integer by using start and end.
+     * @return int random number
+     * @param int start
+     * @param int end
+     */
     private static int randInt(int start, int end) {
         // uses math.Random()
         // INCLUSIVE of start and end
@@ -50,13 +55,16 @@ public class RainRun {
         return (rand >= start && rand <= end) ? rand : end;
     }
 
-
+    /*
+     * Helper method that returns a seconds time interval.
+     * @return int number of seconds
+     * @param int seconds
+     */
     private static int getIntervalFromSecond(int seconds) {
         return (seconds * 1000) / RainRunPanel.DELAY;
     }
 
     // Initializing our instance variables //
-
     private HashMap<String, Integer> getHitRule(int pointAdd, int healthAdd, 
             int speedAdd, int scoreIncAdd) {
         HashMap<String, Integer> hitRule = new HashMap<String, Integer>();
@@ -68,6 +76,10 @@ public class RainRun {
         return hitRule;
     }
  
+    /*
+     * Method that sets up the hitting rules for each powerup (effects of powerup).
+     * @return HashMap containing rules per powerup
+     */
     private HashMap<String, HashMap<String, Integer>> getHitRules() {
         HashMap<String, HashMap<String, Integer>> allHitRules;
         allHitRules = new HashMap<String, HashMap<String, Integer>>();
@@ -81,7 +93,6 @@ public class RainRun {
     }
 
     // Allowing our characters to move based on keyboard input //
-
     public void moveLeft() {
         character.moveLeft();
     }
@@ -90,8 +101,9 @@ public class RainRun {
         character.moveRight();
     }
 
-    // Add a new FallingObject to our game //
-
+    /*
+     * Method that adds a new rain drop monster to game
+     */
     private void addRainDrop() {
         int size = randInt(rainSize, rainSize*2);
         int xLeftBound = Math.max(0, character.getX() - 75); // monsters will appear near character
@@ -99,11 +111,19 @@ public class RainRun {
         int xCoord = randInt(xLeftBound, xRightBound);
         fallingObjects.add(new RainDrop(xCoord, RRConstants.BORDER, size));
     }
-
+    
+    /*
+     * Method that returns a string for the location of the image used, along with the size of it.
+     * @param name
+     * @param size
+     */
     private String getPUPath(String nameStub, int size) {
         return "images/" + nameStub + size + ".png";
     }
 
+    /*
+     * Method that adds a new powerup to game
+     */
     private void addPowerUp() {
         int size = randInt(1, 2);
         int xCoord = randInt(0, RRConstants.WIDTH - 30); // biggest image size is 30px
@@ -115,6 +135,9 @@ public class RainRun {
         fallingObjects.add(newPowerUp);
     }
 
+    /*
+     * Method that adds a new object to game
+     */
     public void addNewObject() {
         if (Math.random() <= PROB_RAIN) 
             addRainDrop();
@@ -129,8 +152,10 @@ public class RainRun {
     }
 
 
-    // Check hit //
-
+    /*
+     * Method that applies the hit rules from hashmap table.
+     * @param falling object (health/speed powerup etc.)
+     */
     private void applyHitRule(FallingObject obj) {
         
         HashMap<String, Integer> rules = hitRules.get(obj.getType());
@@ -146,6 +171,9 @@ public class RainRun {
             speed = newSpeed;
     }
 
+    /*
+     * Method that checks if character is hit
+     */
     public void checkHit() {
         Rectangle charBounds = character.getBounds();
 
@@ -164,13 +192,16 @@ public class RainRun {
         }
     }
 
-
-    // Check time //
-
+    /*
+     * Method that chekcs whether it's time to add element to game
+     */
     private boolean timeToAddElement() {
       return fallingObjects.lastElement().getY() >= (RRConstants.BORDER + SPACE_BETWEEN_OBJ);
     }
     
+    /*
+     * Method that chekcs the time needed to add element to game
+     */
     public void checkTime() {
 
         if (time == 0 || (fallingObjects.size() > 0 && timeToAddElement())) {
@@ -198,7 +229,6 @@ public class RainRun {
 
 
     // Getters and Setters //
-
     public int getScore() {
         return score;
     }
