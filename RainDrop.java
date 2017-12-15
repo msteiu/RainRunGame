@@ -1,6 +1,6 @@
 /**
- * FILENAME: Monster
- * DESCRIPTION: CS230 Final Project - Rain Run Game
+ * FILENAME: RainDrop
+ * DESCRIPTION: Implementation of a rain drop (monster for player), which is a falling object type. 
  * @author Mara Steiu, Angelina Li, Hunter Sessa
  */
 
