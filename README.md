@@ -48,9 +48,6 @@ java RainRunGUI
 
 ### Other 
 
-* Figure out how to toggle between different panels based on buttons.
-* [Optional] Make monsters move down in a less choppy fashion (can maybe use another timer to achieve this and modify the moveDown methods)
-* [Optional] Include a pause button, such that the user can manually pause the game when they want.
 * [Optional] Allow the user to choose what color their character should be, and/or different themes.
 * [Optional] Include "themes" / "levels" in our game, where periodically the background / monster colors change.
 
@@ -103,13 +100,13 @@ Will give you one additional life if you have less than 3 lives currently, as we
 
 **Speed Powerup**
 
-Will increase the pace of the game, and will also double the amount your score increases by each time interval.
+Will increase the pace of the game, and will also increase the amount your score increases by each time interval.
 
 ![alt text][umbrella]
 
 **Umbrella Powerup**
 
-Gives you a free 100 extra points!
+Gives you a free 50 extra points!
 
 [health]: images/heart2.png "Health Powerup"
 [speed]: images/speed2.png "Speed Powerup"
