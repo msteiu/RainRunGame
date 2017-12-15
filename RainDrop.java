@@ -57,7 +57,10 @@ public class RainDrop extends FallingObject {
         setY(updatedSpeed);
     }
 
-    // (((( NOT SURE ABOUT THIS ONE ))))
+    /**
+     * drawCharacter() creates new graphics object   
+     * sets aesthetic characteristic of the rain drops  
+     */  
     public void drawCharacter(Graphics g) {
         g.setColor(charColor);
         g.fillOval(getX(), getY(), size, size);
