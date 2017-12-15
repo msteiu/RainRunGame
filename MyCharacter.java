@@ -1,6 +1,6 @@
 /**
  * FILENAME: MyCharacter
- * DESCRIPTION: CS230 Final Project - Rain Run Game
+ * DESCRIPTION: Represents the character of the player in the game
  * @author Mara Steiu, Angelina Li, Hunter Sessa
  */
 
@@ -71,7 +71,11 @@ public class MyCharacter implements Character {
         return "mycharacter";
     }
     
-    // (((( NOT SURE ))))  
+    
+    /*
+     * drawCharacter() draws a character by using the Graphics package
+     * @param Graphics package used
+     */
     public void drawCharacter(Graphics g) {
         g.setColor(charColor);
         g.fillRect(xCoord, yCoord, size, size);
@@ -84,19 +88,35 @@ public class MyCharacter implements Character {
     public Rectangle getBounds() {
         return new Rectangle(xCoord, yCoord, size, size);
     }
-
+    
+    /*
+     * getDied()
+     * @return boolean check if character died
+     */
     public boolean getDied() {
         return died;
     }
-
+    
+    /*
+     * setDied() - sets character dead or not, based on boolean param
+     * @param - boolean showing whether character died or not
+     */
     public void setDied(boolean died) {
         this.died = died;
     }
 
+    /*
+     * getHealth()
+     * @return int health (hearts score) of character
+     */
     public int getHealth() {
         return health;
     }
 
+    /*
+     * setHealth() by using health given as param
+     * @param int health to which it's set
+     */
     public void setHealth(int health) {
         this.health = health;
     }
