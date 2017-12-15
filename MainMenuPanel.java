@@ -1,6 +1,6 @@
 /**
  * FILENAME: MainMenuPanel
- * DESCRIPTION: CS230 Final Project - Rain Run Game
+ * DESCRIPTION: Class that contains elements of game's main menu panel
  * @author Isabel Bryant
  */
 
@@ -22,6 +22,9 @@ public class MainMenuPanel extends TextPanel {
     private JButton rulesButton;
     private JButton scoresButton;
     
+    /*
+     * Constructor of panel
+     */
     public MainMenuPanel() {
         super(RRConstants.BORDER_COLOR);
         int increment = RRConstants.HEIGHT/10;
@@ -65,7 +68,11 @@ public class MainMenuPanel extends TextPanel {
     }
     
     private class ButtonListener implements ActionListener {
-
+        
+    /*
+     * Method that checks the source of the action perdormed when button pressed (play/rules/score).
+     * @param event desired by player
+     */
         public void actionPerformed (ActionEvent event) {
             if (event.getSource() == playButton) {
                 RainRunGUI.newGame(name);
@@ -83,6 +90,11 @@ public class MainMenuPanel extends TextPanel {
     }
 
     private class NameListener implements ActionListener {
+        
+    /*
+     * Method that gets the name entered by player.
+     * @param event/action of player
+     */
         public void actionPerformed(ActionEvent event) {
             String enteredName = nameField.getText();
             if (!enteredName.equals("")) {
