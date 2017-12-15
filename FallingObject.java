@@ -1,7 +1,7 @@
 /**
  * FILENAME: FallingObject
  * DESCRIPTION: CS230 Final Project - Rain Run Game
- * @author Angelina Li, Hunter Sessa
+ * @author Angelina Li, Hunter Sessa, Mara Steiu
  */
 
 import java.awt.*;
