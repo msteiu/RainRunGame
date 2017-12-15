@@ -1,9 +1,8 @@
 /**
  * FILENAME: RainRunPanel
- * DESCRIPTION: CS230 Final Project - Rain Run Game
+ * DESCRIPTION: Method that contains elements and methods for RainRun panel
  * @author Angelina Li
  */
-
 
 import java.awt.*;
 import java.awt.event.*;
@@ -31,6 +30,10 @@ public class RainRunPanel extends JPanel {
     private PauseListener pListener;
     private ImageIcon pauseIcon, playIcon;
     
+    /*
+     * Constructor that uses username
+     * String username
+     */
     public RainRunPanel(String username) {
         game = new RainRun();
         tListener = new TimerListener();
@@ -64,6 +67,7 @@ public class RainRunPanel extends JPanel {
         add(pause);
     }
     
+    /
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
@@ -88,12 +92,19 @@ public class RainRunPanel extends JPanel {
         repaint();
     }
     
+    /*
+     * Method that shows score 
+     */
     private void makeScore(Graphics g) {
         g.setColor(RRConstants.BORDER_COLOR);
         g.setFont(SCORE_FONT);
         g.drawString("Score: " + game.getScore(), RRConstants.BORDER + 8, RRConstants.BORDER + 20);
     }
     
+    /* 
+     * Accesses and shows health powerup's graphics (hearts)
+     * @param Graphics package used
+     */
     private void makeHealth(Graphics g) {
         try { // the health hearts are each 20 px wide
             Image img = ImageIO.read(new File("images/life.png"));
@@ -106,11 +117,10 @@ public class RainRunPanel extends JPanel {
         }
     }
 
-
-    // Adds score after death //
-
+    /*
+     * Method that adds score after character dies
+     */
     private void addScore() {
-        
         try {
             Vector<Score> scores = Score.parseScoresFromFile("scores.txt");
             PrintWriter writer = new PrintWriter(new FileOutputStream("scores.txt", false));
@@ -144,7 +154,16 @@ public class RainRunPanel extends JPanel {
     
     // LISTENERS //
     
-    // required to add an image
+    
+    /*
+     * Method that updates an image by taking in info about image
+     * @param Image image wanted
+     * @param int 
+     * @param x location coordinate
+     * @param y location coordinate
+     * @param width of image
+     * @param heigh of image
+     */
     public class PaneObserver implements ImageObserver {
         public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
             return false;
