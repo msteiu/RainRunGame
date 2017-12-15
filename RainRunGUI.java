@@ -24,15 +24,17 @@ public class RainRunGUI extends JFrame implements Runnable {
     protected static JPanel rulesPanel;
     protected static JPanel scoresPanel;
     protected static JPanel deadPanel;
+    protected static String username;
     
     public RainRunGUI() {
+        username = "";
         c1 = new CardLayout();
 
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(RRConstants.WIDTH, RRConstants.HEIGHT);
         
-        gamePanel = new RainRunPanel();
+        gamePanel = new RainRunPanel(username);
         gamePanel.pauseGame();
 
         mainMenuPanel = new MainMenuPanel();
@@ -52,11 +54,16 @@ public class RainRunGUI extends JFrame implements Runnable {
         add(cards, BorderLayout.CENTER);
     }
     
-    public static void newGame() {
+    public static void newGame(String username) {
         cards.remove(gamePanel);
-        
-        gamePanel = new RainRunPanel();
+        gamePanel = new RainRunPanel(username);
         cards.add(gamePanel, PLAYPANEL);
+    }
+
+    public static void newScoresPanel() {
+        cards.remove(scoresPanel);
+        scoresPanel = new ScoresPanel();
+        cards.add(scoresPanel, SCORESPANEL);
     }
     
     public void run() {

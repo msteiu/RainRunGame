@@ -14,18 +14,37 @@ public class MainMenuPanel extends TextPanel {
     private static final Color RULES_COLOR = RRConstants.RULE_BUTTON_COLOR;
     private static final Color SCORES_COLOR = new Color(255, 0, 255);
     
+    private String name;
     private JLabel gameName;
+    private JPanel namePanel;
+    private JTextField nameField;
     private JButton playButton;
     private JButton rulesButton;
     private JButton scoresButton;
     
     public MainMenuPanel() {
         super(RRConstants.BORDER_COLOR);
+        int increment = RRConstants.HEIGHT/10;
         
         //setting up "Rain Run" Label
         gameName = new JLabel("RAIN RUN");
         gameName.setFont(this.nameFont);
         gameName.setForeground(Color.white);
+
+        // making name label
+        name = "";
+        namePanel = new JPanel();
+        namePanel.setBackground(RRConstants.BORDER_COLOR);
+
+        JLabel nameLabel = new JLabel("Name: ");
+        nameLabel.setFont(this.textFont);
+        nameLabel.setForeground(Color.white);
+
+        nameField = new JTextField(8);
+        nameField.addActionListener(new NameListener());
+
+        namePanel.add(nameLabel);
+        namePanel.add(nameField);
 
         // setting up the buttons
         ButtonListener b = new ButtonListener();
@@ -34,15 +53,17 @@ public class MainMenuPanel extends TextPanel {
         scoresButton = getButton("SCORES", SCORES_COLOR, b);
 
         addComponent(gameName, RRConstants.HEIGHT/4);
-        addComponent(playButton, RRConstants.HEIGHT/2);
-        addComponent(rulesButton, RRConstants.HEIGHT/2 + RRConstants.HEIGHT/8);
-        addComponent(scoresButton, RRConstants.HEIGHT/2 + RRConstants.HEIGHT/4);
+        addComponent(namePanel, RRConstants.HEIGHT/2);
+        addComponent(playButton, RRConstants.HEIGHT/2 + increment);
+        addComponent(rulesButton, RRConstants.HEIGHT/2 + 2*increment);
+        addComponent(scoresButton, RRConstants.HEIGHT/2 + 3*increment);
     }
     
     private class ButtonListener implements ActionListener {
 
         public void actionPerformed (ActionEvent event) {
             if (event.getSource() == playButton) {
+                RainRunGUI.newGame(name);
                 RainRunGUI.c1.show(RainRunGUI.cards, RainRunGUI.PLAYPANEL);
                 RainRunGUI.gamePanel.startGame();
                 RainRunGUI.gamePanel.requestFocusInWindow();
@@ -52,6 +73,17 @@ public class MainMenuPanel extends TextPanel {
             }
             else if (event.getSource() == scoresButton) {
                 RainRunGUI.c1.show(RainRunGUI.cards, RainRunGUI.SCORESPANEL);
+            }
+        }
+    }
+
+    private class NameListener implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
+            String enteredName = nameField.getText();
+            if (!enteredName.equals("")) {
+                name = enteredName;
+                System.out.println(name);
+                remove(namePanel);
             }
         }
     }

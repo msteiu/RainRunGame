@@ -27,7 +27,6 @@ public class ScoresPanel extends TextPanel {
 
         try {
             allHighScores = Score.parseScoresFromFile("scores.txt");
-            System.out.println("hs vector: " + allHighScores);
         } catch (FileNotFoundException e) {
             System.out.println("Could not read scores.txt");
         }

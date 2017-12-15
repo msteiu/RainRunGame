@@ -37,7 +37,6 @@ public class DeadPanel extends TextPanel {
     private class ButtonListener implements ActionListener {
         public void actionPerformed (ActionEvent event) {
             if (event.getSource() == playAgain) {
-                new RainRunPanel();
                 RainRunGUI.c1.show(RainRunGUI.cards, RainRunGUI.PLAYPANEL);
                 RainRunGUI.gamePanel.startGame();
                 RainRunGUI.gamePanel.requestFocusInWindow();

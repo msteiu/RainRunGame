@@ -13,6 +13,8 @@ import java.awt.image.*;
 import javax.imageio.*;
 import java.io.*;
 
+import java.util.Vector;
+
 public class RainRunPanel extends JPanel {
     
     private static final Color PLAY_COLOR = RRConstants.CHAR_DEFAULT_COLOR;
@@ -24,16 +26,18 @@ public class RainRunPanel extends JPanel {
     private TimerListener tListener;
     private MoveListener kListener;
     private boolean running;
+    private String username;
     private JButton pause;
     private PauseListener pListener;
     private ImageIcon pauseIcon, playIcon;
     
-    public RainRunPanel() {
-        this.game = new RainRun();
+    public RainRunPanel(String username) {
+        game = new RainRun();
         tListener = new TimerListener();
         kListener = new MoveListener();
         pListener = new PauseListener();
         
+        this.username = username.equals("") ? "Anon" : username;
         timer = new Timer(DELAY, tListener); // 1000ms = 1 second
         
         setBorder(BorderFactory.createLineBorder(RRConstants.BORDER_COLOR, RRConstants.BORDER));
@@ -60,14 +64,9 @@ public class RainRunPanel extends JPanel {
         add(pause);
     }
     
-    public RainRunPanel(int charSize, Color charColor) {
-        this();
-        this.game = new RainRun(charSize, charColor);
-    }
-    
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
+
         game.getCharacter().drawCharacter(g);
         
         for(FallingObject obj : game.getFallingObjects()) {
@@ -80,8 +79,10 @@ public class RainRunPanel extends JPanel {
         
         if (game.getCharacter().getDied()) {
             pauseGame();
+            addScore();
+            RainRunGUI.newGame(username);
+            RainRunGUI.newScoresPanel();
             RainRunGUI.c1.show(RainRunGUI.cards, RainRunGUI.DEADPANEL);
-            RainRunGUI.newGame();
         }
         
         repaint();
@@ -103,6 +104,41 @@ public class RainRunPanel extends JPanel {
         } catch (IOException e) {
             System.out.println("Couldn't open image images/life.png");
         }
+    }
+
+
+    // Adds score after death //
+
+    private void addScore() {
+        
+        try {
+            Vector<Score> scores = Score.parseScoresFromFile("scores.txt");
+            PrintWriter writer = new PrintWriter(new FileOutputStream("scores.txt", false));
+
+            Score gameScore = new Score(username, game.getScore());
+            int totalAdded = 0;
+            boolean added = false;
+            
+            for(int i = 0; i < scores.size() && totalAdded < 3; i++) {
+                // all else equal newer scores usurp old ones
+                Score prevScore = scores.get(i);
+                
+                if (!added && gameScore.compareTo(prevScore) >= 0) {
+                    writer.println(gameScore);
+                    totalAdded++;
+                    added = true;
+                }
+
+                if (totalAdded < 3) {
+                    writer.println(prevScore);
+                    totalAdded++;
+                }
+            }
+            writer.close();
+        } catch(IOException e) {
+            System.out.println("Couldn't save to scores.txt");
+        }
+        
     }
     
     

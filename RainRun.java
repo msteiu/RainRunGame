@@ -23,15 +23,12 @@ public class RainRun {
 
     /**
      * Constructor - defines what will be contained in RainRun instance
-     * Threads all backend aspects of the game together 
-     * @param charColor- color of character
-     * @param charSize- size of character
+     * Threads all backend aspects of the game together
      */     
-    public RainRun(int charSize, Color charColor) {
-
+    public RainRun() {
         this.character = new MyCharacter(RRConstants.WIDTH/2, 
-            RRConstants.HEIGHT - RRConstants.BORDER - 75, charSize, charColor);
-        this.rainSize = charSize;
+            RRConstants.HEIGHT - RRConstants.BORDER - 75, 20, RRConstants.CHAR_DEFAULT_COLOR);
+        this.rainSize = 20;
         this.speed = 1;
         this.time = 0;
         this.score = 0;
@@ -40,10 +37,6 @@ public class RainRun {
         
         this.fallingObjects = new Vector<FallingObject>();
         this.hitRules = getHitRules();
-    }
-
-    public RainRun() {
-        this(20, RRConstants.CHAR_DEFAULT_COLOR);
     }
 
     // Helper methods //
@@ -136,41 +129,6 @@ public class RainRun {
     }
 
 
-    // Adds score after death //
-
-    private void addScore() {
-        
-        try {
-            Vector<Score> scores = Score.parseScoresFromFile("scores.txt");
-            PrintWriter writer = new PrintWriter(new FileOutputStream("scores.txt", false));
-
-            Score gameScore = new Score("Anon", score);
-            int totalAdded = 0;
-            boolean added = false;
-            
-            for(int i = 0; i < scores.size() && totalAdded < 3; i++) {
-                // all else equal newer scores usurp old ones
-                Score prevScore = scores.get(i);
-                
-                if (!added && gameScore.compareTo(prevScore) >= 0) {
-                    writer.println(gameScore);
-                    totalAdded++;
-                    added = true;
-                }
-
-                if (totalAdded < 3) {
-                    writer.println(prevScore);
-                    totalAdded++;
-                }
-            }
-            writer.close();
-        } catch(IOException e) {
-            System.out.println("Couldn't save to scores.txt");
-        }
-        
-    }
-
-
     // Check hit //
 
     private void applyHitRule(FallingObject obj) {
@@ -201,7 +159,6 @@ public class RainRun {
                 
                 if (character.getHealth() <= 0) {
                     character.setDied(true);
-                    addScore();
                 }
             }                
         }
