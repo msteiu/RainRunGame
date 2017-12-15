@@ -5,6 +5,7 @@
  */
 
 import java.awt.*;
+import java.io.*;
 import java.util.*;
 
 public class RainRun {
@@ -135,6 +136,41 @@ public class RainRun {
     }
 
 
+    // Adds score after death //
+
+    private void addScore() {
+        
+        try {
+            Vector<Score> scores = Score.parseScoresFromFile("scores.txt");
+            PrintWriter writer = new PrintWriter(new FileOutputStream("scores.txt", false));
+
+            Score gameScore = new Score("Anon", score);
+            int totalAdded = 0;
+            boolean added = false;
+            
+            for(int i = 0; i < scores.size() && totalAdded < 3; i++) {
+                // all else equal newer scores usurp old ones
+                Score prevScore = scores.get(i);
+                
+                if (!added && gameScore.compareTo(prevScore) >= 0) {
+                    writer.println(gameScore);
+                    totalAdded++;
+                    added = true;
+                }
+
+                if (totalAdded < 3) {
+                    writer.println(prevScore);
+                    totalAdded++;
+                }
+            }
+            writer.close();
+        } catch(IOException e) {
+            System.out.println("Couldn't save to scores.txt");
+        }
+        
+    }
+
+
     // Check hit //
 
     private void applyHitRule(FallingObject obj) {
@@ -163,8 +199,10 @@ public class RainRun {
                 applyHitRule(obj);
                 fallingObjects.remove(i);
                 
-                if (character.getHealth() <= 0)
+                if (character.getHealth() <= 0) {
                     character.setDied(true);
+                    addScore();
+                }
             }                
         }
     }

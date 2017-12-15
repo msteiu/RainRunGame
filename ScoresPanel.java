@@ -8,6 +8,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import java.io.*;
+import java.util.*;
+
 public class ScoresPanel extends TextPanel {
     
     protected static final Color BACK_COLOR = Color.CYAN;
@@ -15,12 +18,19 @@ public class ScoresPanel extends TextPanel {
     protected JLabel title;
     protected JLabel scores;
     protected JButton mainMenu;
-    protected JLabel highscores;
+    protected JLabel highScores;
+    private Vector<Score> allHighScores;
     
     public ScoresPanel() {
         //setting up background panel
         super(RRConstants.BACKGROUND_COLOR);
-        this.textFont = RRConstants.getFont(30);
+
+        try {
+            allHighScores = Score.parseScoresFromFile("scores.txt");
+            System.out.println("hs vector: " + allHighScores);
+        } catch (FileNotFoundException e) {
+            System.out.println("Could not read scores.txt");
+        }
         
         //setting up "High Scores" Label
         title = new JLabel("<html><center>HIGH<br>SCORES</html>");
@@ -28,7 +38,7 @@ public class ScoresPanel extends TextPanel {
         title.setForeground(RRConstants.BORDER_COLOR);
         
         //setting up scores Label
-        scores = new JLabel("<html>1._______<br>2._______<br>3._______</html>");
+        scores = new JLabel(makeLabelText());
         scores.setFont(textFont);
         scores.setForeground(RRConstants.BORDER_COLOR);
         
@@ -38,6 +48,24 @@ public class ScoresPanel extends TextPanel {
         addComponent(title, RRConstants.HEIGHT/6);
         addComponent(scores, RRConstants.HEIGHT/2 - 30);
         addComponent(mainMenu, RRConstants.HEIGHT/2 + RRConstants.HEIGHT/4);
+    }
+
+    private String makeLabelText() {
+        StringBuilder build = new StringBuilder("<html>");
+        
+        for(int i=0; i < allHighScores.size(); i++) {
+            Score currentScore = allHighScores.get(i);
+            String name = currentScore.getName();
+            int score = currentScore.getScore();
+            int num = i + 1;
+
+            if(!name.equals("NONE")) {
+                build.append(num + ". " + name + " - " + score + "<br>");
+            }
+        }
+
+        build.append("</html>");
+        return build.toString();
     }
     
     private class ButtonListener implements ActionListener {
