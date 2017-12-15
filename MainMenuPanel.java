@@ -44,6 +44,7 @@ public class MainMenuPanel extends TextPanel {
         nameField.setFont(this.textFont);
         nameField.setBackground(RRConstants.BORDER_COLOR);
         nameField.setForeground(Color.white);
+        nameField.setCaretColor(Color.white);
         nameField.setBorder(BorderFactory.createLineBorder(RRConstants.BORDER_COLOR, RRConstants.BORDER));
         nameField.addActionListener(new NameListener());
 
