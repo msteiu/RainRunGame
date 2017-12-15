@@ -26,6 +26,9 @@ public class RainRunGUI extends JFrame implements Runnable {
     protected static JPanel deadPanel;
     protected static String username;
     
+    /*
+     * Constructor
+     */
     public RainRunGUI() {
         username = "";
         c1 = new CardLayout();
@@ -54,22 +57,35 @@ public class RainRunGUI extends JFrame implements Runnable {
         add(cards, BorderLayout.CENTER);
     }
     
+    /*
+     * Method that sets up new game
+     * @param String of user's name
+     */
     public static void newGame(String username) {
         cards.remove(gamePanel);
         gamePanel = new RainRunPanel(username);
         cards.add(gamePanel, PLAYPANEL);
     }
-
+    
+    /*
+     * Method that sets up new scores panel
+     */
     public static void newScoresPanel() {
         cards.remove(scoresPanel);
         scoresPanel = new ScoresPanel();
         cards.add(scoresPanel, SCORESPANEL);
     }
     
+    /*
+     * Method that runs it, making it visible
+     */
     public void run() {
         setVisible(true);
     }
     
+    /*
+     * Main (driver) method envoking new GUI
+     */
     public static void main(String[] args) {
         EventQueue.invokeLater(new RainRunGUI());
     }
