@@ -1,20 +1,28 @@
 /**
  * FILENAME: Character
- * DESCRIPTION: CS230 Final Project - Rain Run Game
- * Character interface
- * @author Angelina
+ * DESCRIPTION: Character interface that represents the main interface for player character and falling objects.
+ * @author Angelina, Mara
  */
 
 import java.awt.*;
 
 public interface Character {
 
-    // returns type of character
+    /*
+     * Returns the type of a character, as a String
+     * @ return String variable representing character type
+     */
     public String getType();
 
-    // will draw character using Graphics package
+    /*
+     * Drawing character
+     * @arg it uses the Graphics package for drawing
+     */
     public void drawCharacter(Graphics g);
 
-    // gets bounds of character in a rectangle
+    /*
+     * Gets bounds of character in a rectangle
+     * @return Rectangle that has the bounds
+     */
     public Rectangle getBounds();
 }
