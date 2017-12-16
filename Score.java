@@ -2,10 +2,6 @@ import java.io.*;
 import java.util.*;
 
 public class Score implements Comparable<Score> {
-
-    // chose an obscure score delimiter to minimize the chances that the user
-    // inputted name will contain this sequence.
-    protected static final String SCORE_DELIMITER = "#";
     
     private String name;
     private int score;
@@ -28,18 +24,18 @@ public class Score implements Comparable<Score> {
     }
 
     public String toString() {
-        return name + SCORE_DELIMITER + score;
+        return name + RRConstants.DELIMITER + score;
     }
 
     public static boolean isValidName(String name) {
-        return !name.contains(SCORE_DELIMITER);
+        return !name.contains(RRConstants.DELIMITER);
     }
 
     /** 
      * Will parse score in format 'name#score' and return a score object.
      */
     public static Score parseScore(String text) {
-        String[] scoreArray = text.split(SCORE_DELIMITER);
+        String[] scoreArray = text.split(RRConstants.DELIMITER);
         String name = scoreArray[0].trim();
         Integer score = Integer.parseInt(scoreArray[1].trim());
         return new Score(name, score);

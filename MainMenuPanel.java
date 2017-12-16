@@ -17,7 +17,7 @@ public class MainMenuPanel extends TextPanel {
     
     private String name;
     private JLabel gameName;
-    private JPanel namePanel;
+    private JLabel nameLabel;
     private JTextField nameField;
     private JButton playButton;
     private JButton rulesButton;
@@ -38,10 +38,8 @@ public class MainMenuPanel extends TextPanel {
 
         // making name label
         name = "";
-        namePanel = new JPanel();
-        namePanel.setBackground(RRConstants.BORDER_COLOR);
 
-        JLabel nameLabel = new JLabel("Name: ");
+        nameLabel = new JLabel("Enter your name:");
         nameLabel.setFont(this.textFont);
         nameLabel.setForeground(Color.white);
 
@@ -50,11 +48,9 @@ public class MainMenuPanel extends TextPanel {
         nameField.setBackground(RRConstants.BORDER_COLOR);
         nameField.setForeground(Color.white);
         nameField.setCaretColor(Color.white);
+        nameField.setHorizontalAlignment(JTextField.CENTER);
         nameField.setBorder(BorderFactory.createLineBorder(RRConstants.BORDER_COLOR, RRConstants.BORDER));
         nameField.addActionListener(new NameListener());
-
-        namePanel.add(nameLabel);
-        namePanel.add(nameField);
 
         // setting up the buttons
         ButtonListener b = new ButtonListener();
@@ -64,7 +60,8 @@ public class MainMenuPanel extends TextPanel {
         creditsButton = getButton("CREDITS", CREDITS_COLOR, b);
 
         addComponent(gameName, RRConstants.HEIGHT/5);
-        addComponent(namePanel, RRConstants.HEIGHT/5 + increment);
+        addComponent(nameLabel, RRConstants.HEIGHT/5 + (5*increment/4));
+        addComponent(nameField, RRConstants.HEIGHT/5 + (3*increment/2));
         addComponent(playButton, RRConstants.HEIGHT/2);
         addComponent(rulesButton, RRConstants.HEIGHT/2 + increment);
         addComponent(scoresButton, RRConstants.HEIGHT/2 + 2*increment);
@@ -105,9 +102,14 @@ public class MainMenuPanel extends TextPanel {
         public void actionPerformed(ActionEvent event) {
             String enteredName = nameField.getText();
             boolean valid = Score.isValidName(enteredName);
-            if (valid && !enteredName.equals("")) {
+            if (!valid) {
+                nameLabel.setText(
+                    "Can't use '" + RRConstants.DELIMITER + "'s!");
+            }
+            else if (!enteredName.equals("")) {
                 name = enteredName;
-                remove(namePanel);
+                remove(nameLabel);
+                remove(nameField);
                 repaint();
             }
         }
