@@ -18,7 +18,6 @@ public class RainRunPanel extends JPanel {
     
     private static final Color PLAY_COLOR = RRConstants.CHAR_DEFAULT_COLOR;
     private static final Font SCORE_FONT = RRConstants.getFont(16); // new Font(RRConstants.FONT_NAME, Font.BOLD, 16);
-    protected static final int DELAY = 25;
     
     private RainRun game;
     private Timer timer;
@@ -41,7 +40,7 @@ public class RainRunPanel extends JPanel {
         pListener = new PauseListener();
         
         this.username = username.equals("") ? "Anon" : username;
-        timer = new Timer(DELAY, tListener); // 1000ms = 1 second
+        timer = new Timer(RRConstants.DELAY, tListener); // 1000ms = 1 second
         
         setBorder(BorderFactory.createLineBorder(RRConstants.BORDER_COLOR, RRConstants.BORDER));
         setBackground(RRConstants.BACKGROUND_COLOR);

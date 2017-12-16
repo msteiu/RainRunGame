@@ -12,6 +12,7 @@ public class RRConstants {
     protected static final int BORDER = 10; // thickness of border
     protected static final int MAX_HEALTH = 3;
     protected static final int NUM_TOPSCORES = 5;
+    protected static final int DELAY = 25;
 
     protected static final Color BORDER_COLOR = new Color(75, 0, 130);
     protected static final Color BACKGROUND_COLOR = new Color(233, 223, 239);

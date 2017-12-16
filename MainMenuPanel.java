@@ -108,6 +108,7 @@ public class MainMenuPanel extends TextPanel {
             if (valid && !enteredName.equals("")) {
                 name = enteredName;
                 remove(namePanel);
+                repaint();
             }
         }
     }

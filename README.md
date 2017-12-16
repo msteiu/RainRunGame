@@ -16,7 +16,7 @@ java RainRunGUI
 
 * Commenting:
     * Character
-    * CreditsPanel - Angelina
+    * ✓ CreditsPanel - Angelina
     * DeadPanel
     * FallingObject
     * HealthPowerUp
