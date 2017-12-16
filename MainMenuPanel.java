@@ -17,7 +17,6 @@ public class MainMenuPanel extends TextPanel {
     
     private String name;
     private JLabel gameName;
-    private JLabel nameLabel;
     private JPanel namePanel;
     private JTextField nameField;
     private JButton playButton;
@@ -42,11 +41,11 @@ public class MainMenuPanel extends TextPanel {
         namePanel = new JPanel();
         namePanel.setBackground(RRConstants.BORDER_COLOR);
 
-        nameLabel = new JLabel("Name: ");
+        JLabel nameLabel = new JLabel("Name: ");
         nameLabel.setFont(this.textFont);
         nameLabel.setForeground(Color.white);
 
-        nameField = new JTextField(10);
+        nameField = new JTextField(12);
         nameField.setFont(this.textFont);
         nameField.setBackground(RRConstants.BORDER_COLOR);
         nameField.setForeground(Color.white);
@@ -106,9 +105,7 @@ public class MainMenuPanel extends TextPanel {
         public void actionPerformed(ActionEvent event) {
             String enteredName = nameField.getText();
             boolean valid = Score.isValidName(enteredName);
-            if (!valid) {
-                nameLabel.setText("Enter name without '" + Score.SCORE_DELIMITER + "': ");
-            } else if (!enteredName.equals("")) {
+            if (valid && !enteredName.equals("")) {
                 name = enteredName;
                 remove(namePanel);
             }

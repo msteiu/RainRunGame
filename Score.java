@@ -41,7 +41,6 @@ public class Score implements Comparable<Score> {
     public static Score parseScore(String text) {
         String[] scoreArray = text.split(SCORE_DELIMITER);
         String name = scoreArray[0].trim();
-        System.out.println(name);
         Integer score = Integer.parseInt(scoreArray[1].trim());
         return new Score(name, score);
     }
