@@ -12,45 +12,28 @@ javac RainRunGUI.java
 java RainRunGUI
 ```
 
-## Change log
-
-* Angelina - Modified RainRun and RainRunPanel for modularity. Assumes that FallingObjects all contain the method: public void moveDown(int speed);
-* Angelina - Updated the FallingObject & Character interfaces, and PowerUp class to reflect that change
-* Mara - Update backend classes (MyCharacter, Monster)
-* Mara - FallingObject interface needs to be implemented by Monster - all things that fall are FallingObjects in this game.
-* Mara - Added png files to images, for MyCharacter (minion) and rain drops (2 dimensions)
-* Angelina - Changed the way falling objects are added such that the space between falling objects stays approximately the same
-
-## Data Structures
-
-* Hash Tables for storing the hit rules
-* Vector to store FallingObjects 
-* Hash Tables for scores 
-
-
 ## To Do
 
-### Mara
-
-### Angelina
-
-### Isabel
-
-* Create a main menu to start the game from.
-* When a game has ended, insert a button they can press to return to the main menu.
-* Create a rules panel explaining the rules of the game, to link from the main menu.
-
-### Hunter
-
-* DeadPanel 
-* FallingObject
-* Start slides 
-
-### Other 
-
-* [Optional] Allow the user to choose what color their character should be, and/or different themes.
-* [Optional] Include "themes" / "levels" in our game, where periodically the background / monster colors change.
-
+* Commenting:
+    * Character
+    * DeadPanel
+    * FallingObject
+    * HealthPowerUp
+    * MainMenuPanel
+    * MyCharacter
+    * PowerUp
+    * RainDrop
+    * RainRun - Angelina
+    * RainRunGUI
+    * RainRunPanel - Angelina
+    * RRConstants - Angelina
+    * RulesPanel
+    * Score - Angelina
+    * ScoresPanel
+    * SpeedPowerUp
+    * TextPanel - Angelina
+    * UmbrellaPowerUp
+* Create a new credits panel with our names and contributors
 
 ## Technical specifications
 

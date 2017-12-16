@@ -16,6 +16,7 @@ public class RainRunGUI extends JFrame implements Runnable {
     protected final static String RULESPANEL = "Card with Rules";
     protected final static String SCORESPANEL = "Card with Scores";
     protected final static String DEADPANEL = "Card with Death";
+    protected final static String CREDITSPANEL = "Card with Credits";
 
     protected static CardLayout c1;
     protected static JPanel cards;
@@ -24,6 +25,7 @@ public class RainRunGUI extends JFrame implements Runnable {
     protected static JPanel rulesPanel;
     protected static JPanel scoresPanel;
     protected static JPanel deadPanel;
+    protected static JPanel creditsPanel;
     protected static String username;
     
     /*
@@ -44,6 +46,7 @@ public class RainRunGUI extends JFrame implements Runnable {
         rulesPanel = new RulesPanel();
         scoresPanel = new ScoresPanel();
         deadPanel = new DeadPanel();
+        creditsPanel = new CreditsPanel();
         cards = new JPanel(c1);
         
         cards.add(mainMenuPanel, MENUPANEL);
@@ -51,6 +54,7 @@ public class RainRunGUI extends JFrame implements Runnable {
         cards.add(rulesPanel, RULESPANEL);
         cards.add(scoresPanel, SCORESPANEL);
         cards.add(deadPanel, DEADPANEL);
+        cards.add(creditsPanel, CREDITSPANEL);
         
         c1.show(cards, MENUPANEL);
         
