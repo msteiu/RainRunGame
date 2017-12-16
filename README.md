@@ -30,7 +30,7 @@ java RainRunGUI
     * RRConstants - Angelina
     * RulesPanel
     * Score - Angelina
-    * ScoresPanel
+    * ScoresPanel - Angelina
     * SpeedPowerUp
     * TextPanel - Angelina
     * UmbrellaPowerUp
