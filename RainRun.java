@@ -69,6 +69,20 @@ public class RainRun {
 
     // INITIALIZING RULES //
 
+    /**
+     * Helper method that creates and returns a HashMap mapping from a string 
+     * representation of each instance attribute to the amount by which hitting 
+     * a particular FallingObject should change each attribute. Used to create
+     * the hitRules HashMap. 
+     *
+     * @param int pointAdd the amount by which to increment points by when hit
+     * @param int healthAdd the amount by which to increment health by when hit
+     * @param int speedAdd the amount by which to increment speed by when hit
+     * @param int scoreIncAdd the amount by which to increment scoreInc by when hit
+     *
+     * @return HashMap mapping from a string representation of each attribute to
+     * an amount by which they should be incremented
+     */
     private HashMap<String, Integer> getHitRule(int pointAdd, int healthAdd, 
             int speedAdd, int scoreIncAdd) {
         HashMap<String, Integer> hitRule = new HashMap<String, Integer>();
@@ -81,8 +95,12 @@ public class RainRun {
     }
  
     /**
-     * Method that sets up the hitting rules for each powerup (effects of powerup).
-     * @return HashMap containing rules per powerup
+     * Helper method that creates and returns a HashMap mapping from a string
+     * representation of each FallingObject type to a HashMap representing the
+     * rules for how each instance attribute in this game should change when
+     * our main character hits a FallingObject of this type
+     *
+     * @return HashMap containing rules for each PowerUp.
      */
     private HashMap<String, HashMap<String, Integer>> getHitRules() {
         HashMap<String, HashMap<String, Integer>> allHitRules;
@@ -154,27 +172,36 @@ public class RainRun {
     private void addRainDrop() {
         int size = randInt(rainSize, rainSize*2); // radius of the RainDrop
 
-        int xLeftBound = Math.max(0, character.getX() - 75);
+        int xLeftBound = Math.max(RRConstants.BORDER, character.getX() - 75);
         int xRightBound = Math.min(RRConstants.WIDTH - size, character.getX() + 75);
         int xCoord = randInt(xLeftBound, xRightBound);
         fallingObjects.add(new RainDrop(xCoord, RRConstants.BORDER, size));
     }
     
     /**
-     * Method that returns a string for the location of the image used, along with the size of it.
-     * @param name
-     * @param size
+     * Helper method that will return the filepath for a given powerup icon.
+     * PowerUp path names are all structured as "images/NAMESTUB#.png", e.g.
+     * images/heart1.png (where heart1 is a smaller sized icon than heart2).
+     * 
+     * @param nameStub - String representation of the PowerUp required
+     * @param size - an integer between 1 and 2 representing the size of the 
+     * PowerUp icon wanted
+     * @return the filepath for the icon needed.
      */
     private String getPUPath(String nameStub, int size) {
         return "images/" + nameStub + size + ".png";
     }
 
-    /*
-     * Method that adds a new powerup to game
+    /**
+     * Helper method that will add a random powerup to the Vector of FallingObjects
+     * in our game. The x coordinate of this powerup will be selected independently
+     * from the current location of the character.
      */
     private void addPowerUp() {
+        /* PowerUps of size '1' are approximately 30 x 30 pixels large, and
+        PowerUps of size '2' are approximately 50 x 50 pixels large */
         int size = randInt(1, 2);
-        int xCoord = randInt(0, RRConstants.WIDTH - 30); // biggest image size is 30px
+        int xCoord = randInt(RRConstants.BORDER, RRConstants.WIDTH - 50); // biggest image size is 50px
         PowerUp newPowerUp = new HealthPowerUp(xCoord, RRConstants.BORDER, getPUPath("heart", size));
         switch (randInt(0, 2)) {
             case(1) : newPowerUp = new SpeedPowerUp(xCoord, RRConstants.BORDER, getPUPath("speed", size)); break;
@@ -183,26 +210,41 @@ public class RainRun {
         fallingObjects.add(newPowerUp);
     }
 
-    /*
-     * Method that adds a new object to game
+    /**
+     * Method that, when invoked, will add a random FallingObject to the game,
+     * with probability PROB_RAIN of getting a RainDrop character and a probability
+     * 1 - PROB_RAIN of getting a PowerUp character. 
+     *
+     * Every time an object is added to our vector of FallingObjects, this 
+     * method will also check whether or not the last element of the vector has 
+     * moved too far off the screen for the user to see it, and if so will remove
+     * it to ensure our Vector stays of a manageable size. Because FallingObjects
+     * each fall by the same vertical amount each time interval in this game,
+     * we know the object which has travelled the farthest at any given time is
+     * the first object in our vector (i.e. the first added).
      */
     public void addNewObject() {
-        if (Math.random() <= PROB_RAIN) 
+        if (Math.random() <= PROB_RAIN) {
             addRainDrop();
-        
-        else
+        } else {
             addPowerUp();
+        }
 
-        // while adding a new object, remove any stray objects who can't be seen by the game anymore
-        while (fallingObjects.firstElement().getY() > RRConstants.HEIGHT  - RRConstants.BORDER) {
+        /* While adding a new object, remove any stray FallingObjects who can't be 
+        seen within the game anymore. (i.e. whose starting Y coordinate is obscured
+        by the game border or who are completely out of bounds of the game). */
+        while (fallingObjects.firstElement().getY() > RRConstants.HEIGHT - RRConstants.BORDER) {
             fallingObjects.remove(0);
         }
     }
 
 
-    /*
-     * Method that applies the hit rules from hashmap table.
-     * @param falling object (health/speed powerup etc.)
+    /**
+     * Helper method that, given a FallingObject that the main character has hit,
+     * will use the hitRules HashMap to increment each instance attribute that
+     * might have changed by the amount by which it should change.
+     *
+     * @param falling object that you've hit.
      */
     private void applyHitRule(FallingObject obj) {
         
@@ -219,22 +261,31 @@ public class RainRun {
             speed = newSpeed;
     }
 
-    /*
-     * Method that checks if character is hit
+    /**
+     * Method that checks whether or not the main character was hit by any Falling
+     * Object, and if so will update each of the instance attributes affected in
+     * the game given the type of this FallingObject, will remove the FallingObject
+     * in question from view (so that you can't be constantly hit by an object)
+     * and will determine whether this change kills the main character.
      */
     public void checkHit() {
         Rectangle charBounds = character.getBounds();
 
+        /* increment downwards to preserve index of each falling object in the
+        vector at the time of access even as we remove some of the objects */
         for(int i = fallingObjects.size() - 1; i >= 0; i--) {
             
             FallingObject obj = fallingObjects.get(i);
             
+            /* each character has a getBounds() method specified in the Character 
+            interface */
             if (charBounds.intersects(obj.getBounds())) {
                 applyHitRule(obj);
                 fallingObjects.remove(i);
                 
                 if (character.getHealth() <= 0) {
                     character.setDied(true);
+                    break;
                 }
             }                
         }

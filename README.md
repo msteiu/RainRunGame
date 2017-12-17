@@ -15,7 +15,7 @@ java RainRunGUI
 ## To Do
 
 * Commenting:
-    * Character
+    * Character - Angelina
     * ✓ CreditsPanel - Angelina
     * DeadPanel
     * FallingObject
