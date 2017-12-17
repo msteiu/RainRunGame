@@ -17,7 +17,7 @@ java RainRunGUI
 * Commenting:
     * ✓ Character - Angelina
     * ✓ CreditsPanel - Angelina
-    * *check* DeadPanel
+    * (done) DeadPanel
     * FallingObject
     * HealthPowerUp
     * *check* MainMenuPanel
@@ -25,12 +25,12 @@ java RainRunGUI
     * PowerUp
     * RainDrop
     * ✓ RainRun - Angelina
-    * *check* RainRunGUI
+    * (done) RainRunGUI
     * ✓ RainRunPanel - Angelina
     * RRConstants
-    * *check* RulesPanel
+    * (done) RulesPanel
     * ✓ Score - Angelina
-    * *check* ScoresPanel
+    * (done) ScoresPanel
     * SpeedPowerUp
     * TextPanel
     * UmbrellaPowerUp
