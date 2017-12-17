@@ -20,7 +20,7 @@ java RainRunGUI
     * (done) DeadPanel
     * FallingObject
     * HealthPowerUp
-    * *check* MainMenuPanel
+    * (done) MainMenuPanel
     * MyCharacter
     * PowerUp
     * RainDrop
