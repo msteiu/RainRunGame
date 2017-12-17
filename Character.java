@@ -26,7 +26,6 @@ public abstract class Character {
      * Will return a Rectangle object that represents the smallest possible
      * Rectangle needed to enclose the graphical representation of the Character
      * in its entirety.
-     * 
      * @return Rectangle that has the bounds
      */
     public abstract Rectangle getBounds();
@@ -36,7 +35,6 @@ public abstract class Character {
      * the bounds of another character. This method of checking for intersection
      * will sometimes be slightly inaccurate - particularly for shapes that
      * don't fit nicely into rectangles.
-     *
      * @param another Character object to check for intersection
      * @return whether or not this Character intersects with the specified Character
      */

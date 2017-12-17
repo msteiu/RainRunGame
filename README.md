@@ -26,11 +26,11 @@ java RainRunGUI
     * RainDrop
     * ✓ RainRun - Angelina
     * RainRunGUI
-    * RainRunPanel - Angelina
+    * ✓ RainRunPanel - Angelina
     * RRConstants
     * RulesPanel
     * Score - Angelina
-    * ScoresPanel - Angelina
+    * ScoresPanel
     * SpeedPowerUp
     * TextPanel
     * UmbrellaPowerUp
