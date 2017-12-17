@@ -1,6 +1,7 @@
 /**
  * FILENAME: RainRunGUI
- * DESCRIPTION: CS230 Final Project - Rain Run Game
+ * DESCRIPTION: CS230 Final Project - Rain Run Game. Displays the graphics of the game including the character,
+ * falling raindrops and powerups, pause button, score, and lives.
  * @author Angelina Li and Isabel Bryant
  */
 
@@ -33,22 +34,23 @@ public class RainRunGUI extends JFrame implements Runnable {
      */
     public RainRunGUI() {
         username = "";
-        c1 = new CardLayout();
+        c1 = new CardLayout(); //using CardLayout to easily and neatly switch among panels
 
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(RRConstants.WIDTH, RRConstants.HEIGHT);
         
+        // creating all the panels
         gamePanel = new RainRunPanel(username);
-        gamePanel.pauseGame();
-
+        gamePanel.pauseGame(); //make sure the game isn't playing in the background while on the initial main menu panel
         mainMenuPanel = new MainMenuPanel();
         rulesPanel = new RulesPanel();
         scoresPanel = new ScoresPanel();
         deadPanel = new DeadPanel();
         creditsPanel = new CreditsPanel();
-        cards = new JPanel(c1);
+        cards = new JPanel(c1); //"container panel" that will hold all the above panels
         
+        // add all the panels to the "container panel" = cards
         cards.add(mainMenuPanel, MENUPANEL);
         cards.add(gamePanel, PLAYPANEL);
         cards.add(rulesPanel, RULESPANEL);
@@ -56,13 +58,15 @@ public class RainRunGUI extends JFrame implements Runnable {
         cards.add(deadPanel, DEADPANEL);
         cards.add(creditsPanel, CREDITSPANEL);
         
+        // initially display the main menu panel
         c1.show(cards, MENUPANEL);
         
+        // center the display
         add(cards, BorderLayout.CENTER);
     }
     
     /*
-     * Method that sets up new game
+     * Method that sets up new game. Used when the user hits the playAgain button on DeadPanel
      * @param String of user's name
      */
     public static void newGame(String username) {

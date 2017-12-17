@@ -1,6 +1,7 @@
 /**
  * FILENAME: RulesPanel
- * DESCRIPTION: Contains elements of the rules panel 
+ * DESCRIPTION: Rules Panel that displays the rules of the game and the option to return 
+ * to the main menu panel.
  * @author Isabel Bryant
  */
 
@@ -39,19 +40,21 @@ public class RulesPanel extends TextPanel {
         //setting up backButton
         backButton = getButton("BACK TO MENU", BACK_COLOR, new ButtonListener());
         
+        // add all labels and buttons to the panel and format them nicely
         addComponent(rules, RRConstants.HEIGHT/5);
         addComponent(text, RRConstants.HEIGHT/3);
         addComponent(backButton, RRConstants.HEIGHT/2 + RRConstants.HEIGHT/5);
     }
     
     private class ButtonListener implements ActionListener {
-        /*
-         * Return to main menu
-         * @param ActionEvent event
-         */
-        public void actionPerformed (ActionEvent event) {
-            RainRunGUI.c1.show(RainRunGUI.cards, RainRunGUI.MENUPANEL);
-        }
+      /*
+       * Return to main menu
+       * @param ActionEvent event
+       */
+      public void actionPerformed (ActionEvent event) {
+        // display the menu panel when the backButton is pressed
+        RainRunGUI.c1.show(RainRunGUI.cards, RainRunGUI.MENUPANEL);
+      }
     }
     
     public static void main(String[] args) {}

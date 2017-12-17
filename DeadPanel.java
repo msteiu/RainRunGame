@@ -1,6 +1,6 @@
 /**
  * FILENAME: DeadPanel
- * DESCRIPTION: Panel containing elements show when character dies.
+ * DESCRIPTION: Panel that apepars when character dies. Options to return the main menu or play again.
  * @author Isabel Bryant
  */
 
@@ -27,11 +27,12 @@ public class DeadPanel extends TextPanel {
         died.setFont(this.nameFont);
         died.setForeground(RRConstants.BORDER_COLOR);
         
-        //setting up playAgain button
+        //setting up playAgain and MainMenu button
         ButtonListener b = new ButtonListener();
         playAgain = getButton("PLAY AGAIN", BACK_COLOR, b);
         mainMenu = getButton("BACK TO MENU", BACK_COLOR, b);
                 
+        //add the "You Died" label, playAgain button, and Main Menu button to the panel
         addComponent(died, RRConstants.HEIGHT/4);
         addComponent(playAgain, RRConstants.HEIGHT/2);
         addComponent(mainMenu, RRConstants.HEIGHT/2 + RRConstants.HEIGHT/8);
@@ -47,12 +48,17 @@ public class DeadPanel extends TextPanel {
      * @args event desired by player
      */
         public void actionPerformed (ActionEvent event) {
+          // if the playAgain button is pressed:
             if (event.getSource() == playAgain) {
+              // display the game panel
                 RainRunGUI.c1.show(RainRunGUI.cards, RainRunGUI.PLAYPANEL);
+                //start the new game
                 RainRunGUI.gamePanel.startGame();
-                RainRunGUI.gamePanel.requestFocusInWindow();
+                RainRunGUI.gamePanel.requestFocusInWindow(); //makes sure keys are being listened to rather than mouse
             }
+            //if the mainMenu button is pressed:
             else if (event.getSource() == mainMenu) {
+              // display the main menu panel
                 RainRunGUI.c1.show(RainRunGUI.cards, RainRunGUI.MENUPANEL);
             }
         }
