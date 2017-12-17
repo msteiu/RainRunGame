@@ -1,6 +1,7 @@
 /**
  * FILENAME: RRConstants
  * DESCRIPTION: Class that contains main constants used within the game.
+ * @author Angelina Li
  */
 
 import java.awt.*;
