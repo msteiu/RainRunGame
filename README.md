@@ -15,7 +15,7 @@ java RainRunGUI
 ## To Do
 
 * Commenting:
-    * Character - Angelina
+    * ✓ Character - Angelina
     * ✓ CreditsPanel - Angelina
     * DeadPanel
     * FallingObject
@@ -24,15 +24,15 @@ java RainRunGUI
     * MyCharacter
     * PowerUp
     * RainDrop
-    * RainRun - Angelina
+    * ✓ RainRun - Angelina
     * RainRunGUI
     * RainRunPanel - Angelina
-    * RRConstants - Angelina
+    * RRConstants
     * RulesPanel
     * Score - Angelina
     * ScoresPanel - Angelina
     * SpeedPowerUp
-    * TextPanel - Angelina
+    * TextPanel
     * UmbrellaPowerUp
 * Create a new credits panel with our names and contributors
 

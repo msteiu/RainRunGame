@@ -5,7 +5,7 @@
  * rules for what should happen to the character when it is hit, and rules for
  * when the game ends.
  *
- * @author Hunter Sessa, Angelina Li
+ * @author Angelina Li, Hunter Sessa
  */
 
 import java.awt.*;
@@ -15,9 +15,12 @@ import java.util.*;
 public class RainRun {
 
     // the approximate amount of pixel space to maintain falling objects
-    private static final int SPACE_BETWEEN_OBJ = 100; 
+    private static final int SPACE_BETWEEN_OBJ = 100;
 
-    // number of microseconds between increasing the level of the game
+    // number of time intervals between increasing the score of the game
+    private static final int SCORE_INC_INTERVAL = getIntervalFromSecond(1);
+
+    // number of time intervals between increasing the level of the game
     private static final int NEXT_LEVEL_INTERVAL = getIntervalFromSecond(30); 
 
     // the maximum speed that each falling object can fall by each interval
@@ -249,9 +252,14 @@ public class RainRun {
     private void applyHitRule(FallingObject obj) {
         
         HashMap<String, Integer> rules = hitRules.get(obj.getType());
+
+        /* score and scoreInc aren't constrained by any upper limit and so
+        can be simply incremented */
         this.score += rules.get("points");
         this.scoreInc += rules.get("scoreInc");
 
+        /* both health and speed are attributes that have an upper cap to how
+        large they can be, thus the need for conditional statements */
         int newHealth = character.getHealth() + rules.get("health");
         if (newHealth <= RRConstants.MAX_HEALTH)
             character.setHealth(newHealth);
@@ -269,48 +277,67 @@ public class RainRun {
      * and will determine whether this change kills the main character.
      */
     public void checkHit() {
-        Rectangle charBounds = character.getBounds();
-
         /* increment downwards to preserve index of each falling object in the
         vector at the time of access even as we remove some of the objects */
         for(int i = fallingObjects.size() - 1; i >= 0; i--) {
             
             FallingObject obj = fallingObjects.get(i);
             
-            /* each character has a getBounds() method specified in the Character 
-            interface */
-            if (charBounds.intersects(obj.getBounds())) {
+            /* each character has an intersects method */
+            if (character.intersects(obj)) {
                 applyHitRule(obj);
                 fallingObjects.remove(i);
                 
                 if (character.getHealth() <= 0) {
                     character.setDied(true);
-                    break;
+                    break; // at this point we don't need to check the other objects
                 }
             }                
         }
     }
 
-    /*
-     * Method that chekcs whether it's time to add element to game
+    /**
+     * Helper predicate method that returns true if the time period is 0 or 
+     * the space between the BORDER and the last element to be added is equal to 
+     * or greater than the approximate space to preserve between FallingObjects 
+     * (i.e. whether it is time to add a new FallingObject to the game). 
+     *
+     * This method will only approximately preserve the spacing between objects, 
+     * since it only takes into account the Y coordinate of the last added object, 
+     * without considering the size of the next object that will be added (bigger 
+     * objects that are added to the game will see a smaller distance between the
+     * bottom of the object and the top of the previous object). This is good enough
+     * for our purposes because we only really care about maintaining approximate
+     * spacing between FallingObjects.
+     *
+     * @return whether it's time to add a new FallingObject to the game
      */
     private boolean timeToAddElement() {
-      return fallingObjects.lastElement().getY() >= (RRConstants.BORDER + SPACE_BETWEEN_OBJ);
+        return time == 0 || (fallingObjects.size() > 0 && 
+                fallingObjects.lastElement().getY() >= (RRConstants.BORDER + 
+                SPACE_BETWEEN_OBJ));
     }
     
-    /*
-     * Method that chekcs the time needed to add element to game
+    /**
+     * Method that, when run, will 'check the time' left in the game and will
+     * increment the score, add new FallingObjects and/or increase the level of 
+     * the game as needed. Each time this is run, this will also move each
+     * FallingObject down in the game relative to the current speed of the game,
+     * as well as check whether or not the character has hit any particular
+     * FallingObject and increment the time passed within the game.
      */
     public void checkTime() {
 
-        if (time == 0 || (fallingObjects.size() > 0 && timeToAddElement())) {
+        if (timeToAddElement()) {
             addNewObject();
         }
 
-        if (time % getIntervalFromSecond(1) == 0) { // add to score each second
+        if (time % SCORE_INC_INTERVAL == 0) { 
             score += scoreInc;
         }
 
+        /* every new level, the size of new RainDrops increases on average, 
+        and the speed of the game increases */
         if (time % NEXT_LEVEL_INTERVAL == 0) {
             rainSize++;
 
@@ -328,14 +355,27 @@ public class RainRun {
 
 
     // Getters and Setters //
+
+    /**
+     * Returns the current score of the game
+     * @return score of the game
+     */
     public int getScore() {
         return score;
     }
 
+    /**
+     * Returns the current vector of FallingObjects in the game
+     * @return vector of FallingObjects in the game
+     */
     public Vector<FallingObject> getFallingObjects() {
         return fallingObjects;
     }
 
+    /**
+     * Returns the main character of the game
+     * @return main character of the game
+     */
     public MyCharacter getCharacter() {
         return character;
     }

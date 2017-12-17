@@ -9,7 +9,7 @@ public class RRConstants {
 
     protected static final int HEIGHT = 550; // how high the overall game frame is
     protected static final int WIDTH = 300; // how wide the overall game frame is
-    protected static final int BORDER = 10; // thickness of border
+    protected static final int BORDER = 40; // thickness of border
     protected static final int MAX_HEALTH = 3;
     protected static final int NUM_TOPSCORES = 5;
     protected static final int DELAY = 25;

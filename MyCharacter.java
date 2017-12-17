@@ -6,7 +6,7 @@
 
 import java.awt.*;
 
-public class MyCharacter implements Character {
+public class MyCharacter extends Character {
     
     // instance variables 
     private Color charColor;

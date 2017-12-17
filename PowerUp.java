@@ -11,7 +11,7 @@ import javax.imageio.*;
 
 import java.util.Random;
 
-public abstract class PowerUp extends FallingObject implements Character {
+public abstract class PowerUp extends FallingObject {
     
     protected String powerType;
     private int time;

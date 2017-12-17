@@ -6,8 +6,8 @@
 
 import java.awt.*;
 
-// a FallingObject is a Character interface's child
-public abstract class FallingObject implements Character {
+// a FallingObject is a Character's child
+public abstract class FallingObject extends Character {
     
     // instance variables to be inherited by Rain and PowerUp
     private int xCoord, yCoord, height, width;
