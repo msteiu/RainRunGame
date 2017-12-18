@@ -62,8 +62,8 @@ public class MainMenuPanel extends TextPanel {
         
         // adding all the labels and buttons to the panel, formatting them nicely on the panel
         addComponent(gameName, RRConstants.HEIGHT/5);
-        addComponent(nameLabel, RRConstants.HEIGHT/5 + (5*increment/4));
-        addComponent(nameField, RRConstants.HEIGHT/5 + (3*increment/2));
+        addComponent(nameLabel, RRConstants.HEIGHT/5 + (3*increment/2));
+        addComponent(nameField, RRConstants.HEIGHT/5 + (7*increment/4));
         addComponent(playButton, RRConstants.HEIGHT/2);
         addComponent(rulesButton, RRConstants.HEIGHT/2 + increment);
         addComponent(scoresButton, RRConstants.HEIGHT/2 + 2*increment);

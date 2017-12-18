@@ -29,7 +29,7 @@ public class RainRunGUI extends JFrame implements Runnable {
     protected static JPanel creditsPanel;
     protected static String username;
     
-    /*
+    /**
      * Constructor
      */
     public RainRunGUI() {
@@ -46,7 +46,7 @@ public class RainRunGUI extends JFrame implements Runnable {
         mainMenuPanel = new MainMenuPanel();
         rulesPanel = new RulesPanel();
         scoresPanel = new ScoresPanel();
-        deadPanel = new DeadPanel();
+        deadPanel = new DeadPanel(0); // initialize dead panel with a score of 0
         creditsPanel = new CreditsPanel();
         cards = new JPanel(c1); //"container panel" that will hold all the above panels
         
@@ -65,7 +65,7 @@ public class RainRunGUI extends JFrame implements Runnable {
         add(cards, BorderLayout.CENTER);
     }
     
-    /*
+    /**
      * Method that sets up new game. Used when the user hits the playAgain button on DeadPanel
      * @param String of user's name
      */
@@ -75,7 +75,7 @@ public class RainRunGUI extends JFrame implements Runnable {
         cards.add(gamePanel, PLAYPANEL);
     }
     
-    /*
+    /**
      * Method that sets up new scores panel
      */
     public static void newScoresPanel() {
@@ -83,15 +83,21 @@ public class RainRunGUI extends JFrame implements Runnable {
         scoresPanel = new ScoresPanel();
         cards.add(scoresPanel, SCORESPANEL);
     }
+
+    public static void newDeadPanel(int score) {
+        cards.remove(deadPanel);
+        deadPanel = new DeadPanel(score);
+        cards.add(deadPanel, DEADPANEL);
+    }
     
-    /*
+    /**
      * Method that runs it, making it visible
      */
     public void run() {
         setVisible(true);
     }
     
-    /*
+    /**
      * Main (driver) method envoking new GUI
      */
     public static void main(String[] args) {

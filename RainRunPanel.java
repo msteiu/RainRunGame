@@ -252,6 +252,8 @@ public class RainRunPanel extends JPanel {
 
                     addScore();
                     RainRunGUI.newGame(username);
+                    RainRunGUI.newDeadPanel(game.getScore()); // initialize a new dead panel with your score
+                    
                     // need to generate a new Scores Panel because top scores may have changed
                     RainRunGUI.newScoresPanel();
                     RainRunGUI.c1.show(RainRunGUI.cards, RainRunGUI.DEADPANEL);
