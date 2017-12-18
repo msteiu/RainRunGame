@@ -1,6 +1,6 @@
 # Rain Run
 
-Simple Java game allowing user to control a character using keyboard input, where the user must make quick decisions to navigate a terrain.
+Game allowing user to control a character using keyboard input, where the user must make quick decisions to navigate a terrain.
 
 To run:
 1. Download this repository.
@@ -14,49 +14,30 @@ java RainRunGUI
 
 ## To Do
 
-* Commenting:
-    * ✓ Character - Angelina
-    * ✓ CreditsPanel - Angelina
-    * (done) DeadPanel
-    * FallingObject
-    * HealthPowerUp
-    * (done) MainMenuPanel
-    * MyCharacter
-    * PowerUp
-    * RainDrop
-    * ✓ RainRun - Angelina
-    * (done) RainRunGUI
-    * ✓ RainRunPanel - Angelina
-    * RRConstants
-    * (done) RulesPanel
-    * ✓ Score - Angelina
-    * (done) ScoresPanel
-    * SpeedPowerUp
-    * TextPanel
-    * UmbrellaPowerUp
-* Create a new credits panel with our names and contributors
+#### Commenting
+* FallingObject
+* HealthPowerUp
+* MyCharacter
+* PowerUp
+* RainDrop
+* RRConstants
+* SpeedPowerUp
+* TextPanel
+* UmbrellaPowerUp
 
-## Technical specifications
+## Done
 
-### Character - DONE (Angelina)
-* Character interface specifies what properties Characters have
-* Think of each object appearing on RainRunPanel as a Character / sometimes a FallingObject
-
-### FallingObject - DONE
-* maybe: create a new class for all Characters that fall (monsters, powerups)
-
-### MyCharacter - Mara
-* Attributes: died; health;
-
-### Monster - Mara
-* Attributes: moveDown();
-
-### RainRun
-* Attributes: score; time; scoreInc; speed; monsters / powerUps (maybe Vector<FallingObject>); addElInterval; increaseSizeInterval; increaseSpeedInterval;
-
-### PowerUp
-* Method: moveDown(int speed) <-- probably wants to zig zag differently based on speed
-
+#### Finished commenting
+* ✓ Character - Angelina
+* ✓ CreditsPanel - Angelina
+* ✓ DeadPanel
+* ✓ MainMenuPanel
+* ✓ RainRun - Angelina
+* ✓ RainRunGUI
+* ✓ RainRunPanel - Angelina
+* ✓ RulesPanel
+* ✓ Score - Angelina
+* ✓ ScoresPanel
 
 ## Rules
 
@@ -68,27 +49,28 @@ java RainRunGUI
 
 ## Notes
 
-1. Monsters move straight down.
-2. Bigger monsters move faster - watch out!
-3. Powerups zig zag.
+1. Monsters move straight down; Powerups zig zag.
+2. The maximum speed you can attain is 10 (characters move down approximately 10 pixels every 25 milliseconds).
+3. The maximum amount of lives you can attain is 3. Lose all, and you'll die!
+4. You can pause/unpause the game by clicking the yellow pause button or by hitting the space bar.
 
 ## Powerups
 
-![alt text][health]
-
 **Health Powerup**
+
+![alt text][health]
 
 Will give you one additional life if you have less than 3 lives currently, as well as giving you a bonus 10 points.
 
-![alt text][speed]
-
 **Speed Powerup**
+
+![alt text][speed]
 
 Will increase the pace of the game, and will also increase the amount your score increases by each time interval.
 
-![alt text][umbrella]
-
 **Umbrella Powerup**
+
+![alt text][umbrella]
 
 Gives you a free 50 extra points!
 
