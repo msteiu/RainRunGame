@@ -76,7 +76,13 @@ Gives you a free 50 extra points!
 
 ## Gameplay examples
 
-![alt text][menu] ![alt text][gameplay]
+**Main Menu Options**
+
+![alt text][menu]
+
+**Gameplay**
+
+![alt text][gameplay]
 
 [health]: images/heart2.png "Health Powerup"
 [speed]: images/speed2.png "Speed Powerup"
