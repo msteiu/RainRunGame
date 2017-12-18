@@ -74,6 +74,12 @@ Will increase the pace of the game, and will also increase the amount your score
 
 Gives you a free 50 extra points!
 
+## Gameplay examples
+
+![alt text][menu] ![alt text][gameplay]
+
 [health]: images/heart2.png "Health Powerup"
 [speed]: images/speed2.png "Speed Powerup"
 [umbrella]: images/umbrella2.png "Umbrella Powerup"
+[menu]: https://giphy.com/gifs/l4Epd3ULnVFSuEtNe "Menu options"
+[gameplay]: https://giphy.com/gifs/26n8D7s7sj6agImlO "Gameplay"
