@@ -1,20 +1,24 @@
 /**
  * FILENAME: FallingObject
- * DESCRIPTION: CS230 Final Project - Rain Run Game
+ * DESCRIPTION: Abstract class that extends the Character interface. This class is afterwards extended by new classes - RainDrop (rain 
+ * drops that decrease the number of lives of the player) and PowerUp (power-ups that offer the player special abilities - e.g. speed,
+ * shield against the rain drops). The current class includes the main characteristics and behaviors of all falling objects (rain drops,
+ * umbrella, health, and speed power-ups).
  * @author Angelina Li, Mara Steiu, Hunter Sessa
  */
 
 import java.awt.*;
 
-// a FallingObject is a Character's child
+// A FallingObject is a Character's child
 public abstract class FallingObject extends Character {
     
-    // instance variables to be inherited by Rain and PowerUp
+    // Instance variables to be inherited by RainDrop and PowerUp
     private int xCoord, yCoord, height, width;
     private int leftEdge, rightEdge;
     
     /**
-     * Constructor - defines what will be passed to children
+     * Constructor - defines what will be passed to extensions. The left and right edges are constants, and the x and y coordinates that
+     * define location are variables.
      * @param xCoord int, x position of image
      * @param yCoord int, y position of image
      */
@@ -28,41 +32,64 @@ public abstract class FallingObject extends Character {
 
     /**
      * getBounds()
-     * @return new Rectangle object with inputted postion and dimensions 
+     * @return new Rectangle object with inputted (x,y) coordinates location of rectangle and dimensions (width, height).
      */
     public Rectangle getBounds() {
         return new Rectangle(xCoord, yCoord, width, height);
     }
 
     /**
-     * getType() abstract, will return type value 
-     * @return String name of type 
+     * getType() abstract method that will be overriden by RainDrop and PowerUp(s); the method returns the type of an object as a String 
+     * @return String name of object type
      */       
     public abstract String getType();
     
     /**
-     * moveDown() abstract, to be defined by children 
-     * @param speed with which falling object will move down
+     * moveDown() abstract method that will be defined by RainDrop and PowerUp(s); the method moves the object down the panel (objects
+     * are falling) by the speed which is given as an integer parameter
+     * @param speed int with which falling object will move down
      */     
     public abstract void moveDown(int speed);
     
+    //Getter methods 
+    
     /** 
-     * getRightEdge() returns right edge value
+     * getRightEdge() method that returns the right edge value as an integer
+     * @return int rightEdge value
      */
     public int getRightEdge() {
         return rightEdge;
     }
 
     /** 
-     * getLeftEdge() returns left edge value
+     * getLeftEdge() method that returns the left edge value as an integer
+     * @return int leftEdge value
      */
     public int getLeftEdge() {
         return leftEdge;
     }
     
     /**
-     * setWidth(int width) sets width as inputted value 
-     * @param int value to be set as width
+     * getX() returns the X coordinate of object's location 
+     * @return int xCoord value of location
+     */       
+    public int getX() {
+        return xCoord;
+    }
+    
+    /**
+     * getY() returns the Y coordinate of object's location
+     * @return int yCoord value of location
+     */       
+    public int getY() {
+        return yCoord;
+    }
+    
+    //Setter methods
+    
+    /**
+     * setWidth() sets width of object by offering it the int width inputted as parameter
+     * @param int width value that represents new width
      */     
     public void setWidth(int width) {
         this.width = width;
@@ -70,43 +97,26 @@ public abstract class FallingObject extends Character {
     }
 
     /**
-     * setHeight(int height) sets height as inputted value 
-     * @param int value to be set as height
+     * setHeight() sets height of object by offering it the int height inputted as parameter
+     * @param int height value that represents new height
      */         
     public void setHeight(int height) {
         this.height = height;
     }
     
     /**
-     * getX() returns x position value 
-     * @return int value of x position 
-     */       
-    public int getX() {
-        return xCoord;
-    }
-    
-    /**
-     * getYCoord() returns y position value 
-     * @return int value of y position 
-     */       
-    public int getY() {
-        return yCoord;
-    }
-    
-    /**
-     * setXCoord(int xCoord) sets x position as inputted value 
-     * @param int value to be set as x position
+     * setX() sets x position of object location by using the new x coord. value offered as parameter 
+     * @param int xCoord value that represents new x coord. of object location
      */     
     public void setX(int xCoord) {
         this.xCoord = xCoord;
     }
-    
+
     /**
-     * setYCoord(int yCoord) sets y position as inputted value 
-     * @param int value to be set as y position
-     */     
+     * setY() sets y position of object location by using the new y coord. value offered as parameter 
+     * @param int yCoord value that represents new y coord. of object location
+     */ 
     public void setY(int yCoord) {
         this.yCoord = yCoord;
     }
-
 }
