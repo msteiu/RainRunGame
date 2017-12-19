@@ -1,6 +1,8 @@
 /**
  * FILENAME: MyCharacter
- * DESCRIPTION: Represents the character of the player in the game
+ * DESCRIPTION: This class represents the character of the player in the game. The class extends the Character interface, which is shared
+ * by all game objects (player, rain drops, power-ups), but is more specific in that it offers characteristics and behaviors only shared
+ * by the player's character.
  * @author Mara Steiu, Angelina Li, Hunter Sessa
  */
 
@@ -8,18 +10,20 @@ import java.awt.*;
 
 public class MyCharacter extends Character {
     
-    // instance variables 
+    // Private instance variables 
     private Color charColor;
     private int xCoord, yCoord, size, health;
     private int leftEdge, rightEdge;
     private boolean died;
 
     /**
-     * Constructor - defines what will be contained in MyCharacter instance
-     * @param xCoord int- x position of character
-     * @param yCoord int- y position of character
-     * @param size int- size of character
-     * @param color Color- color of character
+     * Constructor - defines what will be contained in MyCharacter objects. The main characteristics of every player object are: location
+     * defined by (x,y) coordinates, size and color of objects, health status (died/still has some hearts), left and right edge constants.
+     * The four parameters of constructor can vary, while the other four are constants.
+     * @param xCoord int - x coord in location of character
+     * @param yCoord int - y coord in location of character
+     * @param size int - size of character
+     * @param color Color - color of character
      */    
     public MyCharacter(int xCoord, int yCoord, int size, Color color) {
         this.xCoord = xCoord;
@@ -34,16 +38,15 @@ public class MyCharacter extends Character {
     }
     
     /**
-     * getX() returns x position of character
-     * @return xCoord int value of x position 
+     * getX() returns x coord. in location of player character
+     * @return xCoord int value representing x location 
      */
     public int getX() {
         return xCoord;
     }
 
     /**
-     * moveRight() moves the character right
-     * Ensures that movement would keep character in bounds
+     * moveRight() method that moves the character to the right on the panel. Ensures that movement would keep character in bounds.
      */
     public void moveRight() {
         int newxCoord = xCoord + size;
@@ -53,8 +56,7 @@ public class MyCharacter extends Character {
     }
     
     /**
-     * moveLeft() moves the character left
-     * Ensures that movement would keep character in bounds
+     * moveLeft() method that moves the character to the left. Ensures that movement would keep character in bounds.
      */    
     public void moveLeft() {
         int newxCoord = xCoord - size;
@@ -64,8 +66,8 @@ public class MyCharacter extends Character {
     }
 
     /**
-    * getType() returns String type of character to be used in RainRun main controls
-    * @return String mycharacter
+    * getType() method that returns String that represents the type of character to be used in RainRun main controls
+    * @return String mycharacter type
     */    
     public String getType() {
         return "mycharacter";
@@ -73,8 +75,9 @@ public class MyCharacter extends Character {
     
     
     /*
-     * drawCharacter() draws a character by using the Graphics package
-     * @param Graphics package used
+     * drawCharacter() method that draws a character by using the Graphics package. Method sets color and fills Rectangle that contains the element
+     * within bounds.
+     * @param Graphics g representing Graphics character (created by using Graphics package)
      */
     public void drawCharacter(Graphics g) {
         g.setColor(charColor);
@@ -82,40 +85,40 @@ public class MyCharacter extends Character {
     }
     
     /**
-     * getBounds()
-     * @return new Rectangle object with inputted postion and dimensions 
+     * getBounds() method that returns the Rectangle surrounding an object of type MyCharacter
+     * @return new Rectangle object which has the (xCoord, yCoord) location and size width and height.
      */     
     public Rectangle getBounds() {
         return new Rectangle(xCoord, yCoord, size, size);
     }
     
     /*
-     * getDied()
-     * @return boolean check if character died
+     * getDied() method that checks whether MyCharacter object has died or not.
+     * @return boolean which is true if character died, false otherwise
      */
     public boolean getDied() {
         return died;
     }
     
     /*
-     * setDied() - sets character dead or not, based on boolean param
-     * @param - boolean showing whether character died or not
+     * setDied() method that sets player (MyCharacter) character dead or not, based on boolean param 
+     * @param - boolean showing whether character is dead or not (true - dead; false - not dead)
      */
     public void setDied(boolean died) {
         this.died = died;
     }
 
     /*
-     * getHealth()
-     * @return int health (hearts score) of character
+     * getHealth() method that returns the health score of the player (MyCharacter)
+     * @return int health (hearts score) of player character
      */
     public int getHealth() {
         return health;
     }
 
     /*
-     * setHealth() by using health given as param
-     * @param int health to which it's set
+     * setHealth() method that sets health score by using int health given as param
+     * @param int health to which player's health is set
      */
     public void setHealth(int health) {
         this.health = health;
