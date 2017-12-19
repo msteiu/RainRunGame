@@ -15,11 +15,8 @@ java RainRunGUI
 ## To Do
 
 #### Commenting
-* FallingObject
 * HealthPowerUp
-* MyCharacter
 * PowerUp
-* RainDrop
 * RRConstants
 * SpeedPowerUp
 * TextPanel
@@ -28,7 +25,10 @@ java RainRunGUI
 ## Done
 
 #### Finished commenting
-* ✓ Character - Angelina
+* MyCharacter - Mara
+* FallingObject - Mara
+* RainDrop - Mara
+* ✓ Character - Angelina, Mara
 * ✓ CreditsPanel - Angelina
 * ✓ DeadPanel
 * ✓ MainMenuPanel
