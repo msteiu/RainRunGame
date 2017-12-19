@@ -1,6 +1,6 @@
 /**
  * FILENAME: Character
- * DESCRIPTION: Character abstract class which is implemented by the main character classes of our game - MyCharacter and FallingObject.
+ * DESCRIPTION: Character abstract class which is extended by the main character classes of our game - MyCharacter and FallingObject.
  * All the characters appearing in the game (player, power-ups - umbrella, speed, health; rain drops) are considered to be instances of
  * Character, each having subsequently new characteristics and behaviours added through more specific classes such as MyCharacter or 
  * FallingObject.
