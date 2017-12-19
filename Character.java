@@ -2,7 +2,7 @@
  * FILENAME: Character
  * DESCRIPTION: Character abstract class which is implemented by the main objects
  * that appear in our game - MyCharacter and the FallingObjects.
- * @author Angelina Li, Mara
+ * @author Angelina Li, Mara Steiu
  */
 
 import java.awt.*;
