@@ -1,7 +1,9 @@
 /**
  * FILENAME: Character
- * DESCRIPTION: Character abstract class which is implemented by the main objects
- * that appear in our game - MyCharacter and the FallingObjects.
+ * DESCRIPTION: Character abstract class which is implemented by the main character classes of our game - MyCharacter and FallingObject.
+ * All the characters appearing in the game (player, power-ups - umbrella, speed, health; rain drops) are considered to be instances of
+ * Character, each having subsequently new characteristics and behaviours added through more specific classes such as MyCharacter or 
+ * FallingObject.
  * @author Angelina Li, Mara Steiu
  */
 
@@ -10,22 +12,20 @@ import java.awt.*;
 public abstract class Character {
 
     /**
-     * Returns a String representation of the type of this Character
+     * Abstract method that returns a String representation of the type of a Character object.
      * @return String variable representing character type
      */
     public abstract String getType();
 
     /**
-     * Given a Graphics object, will draw a graphical representation
-     * of this Character
+     * Given a Graphics object, this abstract method will draw a graphical representation of this Character on the game panel. 
      * @param Graphics object used to draw the character
      */
     public abstract void drawCharacter(Graphics g);
 
     /**
-     * Will return a Rectangle object that represents the smallest possible
-     * Rectangle needed to enclose the graphical representation of the Character
-     * in its entirety.
+     * Will return a Rectangle object that represents the smallest possible Rectangle needed to enclose the graphical representation of 
+     * the Character in its entirety.
      * @return Rectangle that has the bounds
      */
     public abstract Rectangle getBounds();
