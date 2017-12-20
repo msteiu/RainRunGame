@@ -1,6 +1,7 @@
 /**
  * FILENAME: UmbrellaPowerUp
- * DESCRIPTION: Powerup child implementing PowerUp abstract class. 
+ * DESCRIPTION: Umbrella power-up which extends PowerUp abstract class, using its constructor and adding the specific type of the umbrella
+ * power-up. 
  * @author Angelina Li
  */
 
@@ -16,6 +17,11 @@ public class UmbrellaPowerUp extends PowerUp {
         powerType = "umbrella";
     }
 
+    /*
+     * Static method that returns the String location of the umbrella image used within the game.
+     * @param int size represents size of icon
+     * @return String location of image
+     */
     private static String getImagePath(int size) {
         return "images/umbrella" + size + ".png";
     }
