@@ -180,20 +180,6 @@ public class RainRun {
         int xCoord = randInt(xLeftBound, xRightBound);
         fallingObjects.add(new RainDrop(xCoord, RRConstants.BORDER, size));
     }
-    
-    /**
-     * Helper method that will return the filepath for a given powerup icon.
-     * PowerUp path names are all structured as "images/NAMESTUB#.png", e.g.
-     * images/heart1.png (where heart1 is a smaller sized icon than heart2).
-     * 
-     * @param nameStub - String representation of the PowerUp required
-     * @param size - an integer between 1 and 2 representing the size of the 
-     * PowerUp icon wanted
-     * @return the filepath for the icon needed.
-     */
-    private String getPUPath(String nameStub, int size) {
-        return "images/" + nameStub + size + ".png";
-    }
 
     /**
      * Helper method that will add a random powerup to the Vector of FallingObjects
@@ -204,11 +190,12 @@ public class RainRun {
         /* PowerUps of size '1' are approximately 30 x 30 pixels large, and
         PowerUps of size '2' are approximately 50 x 50 pixels large */
         int size = randInt(1, 2);
-        int xCoord = randInt(RRConstants.BORDER, RRConstants.WIDTH - 50); // biggest image size is 50px
-        PowerUp newPowerUp = new HealthPowerUp(xCoord, RRConstants.BORDER, getPUPath("heart", size));
+        int pixelSize = size == 1 ? 30 : 50;
+        int xCoord = randInt(RRConstants.BORDER, RRConstants.WIDTH - pixelSize);
+        PowerUp newPowerUp = new HealthPowerUp(xCoord, RRConstants.BORDER, size);
         switch (randInt(0, 2)) {
-            case(1) : newPowerUp = new SpeedPowerUp(xCoord, RRConstants.BORDER, getPUPath("speed", size)); break;
-            case(2) : newPowerUp = new UmbrellaPowerUp(xCoord, RRConstants.BORDER, getPUPath("umbrella", size)); break;
+            case(1) : newPowerUp = new SpeedPowerUp(xCoord, RRConstants.BORDER, size); break;
+            case(2) : newPowerUp = new UmbrellaPowerUp(xCoord, RRConstants.BORDER, size); break;
         }
         fallingObjects.add(newPowerUp);
     }

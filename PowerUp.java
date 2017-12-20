@@ -14,7 +14,6 @@ import java.util.Random;
 public abstract class PowerUp extends FallingObject {
     
     protected String powerType;
-    private int time;
     private boolean movingLeft;
     private BufferedImage img;
     
@@ -36,7 +35,6 @@ public abstract class PowerUp extends FallingObject {
             System.out.println("Couldn't open image " + imagePath);
         }
 
-        this.time = 0;
         this.movingLeft = new Random().nextBoolean();
     }
 
@@ -105,22 +103,6 @@ public abstract class PowerUp extends FallingObject {
         } else {
             moveRight(speed);
         }
-    }
-    
-    /**
-     * getTime() returns time value 
-     * @return int value of time 
-     */    
-    public int getTime() {
-     return time; 
-    }
-   
-    /**
-     * increaseTime(int increment) adds to time by a certain value
-     * @param increment int value to add to previous time  
-     */     
-    public void increaseTime(int increment) {
-      time += increment;
     }
    
 }

@@ -1,6 +1,6 @@
 /**
  * FILENAME: FallingObject
- * DESCRIPTION: Abstract class that extends the Character interface. This class is afterwards extended by new classes - RainDrop (rain 
+ * DESCRIPTION: Abstract class that extends the Character class. This class is afterwards extended by new classes - RainDrop (rain 
  * drops that decrease the number of lives of the player) and PowerUp (power-ups that offer the player special abilities - e.g. speed,
  * shield against the rain drops). The current class includes the main characteristics and behaviors of all falling objects (rain drops,
  * umbrella, health, and speed power-ups).
@@ -39,15 +39,15 @@ public abstract class FallingObject extends Character {
     }
 
     /**
-     * getType() abstract method that will be overriden by RainDrop and PowerUp(s); the method returns the type of an object as a String 
+     * getType() abstract method that will be defined by RainDrop and PowerUp(s); the method returns the type of an object as a String 
      * @return String name of object type
      */       
     public abstract String getType();
     
     /**
      * moveDown() abstract method that will be defined by RainDrop and PowerUp(s); the method moves the object down the panel (objects
-     * are falling) by the speed which is given as an integer parameter
-     * @param speed int with which falling object will move down
+     * are falling) relative to the current speed of the game, which is given as an integer parameter
+     * @param speed int relative to which the falling object will move down
      */     
     public abstract void moveDown(int speed);
     

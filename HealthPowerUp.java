@@ -5,15 +5,18 @@
  */
 
 public class HealthPowerUp extends PowerUp {
-    
     /**
      * Constructor of health power-up
      * @param int X coordinate of location 
      * @param int Y coordinate of location 
-     * @param String pathdir for icon used
+     * @param int size to define which icon to use
      */
-    public HealthPowerUp (int xCoord, int yCoord, String pathdir) {
-        super(xCoord, yCoord, pathdir);
+    public HealthPowerUp (int xCoord, int yCoord, int size) {
+        super(xCoord, yCoord, getImagePath(size));
         powerType = "health";
+    }
+
+    private static String getImagePath(int size) {
+        return "images/heart" + size + ".png";
     }
 }
