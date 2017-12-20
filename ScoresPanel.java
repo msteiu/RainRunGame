@@ -2,7 +2,7 @@
  * FILENAME: ScoresPanel
  * DESCRIPTION: CS230 Final Project - Rain Run Game. The ScoresPanel displays the top 5 high scores
  * and a button to return to the main menu panel.
- * @author Isabel Bryant
+ * @author Isabel Bryant, Angelina Li
  */
 
 import java.awt.*;
@@ -22,7 +22,8 @@ public class ScoresPanel extends TextPanel {
   protected JLabel highScores;
   private Vector<Score> allHighScores;
   
-  /* Constructor
+  /**
+   * Constructor
    */
   public ScoresPanel() {
     //setting up background panel
@@ -53,7 +54,8 @@ public class ScoresPanel extends TextPanel {
     addComponent(mainMenu, RRConstants.HEIGHT/2 + RRConstants.HEIGHT/4);
   }
   
-  /* makeLabelText() makes the text box of all the high scores
+  /**
+   * makeLabelText() makes the text box of all the high scores
    * formatted accordingly.
    */
   private String makeLabelText() {

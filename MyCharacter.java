@@ -74,7 +74,7 @@ public class MyCharacter extends Character {
     }
     
     
-    /*
+    /**
      * drawCharacter() method that draws a character by using the Graphics package. Method sets color and fills Rectangle that contains the element
      * within bounds.
      * @param Graphics g representing Graphics character (created by using Graphics package)
@@ -92,7 +92,7 @@ public class MyCharacter extends Character {
         return new Rectangle(xCoord, yCoord, size, size);
     }
     
-    /*
+    /**
      * getDied() method that checks whether MyCharacter object has died or not.
      * @return boolean which is true if character died, false otherwise
      */
@@ -100,7 +100,7 @@ public class MyCharacter extends Character {
         return died;
     }
     
-    /*
+    /**
      * setDied() method that sets player (MyCharacter) character dead or not, based on boolean param 
      * @param - boolean showing whether character is dead or not (true - dead; false - not dead)
      */
@@ -108,7 +108,7 @@ public class MyCharacter extends Character {
         this.died = died;
     }
 
-    /*
+    /**
      * getHealth() method that returns the health score of the player (MyCharacter)
      * @return int health (hearts score) of player character
      */
@@ -116,7 +116,7 @@ public class MyCharacter extends Character {
         return health;
     }
 
-    /*
+    /**
      * setHealth() method that sets health score by using int health given as param
      * @param int health to which player's health is set
      */

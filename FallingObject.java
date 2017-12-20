@@ -4,7 +4,7 @@
  * drops that decrease the number of lives of the player) and PowerUp (power-ups that offer the player special abilities - e.g. speed,
  * shield against the rain drops). The current class includes the main characteristics and behaviors of all falling objects (rain drops,
  * umbrella, health, and speed power-ups).
- * @author Angelina Li, Mara Steiu, Hunter Sessa
+ * @author Mara Steiu, Hunter Sessa, Angelina Li
  */
 
 import java.awt.*;

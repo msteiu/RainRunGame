@@ -2,7 +2,7 @@
  * FILENAME: RainDrop
  * DESCRIPTION: Implementation of a rain drop (player has to try not to be hit by rain drops, because they decrease the health score), 
  * which is a falling object type; therefore, RainDrop extends FallingObject.
- * @author Mara Steiu, Angelina Li, Hunter Sessa
+ * @author Mara Steiu, Hunter Sessa
  */
 
 import java.awt.*;
@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class RainDrop extends FallingObject {
 
-    //Variety of blue colors that rain drops have
+    // Variety of blue colors that rain drops might take on
     private static final Color[] COLORS = {
         new Color(22, 111, 213),
         new Color(0, 70, 112),
@@ -24,7 +24,7 @@ public class RainDrop extends FallingObject {
         new Color(176, 224, 230)
     };
     
-    //Private instance variable of rain drop objects
+    // Private instance variable of rain drop objects
     private Color charColor;
     private int size;
     
@@ -60,7 +60,7 @@ public class RainDrop extends FallingObject {
         setY(updatedSpeed);
     }
 
-    /*
+    /**
      * drawCharacter() draws a RainDrop character by using the Graphics package. Method sets color and fills Oval that contains
      * rain drop element within bounds.
      * @param Graphics g representing Graphics rain drop character (created by using Graphics package)

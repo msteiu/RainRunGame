@@ -84,6 +84,9 @@ public class RainRunGUI extends JFrame implements Runnable {
         cards.add(scoresPanel, SCORESPANEL);
     }
 
+    /**
+     * Method that sets up new dead panel
+     */
     public static void newDeadPanel(int score) {
         cards.remove(deadPanel);
         deadPanel = new DeadPanel(score);

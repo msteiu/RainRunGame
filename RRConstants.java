@@ -22,7 +22,7 @@ public class RRConstants {
     protected static final Color RULE_BUTTON_COLOR = Color.CYAN;
     protected static final String FONT_NAME = "Courier";
     
-    /*
+    /**
      * Method that resturns the font given a specific size.
      * @param int size of element
      */
@@ -30,7 +30,7 @@ public class RRConstants {
         return new Font(FONT_NAME, Font.BOLD, size);
     }
     
-    /*
+    /**
      * Method that resturns the font given specific size and style.
      * @param int style of element
      * @param int size of element
@@ -39,15 +39,15 @@ public class RRConstants {
         return new Font(FONT_NAME, style, size);
     }
 
-    /*
-     * Method that returns left edge of panel. 
+    /**
+     * Method that returns left edge of panel relative to a Character's x coordinate. 
      */
     protected static int getLeftEdge() {
         return BORDER;
     }
     
-    /*
-     * Method that returns the right page of panel.
+    /**
+     * Method that returns the right edge of panel relative to a Character's x coordinate.
      */
     protected static int getRightEdge(int width) {
         return WIDTH - BORDER - width;

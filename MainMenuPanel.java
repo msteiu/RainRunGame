@@ -2,7 +2,7 @@
  * FILENAME: MainMenuPanel
  * DESCRIPTION: Class that contains elements of game's main menu panel. User has the option to
  * start the game, look at the rules, look at the high scores, look at the credits. 
- * @author Isabel Bryant
+ * @author Isabel Bryant, Angelina Li
  */
 
 import java.awt.*;

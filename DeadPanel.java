@@ -16,7 +16,7 @@ public class DeadPanel extends TextPanel {
         private JButton playAgain;
         private JButton mainMenu;
         
-        /*
+        /**
          * Constructor of panel
          */
         public DeadPanel(int sc) {
@@ -44,12 +44,12 @@ public class DeadPanel extends TextPanel {
                 addComponent(mainMenu, RRConstants.HEIGHT/2 + 2*increment);
         }
         
-        /*
+        /**
          * Private class that listens to the action when button is pressed, implementing ActionListener interface
          */
         private class ButtonListener implements ActionListener {
                 
-        /*
+        /**
          * Method that checks the source of the action perdormed (play again/go back to menu).
          * @args event desired by player
          */

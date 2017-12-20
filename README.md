@@ -25,9 +25,9 @@ java RainRunGUI
 ## Done
 
 #### Finished commenting
-* MyCharacter - Mara
-* FallingObject - Mara
-* RainDrop - Mara
+* ✓ MyCharacter - Mara
+* ✓ FallingObject - Mara
+* ✓ RainDrop - Mara
 * ✓ Character - Angelina, Mara
 * ✓ CreditsPanel - Angelina
 * ✓ DeadPanel
