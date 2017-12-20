@@ -301,8 +301,8 @@ public class RainRun {
      */
     private boolean timeToAddElement() {
         return time == 0 || (fallingObjects.size() > 0 && 
-                fallingObjects.lastElement().getY() >= (RRConstants.BORDER + 
-                SPACE_BETWEEN_OBJ));
+            fallingObjects.lastElement().getY() >= (RRConstants.BORDER + 
+            SPACE_BETWEEN_OBJ));
     }
     
     /**
