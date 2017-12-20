@@ -115,6 +115,8 @@ public class RainRunPanel extends JPanel {
     /**
      * paintComponent() draws all of the Characters in the game, as well as 
      * the current score and number of lives left in the game.
+     * Thanks to this answer: https://stackoverflow.com/questions/15544549/how-does-paintcomponent-work
+     * for teaching us how to use the paintComponent() method.
      * @param Graphics g
      */
     public void paintComponent(Graphics g) {
