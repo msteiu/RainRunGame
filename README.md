@@ -12,33 +12,6 @@ javac RainRunGUI.java
 java RainRunGUI
 ```
 
-## To Do
-
-#### Commenting
-* HealthPowerUp
-* PowerUp
-* RRConstants
-* SpeedPowerUp
-* TextPanel
-* UmbrellaPowerUp
-
-## Done
-
-#### Finished commenting
-* ✓ MyCharacter - Mara
-* ✓ FallingObject - Mara
-* ✓ RainDrop - Mara
-* ✓ Character - Angelina, Mara
-* ✓ CreditsPanel - Angelina
-* ✓ DeadPanel
-* ✓ MainMenuPanel
-* ✓ RainRun - Angelina
-* ✓ RainRunGUI
-* ✓ RainRunPanel - Angelina
-* ✓ RulesPanel
-* ✓ Score - Angelina
-* ✓ ScoresPanel
-
 ## Rules
 
 1. You control the character at the bottom using the left/right or A/D keys.
